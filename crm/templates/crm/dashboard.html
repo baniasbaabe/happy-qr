@@ -1,0 +1,41 @@
+{% extends 'crm/base.html' %}
+
+{% block body %}
+    <div class="row mt-3">
+        <div class="col">
+            <h2>Dashboard</h2>
+            <hr>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Vorname</th>
+                    <th scope="col">Nachname</th>
+                    <th scope="col">E-Mail</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Zur Ausgabe die index-Variable nutzen. In diesem Fall ma -->
+                {% for ma in mitarbeiter %}
+                    <tr>
+                        <td>{{ ma.id }}</td>
+                        <td>{{ ma.vorname }}</td>
+                        <td>{{ ma.nachname }}</td>
+                        <td>{{ ma.email }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+{% endblock body %}
+
+
+
