@@ -1,6 +1,6 @@
 from django.urls import path, include
 
-from crm import views
+from . import views
 
 urlpatterns = [
     path('', views.dashboard, name='crm_dashboard'),
