@@ -34,7 +34,20 @@
                         <a class="nav-link" href="{% url 'crm_dashboard' %}"> <span class="fas fa-home"></span> Home</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="{% url 'kundenliste' %}"> <span class="	fas fa-users"></span> Kunden</a>
+                        <a class="nav-link" href="{% url 'kundenliste' %}"> <span class="fas fa-users"></span>
+                            Kunden</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#"> <span class="fas fa-file-alt"></span>
+                            Aufträge</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#"> <span class="fas fa-check-circle"></span>
+                            Rechnungen</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#"> <span class="fas fa-trophy"></span>
+                            Feedback</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
@@ -52,6 +65,14 @@
     {% block body %}
 
     {% endblock %}
+
+    <footer class="my-5 pt-5 text-muted text-center text-small fixed-bottom">
+        <hr width="50%">
+        <p class="mb-1">&copy; 2020 HappyQR</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+    </footer>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

@@ -4,3 +4,7 @@ from django.contrib import admin
 from crm.models import *
 
 admin.site.register(Mitarbeiter)
+admin.site.register(Kunde)
+admin.site.register(Auftrag)
+admin.site.register(Rechnung)
+admin.site.register(Menucard)
