@@ -1,0 +1,23 @@
+{% extends "crm/base.html" %}
+{% load static %}
+{% block body %}
+
+    <br>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card card-body">
+
+<p>Sind Sie sich sicher beim Löschen des Kunden "{{ kunde }}" </p>
+
+    <form action="{% url 'kunde_loeschen' kunde.id %}" method="POST">
+    {% csrf_token %}
+
+    <a class="btn btn-warning" href="{% url 'kundenliste' %}">Cancel</a>
+    <input class="btn btn-danger" type="submit" name="Bestätigen">
+
+    </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}
