@@ -17,30 +17,30 @@ def dashboard(request):
     return render(request, 'crm/dashboard.html', context)
 
 
-def kundenliste(request):
+# Start Kunden CRUD-Methoden-----------------------------------------------------------------------------------------
 
+def kundenliste(request):  #hole alle kunden aus DB
     kunden = Kunde.objects.all()
 
-    context = {"kunden":kunden,
+    context = {"kunden": kunden,
 
-    }
+               }
     return render(request, 'crm/kundenliste.html', context)
 
-def KundeAnlegen(request):
 
+def KundeAnlegen(request):
     form = KundeForm()
     if request.method == "POST":
         form = KundeForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('kundenliste')
-    context = {'form':form}
-
+    context = {'form': form}
 
     return render(request, 'crm/kunde_form.html', context)
 
-def KundeAktualisieren(request, pk):
 
+def KundeAktualisieren(request, pk):
     kunde = Kunde.objects.get(id=pk)
     form = KundeForm(instance=kunde)
 
@@ -54,13 +54,66 @@ def KundeAktualisieren(request, pk):
 
     return render(request, "crm/kunde_form.html", context)
 
-def KundeLoeschen(request, pk):
 
+def KundeLoeschen(request, pk):
     kunde = Kunde.objects.get(id=pk)
 
     if request.method == "POST":
         kunde.delete()
         return redirect('kundenliste')
 
-    context={"kunde":kunde}
+    context = {"kunde": kunde}
     return render(request, 'crm/delete_kunde.html', context)
+
+
+# Ende Kunden CRUD-Methoden-----------------------------------------------------------------------------------------
+
+# Start Mitarbeiter CRUD-Methoden-----------------------------------------------------------------------------------------
+
+def mitarbeiterliste(request): #hole alle Mitarbeiter aus DB
+    mitarbeiter = Mitarbeiter.objects.all()
+
+    context = {"mitarbeiter": mitarbeiter,
+
+               }
+    return render(request, 'crm/mitarbeiterliste.html', context)
+
+
+def mitarbeiterAnlegen(request):
+    form = MitarbeiterForm()
+    if request.method == "POST":
+        form = MitarbeiterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('mitarbeiterliste')
+    context = {'form': form}
+
+    return render(request, 'crm/mitarbeiter_form.html', context)
+
+
+def mitarbeiterAktualisieren(request, pk):
+    mitarbeiter = Mitarbeiter.objects.get(id=pk)
+    form = MitarbeiterForm(instance=mitarbeiter)
+
+    if request.method == "POST":
+        form = MitarbeiterForm(request.POST, instance=mitarbeiter)
+        if form.is_valid():
+            form.save()
+            return redirect('mitarbeiterliste')
+
+    context = {'form': form}
+
+    return render(request, "crm/mitarbeiter_form.html", context)
+
+
+def mitarbeiterLoeschen(request, pk):
+    mitarbeiter = Mitarbeiter.objects.get(id=pk)
+
+    if request.method == "POST":
+        mitarbeiter.delete()
+        return redirect('mitarbeiterliste')
+
+    context = {"mitarbeiter": mitarbeiter}
+    return render(request, 'crm/delete_mitarbeiter.html', context)
+
+# Ende Mitarbeiter CRUD-Methoden-----------------------------------------------------------------------------------------

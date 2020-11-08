@@ -15,7 +15,7 @@
             crossorigin="anonymous"></script>
 
     {% block title %}
-        <title>Happy-QR</title>
+    <title>Happy-QR</title>
     {% endblock %}
 </head>
 <body>
@@ -46,8 +46,9 @@
                             Rechnungen</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="#"> <span class="fas fa-trophy"></span>
-                            Feedback</a>
+                        <a class="nav-link" href="{% url 'mitarbeiterliste' %}"> <span class="fas fa-address-card
+"></span>
+                            Mitarbeiter</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
@@ -66,8 +67,8 @@
 
     {% endblock %}
 
-    <footer class="my-5 pt-5 text-muted text-center text-small fixed-bottom">
-        <hr width="50%">
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <hr>
         <p class="mb-1">&copy; 2020 HappyQR</p>
         <ul class="list-inline">
             <li class="list-inline-item"><a href="#">Support</a></li>
