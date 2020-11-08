@@ -2,9 +2,14 @@
 {% load static %}
 {% block body %}
 
-<br>
+<div class="row mt-3">
+    <div class="col">
+        <h2>Kunden löschen</h2>
+        <hr>
+    </div>
+</div>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col">
         <div class="card card-body">
 
             <p>Wollen Sie Kunde <strong>{{ kunde }}</strong> wirklich löschen? </p>
@@ -13,7 +18,7 @@
                 {% csrf_token %}
 
                 <a class="btn btn-warning" href="{% url 'kundenliste' %}">Abbrechen</a>
-                <input class="btn btn-danger" type="submit" name="Bestätigen">
+                <input class="btn btn-danger" type="submit" name="Bestätigen" value="Löschen">
 
             </form>
         </div>

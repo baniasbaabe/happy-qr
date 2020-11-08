@@ -16,3 +16,12 @@ class TestUrls(SimpleTestCase):
     def test_kunde_anlegen_is_resolved(self):
         url = reverse('kunde_anlegen')
         self.assertEquals(resolve(url).func, KundeAnlegen)
+
+    def test_mitarbeiterliste_is_resolved(self):
+        url = reverse("mitarbeiterliste")
+        self.assertEquals(resolve(url).func, mitarbeiterliste)
+
+    def test_mitarbeiter_anlegen_is_resolved(self):
+        url = reverse("mitarbeiter_anlegen")
+        self.assertEquals(resolve(url).func, mitarbeiterAnlegen)
+
