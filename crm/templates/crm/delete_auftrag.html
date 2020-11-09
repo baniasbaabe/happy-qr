@@ -17,7 +17,7 @@
             <form action="{% url 'auftrag_loeschen' auftrag.id %}" method="POST">
                 {% csrf_token %}
 
-                <a class="btn btn-warning" href="{% url 'mitarbeiterliste' %}">Abbrechen</a>
+                <a class="btn btn-warning" href="{% url 'auftragsliste' %}">Abbrechen</a>
                 <input class="btn btn-danger" type="submit" name="Bestätigen" value="Löschen">
 
             </form>
