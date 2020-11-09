@@ -144,6 +144,7 @@ def auftragAktualisieren(request, pk):
     auftrag =Auftrag.objects.get(id=pk)
     form =AuftragForm(instance=auftrag)
 
+
     if request.method == "POST":
         form = AuftragForm(request.POST, instance=auftrag)
         if form.is_valid():
