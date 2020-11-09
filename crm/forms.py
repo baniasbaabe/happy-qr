@@ -13,3 +13,8 @@ class MitarbeiterForm(ModelForm):
         model = Mitarbeiter
         fields = '__all__'
 
+class AuftragForm(ModelForm):
+    class Meta:
+        model = Auftrag
+        fields = "__all__"
+

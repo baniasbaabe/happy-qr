@@ -117,3 +117,49 @@ def mitarbeiterLoeschen(request, pk):
     return render(request, 'crm/delete_mitarbeiter.html', context)
 
 # Ende Mitarbeiter CRUD-Methoden-----------------------------------------------------------------------------------------
+
+def auftragsliste(request):  #hole alle Aufträge aus DB
+    auftraege = Auftrag.objects.all()
+
+    context = {"auftraege":auftraege,
+
+               }
+    return render(request, 'crm/auftragsliste.html', context)
+
+def auftragAnlegen(request):
+
+    form = AuftragForm()
+
+    if request.method == "POST":
+        form = AuftragForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('auftragsliste')
+
+    context = {'form': form}
+
+    return render(request, "crm/auftrag_form.html", context)
+
+def auftragAktualisieren(request, pk):
+    auftrag =Auftrag.objects.get(id=pk)
+    form =AuftragForm(instance=auftrag)
+
+    if request.method == "POST":
+        form = AuftragForm(request.POST, instance=auftrag)
+        if form.is_valid():
+            form.save()
+            return redirect('auftragsliste')
+
+    context = {'form': form}
+
+    return render(request, "crm/auftrag_form.html", context)
+
+def auftragLoeschen(request, pk):
+    auftrag = Auftrag.objects.get(id=pk)
+
+    if request.method == "POST":
+        auftrag.delete()
+        return redirect('auftragsliste')
+
+    context = {"auftrag":auftrag}
+    return render(request, 'crm/delete_auftrag.html', context)
