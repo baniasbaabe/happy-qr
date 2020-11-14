@@ -9,8 +9,8 @@ def dashboard(request):
     mitarbeiter = Mitarbeiter.objects.all()
 
     # Objekt in der HTML Datei zur Verfügung stellen
-    context = {
-        'mitarbeiter': mitarbeiter,
+    context= {
+        'mitarbeiter':mitarbeiter,
     }
 
     # Ausgabe der HTML Datei
