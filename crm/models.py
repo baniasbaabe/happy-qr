@@ -57,17 +57,28 @@ class Rechnung(models.Model):
         return f'Rechnungsnummer: {self.id}, Kunde: {self.kunde}'
 
 
-class Menucard(models.Model):
-    EINHEIT = [
-        ('Ltr', 'Liter'),
-        ('cl', 'Zentiliter'),
+# Muss entfernt werden
+class Produkt(models.Model):
+    SPARTE = [
+        ('Vorspeisen', 'Vorspeisen'),
+        ('Hauptspeisen', 'Hauptspeisen'),
+        ('Nachspeisen', 'Nachspeisen'),
+        ('Snacks', 'Snacks'),
+        ('Alkoholfreie Getränke', 'Alkoholfreie Getränke'),
+        ('Alkoholhaltige Getränke', 'Alkoholhaltige Getränke'),
     ]
 
-    kunde = models.ForeignKey(Kunde, null=True, on_delete=models.SET_NULL)
-    kategorie = models.CharField(max_length=45)
-    produkt = models.CharField(max_length=45)
-    einheit = models.CharField(max_length=10, choices=EINHEIT)
-    preis = models.FloatField()
+    EINHEIT = [
+        ('Ltr', 'Liter'),
+        ('cl', 'Zentiliter')
+    ]
+
+    sparte = models.CharField(max_length=55, null=False, choices=SPARTE)
+    produktname = models.CharField(max_length=55, null=True)
+    einheit = models.CharField(max_length=55, null=True, choices=EINHEIT)
+    inhalt = models.FloatField(default=0.0)
+    allergene = models.CharField(max_length=100, null=True)
+    preis = models.FloatField(default=0.0)
 
     def __str__(self):
-        return f'{self.kategorie}'
+        return f'{self.produktname}'
