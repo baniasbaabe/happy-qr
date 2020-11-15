@@ -19,7 +19,7 @@ def dashboard(request):
 
 # Start Kunden CRUD-Methoden-----------------------------------------------------------------------------------------
 
-def kundenliste(request):  # hole alle kunden aus DB
+def kundenliste(request):  #hole alle kunden aus DB
     kunden = Kunde.objects.all()
 
     context = {"kunden": kunden,
@@ -68,9 +68,9 @@ def KundeLoeschen(request, pk):
 
 # Ende Kunden CRUD-Methoden-----------------------------------------------------------------------------------------
 
-# Start Mitarbeiter CRUD-Methoden-----------------------------------------------------------------------------------
+# Start Mitarbeiter CRUD-Methoden-----------------------------------------------------------------------------------------
 
-def mitarbeiterliste(request):  # hole alle Mitarbeiter aus DB
+def mitarbeiterliste(request): #hole alle Mitarbeiter aus DB
     mitarbeiter = Mitarbeiter.objects.all()
 
     context = {"mitarbeiter": mitarbeiter,
@@ -116,19 +116,18 @@ def mitarbeiterLoeschen(request, pk):
     context = {"mitarbeiter": mitarbeiter}
     return render(request, 'crm/delete_mitarbeiter.html', context)
 
-
 # Ende Mitarbeiter CRUD-Methoden-----------------------------------------------------------------------------------------
 
-def auftragsliste(request):  # hole alle Aufträge aus DB
+def auftragsliste(request):  #hole alle Aufträge aus DB
     auftraege = Auftrag.objects.all()
 
-    context = {"auftraege": auftraege,
+    context = {"auftraege":auftraege,
 
                }
     return render(request, 'crm/auftragsliste.html', context)
 
-
 def auftragAnlegen(request):
+
     form = AuftragForm()
 
     if request.method == "POST":
@@ -141,10 +140,10 @@ def auftragAnlegen(request):
 
     return render(request, "crm/auftrag_form.html", context)
 
-
 def auftragAktualisieren(request, pk):
-    auftrag = Auftrag.objects.get(id=pk)
-    form = AuftragForm(instance=auftrag)
+    auftrag =Auftrag.objects.get(id=pk)
+    form =AuftragForm(instance=auftrag)
+
 
     if request.method == "POST":
         form = AuftragForm(request.POST, instance=auftrag)
@@ -156,7 +155,6 @@ def auftragAktualisieren(request, pk):
 
     return render(request, "crm/auftrag_form.html", context)
 
-
 def auftragLoeschen(request, pk):
     auftrag = Auftrag.objects.get(id=pk)
 
@@ -164,13 +162,52 @@ def auftragLoeschen(request, pk):
         auftrag.delete()
         return redirect('auftragsliste')
 
-    context = {"auftrag": auftrag}
+    context = {"auftrag":auftrag}
     return render(request, 'crm/delete_auftrag.html', context)
 
+def rechnungsliste(request):  #hole alle Rechnungen aus DB
+    rechnungen = Rechnung.objects.all()
 
-# Ende Kunden CRUD-Aufträge-----------------------------------------------------------------------------------------
+    context = {"rechnungen":rechnungen,
 
-# Start Menucard CRUD-Methoden-----------------------------------------------------------------------------------------
+               }
+    return render(request, 'crm/rechnungsliste.html', context)
 
-def produkt_anlegen(request):  # Muss entfernt werden
-    return render(request, 'crm/add_produkt.html', {})
+def rechnungAnlegen(request):
+
+    form = RechnungForm()
+
+    if request.method == "POST":
+        form = RechnungForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('rechnungsliste')
+
+    context = {'form': form}
+
+    return render(request, "crm/rechnung_form.html", context)
+
+def rechnungAktualisieren(request, pk):
+    auftrag = Rechnung.objects.get(id=pk)
+    form =RechnungForm(instance=auftrag)
+
+
+    if request.method == "POST":
+        form = AuftragForm(request.POST, instance=auftrag)
+        if form.is_valid():
+            form.save()
+            return redirect('rechnungsliste')
+
+    context = {'form': form}
+
+    return render(request, "crm/rechnung_form.html", context)
+
+def rechnungLoeschen(request, pk):
+    rechnung = Rechnung.objects.get(id=pk)
+
+    if request.method == "POST":
+        rechnung.delete()
+        return redirect('rechnungsliste')
+
+    context = {"rechnung":rechnung}
+    return render(request, 'crm/delete_rechnung.html', context)

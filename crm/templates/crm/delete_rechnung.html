@@ -4,7 +4,7 @@
 
 <div class="row mt-3">
     <div class="col">
-        <h2>Mitarbeiter löschen</h2>
+        <h2>Rechnung löschen</h2>
         <hr>
     </div>
 </div>
@@ -13,11 +13,11 @@
     <div class="col mt-3">
         <div class="card card-body shadow">
 
-            <p>Wollen Sie Mitarbeiter <strong>{{ mitarbeiter }}</strong> wirklich löschen? </p>
+            <p>Wollen Sie Rechnung <strong>{{ rechnung }}</strong> wirklich löschen? </p>
 
-            <form action="{% url 'mitarbeiter_loeschen' mitarbeiter.id %}" method="POST">
+            <form action="{% url 'rechnung_loeschen' rechnung.id %}" method="POST">
                 {% csrf_token %}
-                <a class="btn btn-warning" href="{% url 'mitarbeiterliste' %}">Abbrechen</a>
+                <a class="btn btn-warning" href="{% url 'rechnungsliste' %}">Abbrechen</a>
                 <input class="btn btn-danger" type="submit" name="Bestätigen" value="Löschen">
             </form>
         </div>

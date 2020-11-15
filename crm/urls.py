@@ -20,4 +20,9 @@ urlpatterns = [
     path("auftrag_anlegen", views.auftragAnlegen, name="auftrag_anlegen"),
     path("auftrag_aktualisieren/<str:pk>/", views.auftragAktualisieren, name='auftrag_aktualisieren'),
     path("auftrag_loeschen/<str:pk>/", views.auftragLoeschen, name='auftrag_loeschen'),
+    # Rechnungs-URLs-------------------------------------------------------------
+    path("rechnungsliste/", views.rechnungsliste, name="rechnungsliste"),
+    path("rechnung_anlegen", views.rechnungAnlegen, name="rechnung_anlegen"),
+   path("rechnung_aktualisieren/<str:pk>/", views.rechnungAktualisieren, name='rechnung_aktualisieren'),
+    path("rechnung_loeschen/<str:pk>/", views.rechnungLoeschen, name='rechnung_loeschen'),
 ]
