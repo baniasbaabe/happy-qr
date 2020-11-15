@@ -18,3 +18,8 @@ class AuftragForm(ModelForm):
         model = Auftrag
         fields = "__all__"
 
+class RechnungForm(ModelForm):
+    class Meta:
+        model = Rechnung
+        fields = "__all__"
+

@@ -23,6 +23,7 @@
                 <th scope="col">Notiz</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
@@ -42,6 +43,9 @@
                 <td><a class="btn btn-sm btn-danger" href="{% url 'auftrag_loeschen' auftrag.id %} "><span
                         class="fas fa-trash-alt
 "></span></a></td>
+            <td>
+                <a class="btn btn-sm btn-dark" href="#"><span class="fas fa-file-alt"></span></a>
+            </td>
             </tr>
             {% endfor %}
             </tbody>

@@ -164,3 +164,50 @@ def auftragLoeschen(request, pk):
 
     context = {"auftrag":auftrag}
     return render(request, 'crm/delete_auftrag.html', context)
+
+def rechnungsliste(request):  #hole alle Rechnungen aus DB
+    rechnungen = Rechnung.objects.all()
+
+    context = {"rechnungen":rechnungen,
+
+               }
+    return render(request, 'crm/rechnungsliste.html', context)
+
+def rechnungAnlegen(request):
+
+    form = RechnungForm()
+
+    if request.method == "POST":
+        form = RechnungForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('rechnungsliste')
+
+    context = {'form': form}
+
+    return render(request, "crm/rechnung_form.html", context)
+
+def rechnungAktualisieren(request, pk):
+    auftrag = Rechnung.objects.get(id=pk)
+    form =RechnungForm(instance=auftrag)
+
+
+    if request.method == "POST":
+        form = AuftragForm(request.POST, instance=auftrag)
+        if form.is_valid():
+            form.save()
+            return redirect('rechnungsliste')
+
+    context = {'form': form}
+
+    return render(request, "crm/rechnung_form.html", context)
+
+def rechnungLoeschen(request, pk):
+    rechnung = Rechnung.objects.get(id=pk)
+
+    if request.method == "POST":
+        rechnung.delete()
+        return redirect('rechnungsliste')
+
+    context = {"rechnung":rechnung}
+    return render(request, 'crm/delete_rechnung.html', context)
