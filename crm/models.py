@@ -57,17 +57,4 @@ class Rechnung(models.Model):
         return f'Rechnungsnummer: {self.id}, Kunde: {self.kunde}'
 
 
-class Menucard(models.Model):
-    EINHEIT = [
-        ('Ltr', 'Liter'),
-        ('cl', 'Zentiliter'),
-    ]
 
-    kunde = models.ForeignKey(Kunde, null=True, on_delete=models.SET_NULL)
-    kategorie = models.CharField(max_length=45)
-    produkt = models.CharField(max_length=45)
-    einheit = models.CharField(max_length=10, choices=EINHEIT)
-    preis = models.FloatField()
-
-    def __str__(self):
-        return f'{self.kategorie}'

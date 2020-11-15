@@ -1,0 +1,109 @@
+{% extends 'menucard/base.html' %}
+
+{% block body %}
+    <div class="row mt-3">
+        <div class="col">
+            <h2>Dashboard</h2>
+            <hr>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+
+        <div class="col">
+            <div class="card-deck mb-4">
+
+                <div class="card shadow-sm" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Vorspeisen</h5>
+                        <p class="card-text">
+                            {% if count_vorspeisen > 1 %}
+                                Sie haben {{ count_vorspeisen }} Vorspeisen angelegt.
+                            {% else %}
+                                Sie haben {{ count_vorspeisen }} Vorspeise angelegt.
+                            {% endif %}
+                        <p>
+                            <a href="{% url 'vorspeisen' %}" class="btn btn-outline-primary btn-sm">Anzeigen</a>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Hauptspeisen</h5>
+                        <p class="card-text">
+                            {% if count_hauptspeisen > 1 %}
+                                Sie haben {{ count_hauptspeisen }} Hauptspeisen angelegt.
+                            {% else %}
+                                Sie haben {{ count_hauptspeisen }} Hauptspeise angelegt.
+                            {% endif %}
+                        <p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Anzeigen</a>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Nachspeisen</h5>
+                        <p class="card-text">
+                            {% if count_hauptspeisen > 1 %}
+                                Sie haben {{ count_nachspeisen }} Nachspeisen angelegt.
+                            {% else %}
+                                Sie haben {{ count_hauptspeisen }} Nachspeise angelegt.
+                            {% endif %}
+                        <p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Anzeigen</a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-deck mb-4">
+
+                <div class="card shadow-sm" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Snacks</h5>
+                        <p class="card-text">
+                            {% if count_snacks > 1 %}
+                                Sie haben {{ count_snacks }} Snacks angelegt.
+                            {% else %}
+                                Sie haben {{ count_snacks }} Snacks angelegt.
+                            {% endif %}
+                        <p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Anzeigen</a>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Alkoholfreie Getränke</h5>
+                        <p class="card-text">
+                            {% if count_alkfreidrinks > 1 %}
+                                Sie haben {{ count_alkfreidrinks }} alkoholfreies Getränk angelegt.
+                            {% else %}
+                                Sie haben {{ count_alkfreidrinks }} alkoholfreies Getränke angelegt.
+                            {% endif %}
+                        <p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Anzeigen</a>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Alkoholhaltige Getränke</h5>
+                        <p class="card-text">
+                            {% if count_alkdrinks > 1 %}
+                                Sie haben {{ count_alkdrinks }} alkoholhaltiges Getränk angelegt.
+                            {% else %}
+                                Sie haben {{ count_alkdrinks }} alkoholhaltige Getränke angelegt.
+                            {% endif %}
+                        <p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Anzeigen</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+
+
+
