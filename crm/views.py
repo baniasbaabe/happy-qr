@@ -19,7 +19,7 @@ def dashboard(request):
 
 # Start Kunden CRUD-Methoden-----------------------------------------------------------------------------------------
 
-def kundenliste(request):  #hole alle kunden aus DB
+def kundenliste(request):  # hole alle kunden aus DB
     kunden = Kunde.objects.all()
 
     context = {"kunden": kunden,
@@ -68,9 +68,9 @@ def KundeLoeschen(request, pk):
 
 # Ende Kunden CRUD-Methoden-----------------------------------------------------------------------------------------
 
-# Start Mitarbeiter CRUD-Methoden-----------------------------------------------------------------------------------------
+# Start Mitarbeiter CRUD-Methoden-----------------------------------------------------------------------------------
 
-def mitarbeiterliste(request): #hole alle Mitarbeiter aus DB
+def mitarbeiterliste(request):  # hole alle Mitarbeiter aus DB
     mitarbeiter = Mitarbeiter.objects.all()
 
     context = {"mitarbeiter": mitarbeiter,
@@ -116,18 +116,19 @@ def mitarbeiterLoeschen(request, pk):
     context = {"mitarbeiter": mitarbeiter}
     return render(request, 'crm/delete_mitarbeiter.html', context)
 
+
 # Ende Mitarbeiter CRUD-Methoden-----------------------------------------------------------------------------------------
 
-def auftragsliste(request):  #hole alle Aufträge aus DB
+def auftragsliste(request):  # hole alle Aufträge aus DB
     auftraege = Auftrag.objects.all()
 
-    context = {"auftraege":auftraege,
+    context = {"auftraege": auftraege,
 
                }
     return render(request, 'crm/auftragsliste.html', context)
 
-def auftragAnlegen(request):
 
+def auftragAnlegen(request):
     form = AuftragForm()
 
     if request.method == "POST":
@@ -140,10 +141,10 @@ def auftragAnlegen(request):
 
     return render(request, "crm/auftrag_form.html", context)
 
-def auftragAktualisieren(request, pk):
-    auftrag =Auftrag.objects.get(id=pk)
-    form =AuftragForm(instance=auftrag)
 
+def auftragAktualisieren(request, pk):
+    auftrag = Auftrag.objects.get(id=pk)
+    form = AuftragForm(instance=auftrag)
 
     if request.method == "POST":
         form = AuftragForm(request.POST, instance=auftrag)
@@ -155,6 +156,7 @@ def auftragAktualisieren(request, pk):
 
     return render(request, "crm/auftrag_form.html", context)
 
+
 def auftragLoeschen(request, pk):
     auftrag = Auftrag.objects.get(id=pk)
 
@@ -162,5 +164,13 @@ def auftragLoeschen(request, pk):
         auftrag.delete()
         return redirect('auftragsliste')
 
-    context = {"auftrag":auftrag}
+    context = {"auftrag": auftrag}
     return render(request, 'crm/delete_auftrag.html', context)
+
+
+# Ende Kunden CRUD-Aufträge-----------------------------------------------------------------------------------------
+
+# Start Menucard CRUD-Methoden-----------------------------------------------------------------------------------------
+
+def produkt_anlegen(request):  # Muss entfernt werden
+    return render(request, 'crm/add_produkt.html', {})
