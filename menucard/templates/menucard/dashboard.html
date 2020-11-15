@@ -13,6 +13,7 @@
         <div class="col">
             <div class="card-deck mb-4">
 
+                <!-- VORSPEISEN -->
                 <div class="card shadow-sm" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">Vorspeisen</h5>
@@ -27,6 +28,7 @@
                     </div>
                 </div>
 
+                <!-- HAUPTSPEISEN -->
                 <div class="card shadow-sm" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">Hauptspeisen</h5>
@@ -41,6 +43,7 @@
                     </div>
                 </div>
 
+                <!-- NACHSPEISEN -->
                 <div class="card shadow-sm" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">Nachspeisen</h5>
@@ -58,6 +61,7 @@
             </div>
             <div class="card-deck mb-4">
 
+                <!-- SNACKS -->
                 <div class="card shadow-sm" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">Snacks</h5>
@@ -72,6 +76,7 @@
                     </div>
                 </div>
 
+                <!-- SOFTDRINKS -->
                 <div class="card shadow-sm" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">Alkoholfreie Getränke</h5>
@@ -82,10 +87,11 @@
                                 Sie haben {{ count_alkfreidrinks }} alkoholfreies Getränke angelegt.
                             {% endif %}
                         <p>
-                            <a href="#" class="btn btn-outline-primary btn-sm">Anzeigen</a>
+                            <a href="{% url 'alkfreiedrinks' %}" class="btn btn-outline-primary btn-sm">Anzeigen</a>
                     </div>
                 </div>
 
+                <!-- ALKOHOLHALTIGE DRINKS -->
                 <div class="card shadow-sm" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">Alkoholhaltige Getränke</h5>

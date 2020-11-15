@@ -1,0 +1,49 @@
+{% extends 'menucard/base.html' %}
+{% load crispy_forms_filters %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block body %}
+
+    <div class="row mt-3">
+        <div class="col">
+            <h2>Getränk löschen</h2>
+            <hr>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col mt-3">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="alert alert-danger" role="alert">
+                        <span class="fas fa-exclamation-triangle"></span>
+                        Möchten Sie das folgende Getränk wirklich löschen?
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Getränk</strong><br> {{ softdrink.name }}</li>
+                        <li class="list-group-item">
+                            <strong>Beschreibung</strong><br>
+                            {% if softdrink.beschreibung == '' %}
+                                (Leer)
+                            {% else %}
+                                {{ softdrink.beschreibung }}
+                            {% endif %}
+                        </li>
+                        <li class="list-group-item"><strong>Preis</strong><br>{{ softdrink.preis }} EUR</li>
+                    </ul>
+                    <br>
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">
+                            <span class="fas fa-trash"></span> Löschen
+                        </button>
+                        <a href="{% url 'alkfreiedrinks' %}" class="btn btn-secondary">
+                            <span class="fas fa-times-circle"></span> Abbrechen
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}

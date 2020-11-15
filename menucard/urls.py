@@ -10,4 +10,10 @@ urlpatterns = [
     path('vorspeisen-add/', views.vorspeisen_anlegen, name='vorspeisen_anlegen'),
     path('vorspeisen-bearbeiten/<str:pk>/', views.vorspeisen_bearbeiten, name='vorspeisen_bearbeiten'),
     path('vorspeisen-loeschen/<str:pk>/', views.vorspeisen_loeschen, name='vorspeisen_loeschen'),
+
+    # Alkoholfreie Drinks URLs
+    path('alkoholfreiedrinks/', views.alkfreiedrinks, name='alkfreiedrinks'),
+    path('alkoholfreiedrinks-add/', views.alkfreiedrinks_anlegen, name='alkfreiedrinks_anlegen'),
+    path('alkoholfreiedrinks-bearbeiten/<str:pk>/', views.alkfreiedrinks_bearbeiten, name='alkfreiedrinks_bearbeiten'),
+    path('alkoholfreiedrinks-loeschen/<str:pk>/', views.alkfreiedrinks_loeschen, name='alkfreiedrinks_loeschen'),
 ]

@@ -75,3 +75,56 @@ def vorspeisen_loeschen(request, pk):
 
     context = {"vorspeise": vorspeise}
     return render(request, 'menucard/vorspeise_loeschen.html', context)
+
+
+def alkfreiedrinks(request):
+    softdrink = AlkoholfreieDrinks.objects.all()
+    context = {'softdrink': softdrink}
+    return render(request, 'menucard/alkfreiedrinks.html', context)
+
+
+def alkfreiedrinks_anlegen(request):
+    softdrink = AlkoholfreieDrinks()
+    form = AlkfreieDrinksForm(initial={'softdrink': softdrink})
+
+    if request.method == "POST":
+        form = AlkfreieDrinksForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('alkfreiedrinks')
+        # messages.success(request, 'Vorspeise erfolgreich hinzugefügt.')
+        else:
+            messages.info(request, 'Bitte überprüfen Sie Ihre Eingabe.')
+
+    context = {'form': form}
+    return render(request, "menucard/alkfreiedrinks_anlegen.html", context)
+
+
+def alkfreiedrinks_bearbeiten(request, pk):
+    softdrink = AlkoholfreieDrinks.objects.get(id=pk)
+    form = AlkfreieDrinksForm(instance=softdrink)
+
+    if request.method == 'POST':
+        form = AlkfreieDrinksForm(request.POST, instance=softdrink)
+        if form.is_valid():
+            form.save()
+            return redirect('alkfreiedrinks')
+        else:
+            messages.info(request, 'Überprüfen Sie Ihre Eingabe.')
+
+    context = {
+        'softdrink': softdrink,
+        'form': form
+    }
+    return render(request, 'menucard/alkfreiedrinks_bearbeiten.html', context)
+
+
+def alkfreiedrinks_loeschen(request, pk):
+    softdrink = AlkoholfreieDrinks.objects.get(id=pk)
+
+    if request.method == "POST":
+        softdrink.delete()
+        return redirect('alkfreiedrinks')
+
+    context = {"softdrink": softdrink}
+    return render(request, 'menucard/alkfreiedrinks_loeschen.html', context)
