@@ -1,11 +1,12 @@
 {% extends 'menucard/base.html' %}
+{% load crispy_forms_filters %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% block body %}
 
 <div class="row mt-3">
     <div class="col">
-        <h2></h2>
+        <h2>Vorspeise bearbeiten</h2>
         <hr>
     </div>
 </div>
@@ -17,7 +18,7 @@
                 {% csrf_token %}
                 {{ form | crispy }}
                 <input class="btn btn-success" type="submit" name="Submit" value="Speichern">
-                <a class="btn btn-danger" href="{% url 'mitarbeiterliste' %}">Abbrechen</a>
+                <a class="btn btn-danger" href="{% url 'vorspeisen' %}">Abbrechen</a>
             </form>
         </div>
     </div>
