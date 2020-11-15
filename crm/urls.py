@@ -23,6 +23,6 @@ urlpatterns = [
     # Rechnungs-URLs-------------------------------------------------------------
     path("rechnungsliste/", views.rechnungsliste, name="rechnungsliste"),
     path("rechnung_anlegen", views.rechnungAnlegen, name="rechnung_anlegen"),
-
+   path("rechnung_aktualisieren/<str:pk>/", views.rechnungAktualisieren, name='rechnung_aktualisieren'),
     path("rechnung_loeschen/<str:pk>/", views.rechnungLoeschen, name='rechnung_loeschen'),
 ]
