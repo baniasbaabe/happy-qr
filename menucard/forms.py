@@ -10,29 +10,29 @@ class VorspeiseForm(ModelForm):
 
 class HauptspeiseForm(ModelForm):
     class Meta:
-        model = Vorspeise
+        model = Hauptspeise
         fields = '__all__'
 
 
 class NachspeiseForm(ModelForm):
     class Meta:
-        model = Vorspeise
+        model = Nachspeise
         fields = '__all__'
 
 
 class SnacksForm(ModelForm):
     class Meta:
-        model = Vorspeise
+        model = Snacks
         fields = '__all__'
 
 
 class AlkfreieDrinksForm(ModelForm):
     class Meta:
-        model = Vorspeise
+        model = AlkoholfreieDrinks
         fields = '__all__'
 
 
 class AlkhaltigeDrinksForm(ModelForm):
     class Meta:
-        model = Vorspeise
+        model = AlkoholhaltigeDrinks
         fields = '__all__'
