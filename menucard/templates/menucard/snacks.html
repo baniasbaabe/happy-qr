@@ -1,0 +1,75 @@
+{% extends 'menucard/base.html' %}
+
+{% block body %}
+
+    <!-- HEADER -->
+    <div class="row mt-3">
+        <div class="col">
+            <h2>Snacks</h2>
+            <hr>
+        </div>
+    </div>
+
+    <!-- BUTTON GROUP    -->
+    <div class="row mt-3">
+        <div class="col">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a href="{% url 'menucard_dashboard' %}" class="btn btn-outline-primary">
+                    <span class="fas fa-angle-left"></span> Zurück zum Dashboard
+                </a>
+                <a href="{% url 'snacks_anlegen' %}" class="btn btn-outline-primary">
+                    <span class="fas fa-plus"></span> Snacks hinzufügen
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- TABLE -->
+    <div class="row mt-3">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table table-sm table-hover table-bordered">
+                    <thead>
+                    <tr>
+
+                        <th scope="col">Snack</th>
+                        <th scope="col">Beschreibung</th>
+                        <th scope="col" class="text-right">Preis</th>
+                        <th scope="col" class="text-center">
+                            <span class="fas fa-edit"></span>
+                        </th>
+                        <th scope="col" class="text-center">
+                            <span class="fas fa-trash"></span>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for i in snack %}
+                        <tr>
+
+                            <td>{{ i.name }}</td>
+                            <td>{{ i.beschreibung }}</td>
+                            <td class="text-right">{{ i.preis }} EUR</td>
+                            <td data-toggle="tooltip" data-placement="top" title="Snack bearbeiten"
+                                class="text-center">
+                                <a href="{% url 'snacks_bearbeiten' i.id %}">
+                                    <span class="fas fa-edit"></span>
+                                </a>
+                            </td>
+                            <td data-toggle="tooltip" data-placement="top" title="Snack löschen"
+                                class="text-center">
+                                <a href="{% url 'snacks_loeschen' i.id %}">
+                                    <span class="fas fa-trash" style="color: crimson"></span>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+
+
+
