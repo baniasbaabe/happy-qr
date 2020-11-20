@@ -22,4 +22,7 @@ urlpatterns = [
     path('snacks-add/', views.snacks_anlegen, name='snacks_anlegen'),
     path('snacks-bearbeiten/<str:pk>/', views.snacks_bearbeiten, name='snacks_bearbeiten'),
     path('snacks-loeschen/<str:pk>/', views.snacks_loeschen, name='snacks_loeschen'),
+
+    # Menucard URL
+    path('menucard/', views.menucard, name='menucard')
 ]

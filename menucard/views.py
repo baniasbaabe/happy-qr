@@ -184,3 +184,22 @@ def alkfreiedrinks_loeschen(request, pk):
 
     context = {"softdrink": softdrink}
     return render(request, 'menucard/alkfreiedrinks_loeschen.html', context)
+
+
+def menucard(request):
+    vorspeisen = Vorspeise.objects.all()
+    hauptspeise = Hauptspeise.objects.all()
+    nachspeise = Nachspeise.objects.all()
+    snacks = Snacks.objects.all()
+    softdrink = AlkoholfreieDrinks.objects.all()
+    alkdrinks = AlkoholhaltigeDrinks.objects.all()
+
+    context = {
+        'vorspeisen': vorspeisen,
+        'hauptspeise': hauptspeise,
+        'nachspeise': nachspeise,
+        'snacks': snacks,
+        'softdrink': softdrink,
+        'alkdrinks': alkdrinks
+    }
+    return render(request, 'menucard/menucard.html', context)
