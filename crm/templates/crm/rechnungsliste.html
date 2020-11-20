@@ -37,7 +37,13 @@
                         class="fas fa-trash-alt
 "></span></a></td>
             <td>
-                <a class="btn btn-sm btn-dark" href="#"><span class="fas fa-file-alt"></span></a>
+                <a class="btn btn-sm btn-dark" href="{% url 'pdf_view' rechnung.id %}" target="_blank"><span class="fas fa-file-pdf"></span></a>
+            </td>
+            <td>
+                <a class="btn btn-sm btn-dark" href="{% url 'pdf_download' rechnung.id %}" target="_blank"><span class="fas fa-file-download"></span></a>
+            </td>
+             <td>
+                <a class="btn btn-sm btn-dark" href="{% url 'csv_download' rechnung.id %}" target="_blank"><span class="fas fa-file-csv"></span></a>
             </td>
             </tr>
             {% endfor %}

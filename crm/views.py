@@ -1,6 +1,13 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.utils import timezone
 from .models import *
 from .forms import *
+from io import BytesIO
+from django.template.loader import get_template
+from django.views import View
+from xhtml2pdf import pisa
+import csv
 
 
 # Funktion um dashboard.html anzuzeigen mit sämtlichen Mitarbeitern
@@ -212,3 +219,52 @@ def rechnungLoeschen(request, pk):
     context = {"rechnung":rechnung}
     return render(request, 'crm/delete_rechnung.html', context)
 
+def render_to_pdf(template_src, context_dict):
+
+    template = get_template(template_src)
+    html  = template.render(context_dict)
+    result = BytesIO()
+    pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+    if not pdf.err:
+        return HttpResponse(result.getvalue(), content_type='application/pdf')
+    return None
+
+def csv_download(request, pk):
+
+    rechnung = Rechnung.objects.get(id=pk)
+
+    response = HttpResponse(content_type='text/csv')
+    filename = "Rechnung_%s.csv" %(rechnung.id)
+    content = "attachment; filename='%s'" % (filename)
+    response['Content-Disposition'] = content
+
+    writer = csv.writer(response, delimiter =",")
+    writer.writerow(["Vorname", "Nachname", "EMail", "Telefon","Web", "Produkt","Preis"])
+
+    writer.writerow([rechnung.kunde.vorname, rechnung.kunde.nachname, rechnung.kunde.email,
+                     rechnung.kunde.telefon, rechnung.kunde.web, rechnung.auftrag.produkt,
+                     rechnung.auftrag.preis])
+
+    return response
+
+#Opens up page as PDF
+class ViewPDF(View):
+    from .models import Kunde, Rechnung, Auftrag
+    def get(self, request,pk,*args, **kwargs):
+        rechnung = Rechnung.objects.get(id=pk)
+        data = {"rechnung":rechnung, "datum":timezone.now()}
+        pdf = render_to_pdf('crm/rechnung_pdf.html', data)
+        return HttpResponse(pdf, content_type='application/pdf')
+
+
+class DownloadPDF(View):
+    def get(self, request, pk,*args, **kwargs):
+        rechnung = Rechnung.objects.get(id=pk)
+        data = {"rechnung": rechnung, "datum": timezone.now()}
+        pdf = render_to_pdf('crm/rechnung_pdf.html', data)
+
+        response = HttpResponse(pdf, content_type='application/pdf')
+        filename = "Rechnung_%s.pdf" %(rechnung.id)
+        content = "attachment; filename='%s'" %(filename)
+        response['Content-Disposition'] = content
+        return response

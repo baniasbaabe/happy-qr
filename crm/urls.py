@@ -25,4 +25,7 @@ urlpatterns = [
     path("rechnung_anlegen", views.rechnungAnlegen, name="rechnung_anlegen"),
     path("rechnung_aktualisieren/<str:pk>/", views.rechnungAktualisieren, name='rechnung_aktualisieren'),
     path("rechnung_loeschen/<str:pk>/", views.rechnungLoeschen, name='rechnung_loeschen'),
+    path('pdf_view/<str:pk>', views.ViewPDF.as_view(), name="pdf_view"),
+    path('pdf_download/<str:pk>', views.DownloadPDF.as_view(), name="pdf_download"),
+    path('csv_download/<str:pk>', views.csv_download, name="csv_download"),
 ]
