@@ -211,3 +211,4 @@ def rechnungLoeschen(request, pk):
 
     context = {"rechnung":rechnung}
     return render(request, 'crm/delete_rechnung.html', context)
+
