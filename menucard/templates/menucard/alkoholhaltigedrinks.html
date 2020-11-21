@@ -1,0 +1,75 @@
+{% extends 'menucard/base.html' %}
+
+{% block body %}
+
+    <!-- HEADER -->
+    <div class="row mt-3">
+        <div class="col">
+            <h2>Alkoholhaltige Getränke</h2>
+            <hr>
+        </div>
+    </div>
+
+    <!-- BUTTON GROUP    -->
+    <div class="row mt-3">
+        <div class="col">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a href="{% url 'menucard_dashboard' %}" class="btn btn-outline-primary">
+                    <span class="fas fa-angle-left"></span> Zurück zum Dashboard
+                </a>
+                <a href="{% url 'alkoholhaltigedrinks_anlegen' %}" class="btn btn-outline-primary">
+                    <span class="fas fa-plus"></span> Getränk hinzufügen
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- TABLE -->
+    <div class="row mt-3">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table table-sm table-hover table-bordered">
+                    <thead>
+                    <tr>
+                        <th scope="col">Getränk</th>
+                        <th scope="col">Liter</th>
+                        <th scope="col">Beschreibung</th>
+                        <th scope="col" class="text-right">Preis</th>
+                        <th scope="col" class="text-center">
+                            <span class="fas fa-edit"></span>
+                        </th>
+                        <th scope="col" class="text-center">
+                            <span class="fas fa-trash"></span>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for i in alkdrink %}
+                        <tr>
+                            <td>{{ i.name }}</td>
+                            <td>{{ i.liter }}</td>
+                            <td>{{ i.beschreibung }}</td>
+                            <td class="text-right">{{ i.preis }} EUR</td>
+                            <td data-toggle="tooltip" data-placement="top" title="Alkoholhaltige Drink bearbeiten"
+                                class="text-center">
+                                <a href="{% url 'alkoholhaltigedrinks_bearbeiten' i.id %}">
+                                    <span class="fas fa-edit"></span>
+                                </a>
+                            </td>
+                            <td data-toggle="tooltip" data-placement="top" title="Alkoholhaltige Drinks löschen"
+                                class="text-center">
+                                <a href="{% url 'alkoholhaltigedrinks_loeschen' i.id %}">
+                                    <span class="fas fa-trash" style="color: crimson"></span>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+
+
+
