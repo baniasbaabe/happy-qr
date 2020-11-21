@@ -39,7 +39,7 @@
                                 Sie haben {{ count_hauptspeisen }} Hauptspeise angelegt.
                             {% endif %}
                         <p>
-                            <a href="#" class="btn btn-outline-primary btn-sm">Anzeigen</a>
+                            <a href="{% url 'hauptspeisen' %}" class="btn btn-outline-primary btn-sm">Anzeigen</a>
                     </div>
                 </div>
 
@@ -51,10 +51,10 @@
                             {% if count_hauptspeisen > 1 %}
                                 Sie haben {{ count_nachspeisen }} Nachspeisen angelegt.
                             {% else %}
-                                Sie haben {{ count_hauptspeisen }} Nachspeise angelegt.
+                                Sie haben {{ count_nachspeisen }} Nachspeise angelegt.
                             {% endif %}
                         <p>
-                            <a href="#" class="btn btn-outline-primary btn-sm">Anzeigen</a>
+                            <a href="{% url 'nachspeisen' %}" class="btn btn-outline-primary btn-sm">Anzeigen</a>
                     </div>
                 </div>
 
@@ -102,7 +102,7 @@
                                 Sie haben {{ count_alkdrinks }} alkoholhaltige Getränke angelegt.
                             {% endif %}
                         <p>
-                            <a href="#" class="btn btn-outline-primary btn-sm">Anzeigen</a>
+                            <a href="{% url 'alkoholhaltigedrinks' %}" class="btn btn-outline-primary btn-sm">Anzeigen</a>
                     </div>
                 </div>
 

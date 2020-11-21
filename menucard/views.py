@@ -78,6 +78,112 @@ def vorspeisen_loeschen(request, pk):
     context = {"vorspeise": vorspeise}
     return render(request, 'menucard/vorspeise_loeschen.html', context)
 
+# HAUPTSPEISEN CRUD
+def hauptspeisen(request):
+    hauptspeise = Hauptspeise.objects.all()
+    context = {'hauptspeisen': hauptspeise}
+    return render(request, 'menucard/hauptspeisen.html', context)
+
+
+def hauptspeisen_anlegen(request):
+    hauptspeise = Hauptspeise()
+    form = HauptspeiseForm(initial={'hauptspeise': hauptspeise})
+
+    if request.method == "POST":
+        form = HauptspeiseForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('hauptspeisen')
+        # messages.success(request, 'Hauptspeise erfolgreich hinzugefügt.')
+        else:
+            messages.info(request, 'Bitte überprüfen Sie Ihre Eingabe.')
+
+    context = {'form': form}
+    return render(request, "menucard/hauptspeisen_anlegen.html", context)
+
+
+def hauptspeisen_bearbeiten(request, pk):
+    hauptspeise = Hauptspeise.objects.get(id=pk)
+    form = HauptspeiseForm(instance=hauptspeise)
+
+    if request.method == 'POST':
+        form = HauptspeiseForm(request.POST, instance=hauptspeise)
+        if form.is_valid():
+            form.save()
+            return redirect('hauptspeisen')
+        else:
+            messages.info(request, 'Überprüfen Sie Ihre Eingabe.')
+
+    context = {
+        'hauptspeise': hauptspeise,
+        'form': form
+    }
+    return render(request, 'menucard/hauptspeisen_bearbeiten.html', context)
+
+
+def hauptspeise_loeschen(request, pk):
+    hauptspeise = Hauptspeise.objects.get(id=pk)
+
+    if request.method == "POST":
+        hauptspeise.delete()
+        return redirect('hauptspeisen')
+
+    context = {"hauptspeise": hauptspeise}
+    return render(request, 'menucard/hauptspeise_loeschen.html', context)
+
+# NACHSPEISEN CRUD
+def nachspeisen(request):
+    nachspeise = Nachspeise.objects.all()
+    context = {'nachspeisen': nachspeise}
+    return render(request, 'menucard/nachspeisen.html', context)
+
+
+def nachspeisen_anlegen(request):
+    nachspeise = Nachspeise()
+    form = VorspeiseForm(initial={'nachspeisen': nachspeisen})
+
+    if request.method == "POST":
+        form = NachspeiseForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('nachspeisen')
+        # messages.success(request, 'Nachspeise erfolgreich hinzugefügt.')
+        else:
+            messages.info(request, 'Bitte überprüfen Sie Ihre Eingabe.')
+
+    context = {'form': form}
+    return render(request, "menucard/nachspeisen_anlegen.html", context)
+
+
+def nachspeisen_bearbeiten(request, pk):
+    nachspeise = Nachspeise.objects.get(id=pk)
+    form = NachspeiseForm(instance=nachspeise)
+
+    if request.method == 'POST':
+        form = NachspeiseForm(request.POST, instance=nachspeise)
+        if form.is_valid():
+            form.save()
+            return redirect('nachspeisen')
+        else:
+            messages.info(request, 'Überprüfen Sie Ihre Eingabe.')
+
+    context = {
+        'nachspeise': nachspeise,
+        'form': form
+    }
+    return render(request, 'menucard/nachspeisen_bearbeiten.html', context)
+
+
+def nachspeisen_loeschen(request, pk):
+    nachspeise = Nachspeise.objects.get(id=pk)
+
+    if request.method == "POST":
+        nachspeise.delete()
+        return redirect('nachspeisen')
+
+    context = {"nachspeise": nachspeise}
+    return render(request, 'menucard/nachspeise_loeschen.html', context)
+
 
 # SNACKS CRUD
 def snacks(request):
@@ -130,6 +236,59 @@ def snacks_loeschen(request, pk):
 
     context = {"snack": snack}
     return render(request, 'menucard/snacks_loeschen.html', context)
+
+# ALKOHOLHALTIGE GETRÄNKE CRUD
+def alkoholhaltigedrinks(request):
+    alkdrink = AlkoholhaltigeDrinks.objects.all()
+    context = {'alkdrink': alkdrink}
+    return render(request, 'menucard/alkoholhaltigedrinks.html', context)
+
+
+def alkoholhaltigedrinks_anlegen(request):
+    alkdrink = AlkoholhaltigeDrinks()
+    form = AlkhaltigeDrinksForm(initial={'alkdrink': alkdrink})
+
+    if request.method == "POST":
+        form = AlkhaltigeDrinksForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('alkoholhaltigedrinks')
+        # messages.success(request, 'Alkoholhaltige Drinks erfolgreich hinzugefügt.')
+        else:
+            messages.info(request, 'Bitte überprüfen Sie Ihre Eingabe.')
+
+    context = {'form': form}
+    return render(request, "menucard/alkoholhaltigedrinks_anlegen.html", context)
+
+
+def alkoholhaltigedrinks_bearbeiten(request, pk):
+    alkdrink = AlkoholhaltigeDrinks.objects.get(id=pk)
+    form = AlkhaltigeDrinksForm(instance=alkdrink)
+
+    if request.method == 'POST':
+        form = AlkfreieDrinksForm(request.POST, instance=alkdrink)
+        if form.is_valid():
+            form.save()
+            return redirect('alkoholhaltigedrinks')
+        else:
+            messages.info(request, 'Überprüfen Sie Ihre Eingabe.')
+
+    context = {
+        'alkdrink': alkdrink,
+        'form': form
+    }
+    return render(request, 'menucard/alkoholhaltigedrinks_bearbeiten.html', context)
+
+
+def alkoholhaltigedrinks_loeschen(request, pk):
+    alkdrink = AlkoholhaltigeDrinks.objects.get(id=pk)
+
+    if request.method == "POST":
+        alkdrink.delete()
+        return redirect('alkoholhaltigedrinks')
+
+    context = {"alkdrink": alkdrink}
+    return render(request, 'menucard/alkoholhaltigedrinks_loeschen.html', context)
 
 
 # ALKOHOLFREIE GETRÄNKE CRUD
