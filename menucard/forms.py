@@ -1,4 +1,5 @@
 from django.forms import ModelForm
+from django import forms
 from .models import *
 
 
@@ -35,4 +36,10 @@ class AlkfreieDrinksForm(ModelForm):
 class AlkhaltigeDrinksForm(ModelForm):
     class Meta:
         model = AlkoholhaltigeDrinks
+        fields = '__all__'
+
+
+class TemplateForm(ModelForm):
+    class Meta:
+        model = Template
         fields = '__all__'

@@ -57,3 +57,15 @@ class AlkoholhaltigeDrinks(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+
+class Template(models.Model):
+    TEMPLATE = [
+        ('Standard', 'Standard'),
+        ('Deluxe', 'Deluxe'),
+        ('Modern', 'Modern')
+    ]
+    template = models.CharField(choices=TEMPLATE, default='Standard', max_length=20, blank=False, null=False)
+
+    def __str__(self):
+        return self.template
