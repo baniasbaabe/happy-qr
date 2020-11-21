@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -14,6 +15,7 @@ def dashboard(request):
     count_snacks = Snacks.objects.count()
     count_alkfreidrinks = AlkoholfreieDrinks.objects.count()
     count_alkdrinks = AlkoholhaltigeDrinks.objects.count()
+
     context = {
         'count_vorspeisen': count_vorspeisen,
         'count_hauptspeisen': count_hauptspeisen,
@@ -78,6 +80,7 @@ def vorspeisen_loeschen(request, pk):
     context = {"vorspeise": vorspeise}
     return render(request, 'menucard/vorspeise_loeschen.html', context)
 
+
 # HAUPTSPEISEN CRUD
 def hauptspeisen(request):
     hauptspeise = Hauptspeise.objects.all()
@@ -130,6 +133,7 @@ def hauptspeise_loeschen(request, pk):
 
     context = {"hauptspeise": hauptspeise}
     return render(request, 'menucard/hauptspeise_loeschen.html', context)
+
 
 # NACHSPEISEN CRUD
 def nachspeisen(request):
@@ -236,6 +240,7 @@ def snacks_loeschen(request, pk):
 
     context = {"snack": snack}
     return render(request, 'menucard/snacks_loeschen.html', context)
+
 
 # ALKOHOLHALTIGE GETRÄNKE CRUD
 def alkoholhaltigedrinks(request):
@@ -359,6 +364,6 @@ def menucard(request):
         'nachspeise': nachspeise,
         'snacks': snacks,
         'softdrink': softdrink,
-        'alkdrinks': alkdrinks
+        'alkdrinks': alkdrinks,
     }
     return render(request, 'menucard/menucard.html', context)
