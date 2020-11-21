@@ -357,16 +357,6 @@ def menucard(request):
     snacks = Snacks.objects.all()
     softdrink = AlkoholfreieDrinks.objects.all()
     alkdrinks = AlkoholhaltigeDrinks.objects.all()
-    form = TemplateForm()
-
-    # FORM ZUM TESTEN
-    if request.method == 'POST':
-        form = TemplateForm(request.POST)
-        if form.is_valid():
-            form.save()
-            print('OK')
-        else:
-            print('FEHLER')
 
     context = {
         'vorspeisen': vorspeisen,
@@ -375,6 +365,5 @@ def menucard(request):
         'snacks': snacks,
         'softdrink': softdrink,
         'alkdrinks': alkdrinks,
-        'form': form
     }
     return render(request, 'menucard/menucard.html', context)

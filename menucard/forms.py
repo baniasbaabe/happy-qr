@@ -37,9 +37,3 @@ class AlkhaltigeDrinksForm(ModelForm):
     class Meta:
         model = AlkoholhaltigeDrinks
         fields = '__all__'
-
-
-class TemplateForm(ModelForm):
-    class Meta:
-        model = Template
-        fields = '__all__'
