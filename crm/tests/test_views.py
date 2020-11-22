@@ -127,6 +127,50 @@ class TestViews(TestCase):
         self.assertEqual(Kunde.objects.last().vorname, "Hallo")
         self.assertEquals(Kunde.objects.count(), 1)
 
+
+
+    '''
+    def test_UPDATE_auftrag(self):
+
+        response = self.client.post(
+            reverse('auftrag_aktualisieren', kwargs={'pk':self.auftrag1.id}),
+            {'kunde': self.kunde1, 'produkt': 'Digital Menucard', 'status':'Eingegangen', 'auftrag_vom':self.auftrag1.auftrag_vom,
+             'preis':100.00 ,'notiz':'Beispielnotiz1'})
+
+        self.assertEqual(response.status_code, 302)
+
+        self.auftrag1.refresh_from_db()
+        self.assertEqual(self.auftrag1.notiz, 'Beispielnotiz1')
+    '''
+
+
+
+    def test_UPDATE_kunde(self):
+
+        response = self.client.post(
+            reverse('kunde_aktualisieren', kwargs={'pk': self.kunde1.id}),
+            {'vorname': 'Update', 'nachname': 'Mustermann', 'telefon':"+4917611111111",
+             "email":"hallo@test.de", "web":"test.de", "notiz":"Beispielnotiz"})
+
+        self.assertEqual(response.status_code, 302)
+
+        self.kunde1.refresh_from_db()
+        self.assertEqual(self.kunde1.vorname, 'Update')
+
+    def test_UPDATE_mitarbeiter(self):
+
+        response = self.client.post(
+            reverse('mitarbeiter_aktualisieren', kwargs={'pk': self.mitarbeiter1.id}),
+            {'vorname': 'Update', 'nachname': 'Mustermann', 'telefon':"+4917611111111",
+             "email":"hallo@test.de"})
+
+        self.assertEqual(response.status_code, 302)
+
+        self.mitarbeiter1.refresh_from_db()
+        self.assertEqual(self.mitarbeiter1.vorname, 'Update')
+
+
+
     def test_DELETE_mitarbeiter(self):
 
         mitarbeiter = self.mitarbeiter1
