@@ -27,6 +27,8 @@ jobs:
         pip install -r requirements.txt
     - name: Run Migrations
       run: python manage.py migrate
+    - name: Install xvfb
+      run: sudo apt-get install xvfb
     - name: Run Tests
       run: |
-        python manage.py test
+        xvfb-run --auto-servernum python manage.py test
