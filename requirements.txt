@@ -4,3 +4,4 @@ phonenumbers==8.12.12
 coverage==5.3
 django-crispy-forms==1.9.2
 xhtml2pdf==0.2.5
+Selenium==3.141.0
