@@ -1,7 +1,7 @@
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium import webdriver
-from webdriver_manager.chrome import  ChromeDriverManager
+from webdriver_manager.chrome import ChromeDriverManager
 
 class TestKundeSeite(StaticLiveServerTestCase):
 
@@ -11,7 +11,7 @@ class TestKundeSeite(StaticLiveServerTestCase):
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('--headless')
         chrome_options.add_argument('--disable-gpu')
-        cls.browser = webdriver.Chrome(ChromeDriverManager().install(),options=chrome_options)
+        cls.browser = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
 
     @classmethod
     def tearDownClass(cls):
@@ -26,7 +26,7 @@ class TestKundeSeite(StaticLiveServerTestCase):
         nachname_input.send_keys('Mustermann')
         email_input = self.browser.find_element_by_name("email")
         email_input.send_keys('max@hotmail.de')
-        telefon_input = self.browser.find_element_by_name("telefon")
+        telefon_input =  self.browser.find_element_by_name("telefon")
         telefon_input.send_keys('+4917666994073')
         web_input = self.browser.find_element_by_name("web")
         web_input.send_keys('max.de')
