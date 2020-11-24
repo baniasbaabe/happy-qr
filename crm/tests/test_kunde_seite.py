@@ -10,7 +10,7 @@ class TestKundeSeite(StaticLiveServerTestCase):
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('--headless')
         chrome_options.add_argument('--disable-gpu')
-        cls.browser = webdriver.Chrome(options=chrome_options)
+        cls.browser = webdriver.Chrome(r"crm/tests/chromedriver",options=chrome_options)
 
     @classmethod
     def tearDownClass(cls):
