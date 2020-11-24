@@ -6,7 +6,11 @@ class TestKundeSeite(StaticLiveServerTestCase):
 
     @classmethod
     def setUp(cls):
-        cls.browser = webdriver.Chrome(r'crm\tests\chromedriver.exe')
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument('--no-sandbox')
+        chrome_options.add_argument('--headless')
+        chrome_options.add_argument('--disable-gpu')
+        cls.browser = webdriver.Chrome(options=chrome_options)
 
     @classmethod
     def tearDownClass(cls):
@@ -28,4 +32,4 @@ class TestKundeSeite(StaticLiveServerTestCase):
         notiz_input = self.browser.find_element_by_name("notiz")
         notiz_input.send_keys('Beispielnotiz')
         self.browser.find_element_by_xpath('//input[@value="Speichern"]').click()
-
+        print("Selenium test durchgeführt")
