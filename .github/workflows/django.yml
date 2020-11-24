@@ -21,14 +21,17 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
+    - name: Set Up Chromedriver
+      run: |
+        sudo apt-get update
+        sudo apt-get --only-upgrade install google-chrome-stable
+        sudo apt-get -yqq install chromium-chromedriver:
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Run Migrations
       run: python manage.py migrate
-    - name: Install xvfb
-      run: sudo apt-get install xvfb
     - name: Run Tests
       run: |
-        xvfb-run --auto-servernum python manage.py test
+        python manage.py test
