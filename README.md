@@ -4,7 +4,7 @@ Happy-QR ist eine Webapplikation, die Gastronomen eine Webanwendung zur Verfügu
 
 Der Happy-QR Mitarbeiter kann über die integrierte CRM Webanwendung sämtliche Aufträge und Rechnungen von Gastronomen erfassen, bearbeiten, exportieren und ggf. löschen. Zudem besteht die Möglichkeit die Daten bzw. Dokumente als CSV oder PDF Datei zu exportieren. Darüber hinaus können Kundendaten gepflegt werden. 
 
-Anwendung starten (Voraussetzung: Python auf dem Rechner):
+Anwendung starten (Voraussetzung: Python auf dem Rechner; Google Chrome):
 
 Für Windows:
 $ pip install virtualenv
