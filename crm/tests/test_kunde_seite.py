@@ -33,4 +33,4 @@ class TestKundeSeite(StaticLiveServerTestCase):
         notiz_input = self.browser.find_element_by_name("notiz")
         notiz_input.send_keys('Beispielnotiz')
         self.browser.find_element_by_xpath('//input[@value="Speichern"]').click()
-        print("Selenium test durchgeführt")
+
