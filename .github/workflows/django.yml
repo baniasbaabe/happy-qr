@@ -34,4 +34,8 @@ jobs:
       run: python manage.py migrate
     - name: Run Tests
       run: |
-        python manage.py test
+        coverage run --omit=*/venv/*,*/migrations/* manage.py test
+    - name: Test Report
+      run: coverage report
+        
+        
