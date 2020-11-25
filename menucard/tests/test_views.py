@@ -6,6 +6,13 @@ class TestViews(TestCase):
 
     def setUp(self):
         self.client = Client()
+        self.dashboard_url = reverse("menucard_dashboard")
+        self.vorspeisen_url = reverse("vorspeisen")
+        self.hauptspeisen_url = reverse("hauptspeisen")
+        self.nachspeisen_url = reverse("nachspeisen")
+        self.alkfreiedrinks_url = reverse("alkfreiedrinks")
+        self.alkhaltigedrinks_url = reverse("alkoholhaltigedrinks")
+        self.snacks_url = reverse("snacks")
 
         self.vorspeise1 = Vorspeise.objects.create(
             name = "Testname",
@@ -44,6 +51,58 @@ class TestViews(TestCase):
             centiliter=1,
             preis=1
         )
+
+    def test_dashboard_GET(self):
+
+
+        response = self.client.get(self.dashboard_url)
+
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, "menucard/dashboard.html")
+
+    def test_vorspeisen_GET(self):
+
+        response = self.client.get(self.vorspeisen_url)
+
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, "menucard/vorspeisen.html")
+
+    def test_hauptspeisen_GET(self):
+
+        response = self.client.get(self.hauptspeisen_url)
+
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, "menucard/hauptspeisen.html")
+
+    def test_nachspeisen_GET(self):
+
+        response = self.client.get(self.nachspeisen_url)
+
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, "menucard/nachspeisen.html")
+
+    def test_alkfreiedrinks_GET(self):
+
+        response = self.client.get(self.alkfreiedrinks_url)
+
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, "menucard/alkfreiedrinks.html")
+
+    def test_alkhaltigedrinks_GET(self):
+
+        response = self.client.get(self.alkhaltigedrinks_url)
+
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, "menucard/alkoholhaltigedrinks.html")
+
+    def test_snacks_GET(self):
+
+        response = self.client.get(self.snacks_url)
+
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, "menucard/snacks.html")
+
+
 
     def test_CREATE_vorspeise(self):
         post_response = self.client.post(reverse("vorspeisen_anlegen"), {
