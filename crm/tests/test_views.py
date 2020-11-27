@@ -44,6 +44,7 @@ class TestViews(TestCase):
             auftrag=self.auftrag1
         )
 
+    '''
     def test_kundenliste_GET(self):
         response = self.client.get(self.kundenliste_url)
 
@@ -67,14 +68,8 @@ class TestViews(TestCase):
 
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, "crm/auftragsliste.html")
-
-        '''
-         def test_rechnungsliste_GET(self):
-        response = self.client.get(self.rechnungsliste_url)
-
-        self.assertEquals(response.status_code, 200)
-        self.assertTemplateUsed(response, "crm/rechnungsliste.html")
-        '''
+        
+        
 
     def test_auftraganlegen_GET(self):
         response = self.client.get(self.auftraganlegen_url)
@@ -93,6 +88,8 @@ class TestViews(TestCase):
 
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, "crm/mitarbeiter_form.html")
+        
+    '''
 
     def test_CREATE_mitarbeiter(self):
         Mitarbeiter.objects.all().delete()
