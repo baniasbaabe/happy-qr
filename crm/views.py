@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.utils import timezone
+from django.contrib.auth.forms import UserCreationForm
 
 from .decoraters import nicht_authentifizierter_user, genehmigte_user
 from .models import *
@@ -13,7 +14,48 @@ from django.template.loader import get_template
 from django.views import View
 from xhtml2pdf import pisa
 import csv
+from django.contrib import messages
+from django.contrib.auth.models import Group
 
+@nicht_authentifizierter_user
+def register_view(request):
+
+    form = CreateUserForm()
+
+    if request.method == "POST":
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            username = form.cleaned_data.get('username')
+
+            group = Group.objects.get(name="kunde")
+
+            user.groups.add(group)
+
+            messages.success(request, "User wurde erfolgreich erstellt für" + username)
+
+    context = {"form":form}
+    return render(request, 'crm/registrierung.html', context)
+
+@nicht_authentifizierter_user
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('crm_dashboard')
+        else:
+            messages.info(request, 'Username oder Passwort falsch.')
+    context = {}
+    return render(request, 'crm/login.html', context)
+
+
+def logout_view(request):
+    logout(request)
+    messages.info(request, 'Sie haben sich erfolgreich ausgeloggt.')
+    return redirect('login')
 
 # Funktion um dashboard.html anzuzeigen mit sämtlichen Mitarbeitern
 @login_required(login_url='login')
@@ -312,22 +354,4 @@ class DownloadPDF(View):
         return response
 
 
-@nicht_authentifizierter_user
-def login_view(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('crm_dashboard')
-        else:
-            messages.info(request, 'Username oder Passwort falsch.')
-    context = {}
-    return render(request, 'crm/login.html', context)
 
-
-def logout_view(request):
-    logout(request)
-    messages.info(request, 'Sie haben sich erfolgreich ausgeloggt.')
-    return redirect('login')

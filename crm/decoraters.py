@@ -46,6 +46,6 @@ def admin_only(view_func):
                 return redirect('crm_dashboard')
 
             if group == 'kunde':
-                return redirect('logout')
+                return redirect('menucard_dashboard')
 
     return wrapper_func
