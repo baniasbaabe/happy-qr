@@ -1,55 +1,57 @@
 {% extends 'crm/base.html' %}
 
 {% block body %}
-<div class="row mt-3">
-    <div class="col">
-        <h2>Kundenliste</h2>
-        <hr>
-        <a class="btn btn-primary" href="{% url 'kunde_anlegen' %}">
-            <span class="fas fa-plus"></span> Kunden anlegen
-        </a>
+    <div class="row mt-3">
+        <div class="col">
+            <h2>Kundenliste</h2>
+            <hr>
+            <a class="btn btn-primary" href="{% url 'kunde_anlegen' %}">
+                <span class="fas fa-plus"></span> Kunden anlegen
+            </a>
+        </div>
     </div>
-</div>
 
-<div class="row mt-3">
-    <div class="col">
-        <table class="table table-hover table-sm">
-            <thead>
-            <tr>
-                <th scope="col">Anschauen</th>
-                <th scope="col">Vorname</th>
-                <th scope="col">Nachname</th>
-                <th scope="col">E-Mail</th>
-                <th scope="col">Telefon</th>
-                <th scope="col">Web</th>
-                <th scope="col">Notiz</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <!-- Zur Ausgabe die index-Variable nutzen. In diesem Fall ma -->
-            {% for kunde in kunden %}
-            <tr>
-                <td>{{ kunde.vorname }}</td>
-                <td>{{ kunde.nachname }}</td>
-                <td>{{ kunde.email }}</td>
-                <td>{{ kunde.telefon }}</td>
-                <td>{{ kunde.web }}</td>
-                <td>{{ kunde.notiz }}</td>
-                <td><a class="btn btn-sm btn-info" href="{% url 'kunde_aktualisieren' kunde.id %}"><span
-                        class="far fa-edit
+    <div class="row mt-3">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table table-hover table-sm">
+                    <thead>
+                    <tr>
+                        <th scope="col">Anschauen</th>
+                        <th scope="col">Vorname</th>
+                        <th scope="col">Nachname</th>
+                        <th scope="col">E-Mail</th>
+                        <th scope="col">Telefon</th>
+                        <th scope="col">Web</th>
+                        <th scope="col">Notiz</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Zur Ausgabe die index-Variable nutzen. In diesem Fall ma -->
+                    {% for kunde in kunden %}
+                        <tr>
+                            <td>{{ kunde.vorname }}</td>
+                            <td>{{ kunde.nachname }}</td>
+                            <td>{{ kunde.email }}</td>
+                            <td>{{ kunde.telefon }}</td>
+                            <td>{{ kunde.web }}</td>
+                            <td>{{ kunde.notiz }}</td>
+                            <td><a class="btn btn-sm btn-info" href="{% url 'kunde_aktualisieren' kunde.id %}"><span
+                                    class="far fa-edit
 
 "></span></a></td>
-                <td><a class="btn btn-sm btn-danger" href="{% url 'kunde_loeschen' kunde.id %}"><span
-                        class="fas fa-trash-alt
+                            <td><a class="btn btn-sm btn-danger" href="{% url 'kunde_loeschen' kunde.id %}"><span
+                                    class="fas fa-trash-alt
 "></span></a></td>
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-</div>
 
 
 {% endblock body %}

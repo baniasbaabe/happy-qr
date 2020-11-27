@@ -28,4 +28,7 @@ urlpatterns = [
     path('pdf_view/<str:pk>', views.ViewPDF.as_view(), name="pdf_view"),
     path('pdf_download/<str:pk>', views.DownloadPDF.as_view(), name="pdf_download"),
     path('csv_download/<str:pk>', views.csv_download, name="csv_download"),
+    # Login-URLs-------------------------------------------------------------
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
 ]

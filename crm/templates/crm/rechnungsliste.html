@@ -1,56 +1,61 @@
 {% extends 'crm/base.html' %}
 
 {% block body %}
-<div class="row mt-3">
-    <div class="col">
-        <h2>Rechnungsliste</h2>
-        <hr>
-        <a class="btn btn-primary" href="{% url 'rechnung_anlegen' %}">
-            <span class="fas fa-plus"></span> Rechnung anlegen
-        </a>
+    <div class="row mt-3">
+        <div class="col">
+            <h2>Rechnungsliste</h2>
+            <hr>
+            <a class="btn btn-primary" href="{% url 'rechnung_anlegen' %}">
+                <span class="fas fa-plus"></span> Rechnung anlegen
+            </a>
+        </div>
     </div>
-</div>
 
-<div class="row mt-3">
-    <div class="col">
-        <table class="table table-hover table-sm">
-            <thead>
-            <tr>
-                <th scope="col">Kunde</th>
-                <th scope="col">Auftrag</th>
-                <th scope="col">Datum</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <!-- Zur Ausgabe die index-Variable nutzen. In diesem Fall rechnung -->
-            {% for rechnung in rechnungen %}
-            <tr>
-                <td>{{ rechnung.kunde }}</td>
-                <td>{{ rechnung.auftrag }}</td>
-                <td>{{ rechnung.datum }}</td>
+    <div class="row mt-3">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table table-hover table-sm">
+                    <thead>
+                    <tr>
+                        <th scope="col">Kunde</th>
+                        <th scope="col">Auftrag</th>
+                        <th scope="col">Datum</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Zur Ausgabe die index-Variable nutzen. In diesem Fall rechnung -->
+                    {% for rechnung in rechnungen %}
+                        <tr>
+                            <td>{{ rechnung.kunde }}</td>
+                            <td>{{ rechnung.auftrag }}</td>
+                            <td>{{ rechnung.datum }}</td>
 
 
-                <td><a class="btn btn-sm btn-danger" href="{% url 'rechnung_loeschen' rechnung.id %}"><span
-                        class="fas fa-trash-alt
+                            <td><a class="btn btn-sm btn-danger" href="{% url 'rechnung_loeschen' rechnung.id %}"><span
+                                    class="fas fa-trash-alt
 "></span></a></td>
-            <td>
-                <a class="btn btn-sm btn-dark" href="{% url 'pdf_view' rechnung.id %}" target="_blank"><span class="fas fa-file-pdf"></span></a>
-            </td>
-            <td>
-                <a class="btn btn-sm btn-dark" href="{% url 'pdf_download' rechnung.id %}" target="_blank"><span class="fas fa-file-download"></span></a>
-            </td>
-             <td>
-                <a class="btn btn-sm btn-dark" href="{% url 'csv_download' rechnung.id %}" target="_blank"><span class="fas fa-file-csv"></span></a>
-            </td>
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                            <td>
+                                <a class="btn btn-sm btn-dark" href="{% url 'pdf_view' rechnung.id %}"
+                                   target="_blank"><span class="fas fa-file-pdf"></span></a>
+                            </td>
+                            <td>
+                                <a class="btn btn-sm btn-dark" href="{% url 'pdf_download' rechnung.id %}"
+                                   target="_blank"><span class="fas fa-file-download"></span></a>
+                            </td>
+                            <td>
+                                <a class="btn btn-sm btn-dark" href="{% url 'csv_download' rechnung.id %}"
+                                   target="_blank"><span class="fas fa-file-csv"></span></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-</div>
 
 
 {% endblock body %}

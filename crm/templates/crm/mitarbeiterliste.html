@@ -1,50 +1,54 @@
 {% extends 'crm/base.html' %}
 
 {% block body %}
-<div class="row mt-3">
-    <div class="col">
-        <h2>Mitarbeiterliste</h2>
-        <hr>
-        <a class="btn btn-primary" href="{% url 'mitarbeiter_anlegen' %}">
-            <span class="fas fa-plus"></span> Mitarbeiter anlegen
-        </a>
+    <div class="row mt-3">
+        <div class="col">
+            <h2>Mitarbeiterliste</h2>
+            <hr>
+            <a class="btn btn-primary" href="{% url 'mitarbeiter_anlegen' %}">
+                <span class="fas fa-plus"></span> Mitarbeiter anlegen
+            </a>
+        </div>
     </div>
-</div>
 
-<div class="row mt-3">
-    <div class="col">
-        <table class="table table-hover table-sm">
-            <thead>
-            <tr>
-                <th scope="col">Vorname</th>
-                <th scope="col">Nachname</th>
-                <th scope="col">E-Mail</th>
-                <th scope="col">Telefon</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <!-- Zur Ausgabe die index-Variable nutzen. Mitarbeiter werden aus DB ausgelesen -->
-            {% for mitarbeiter in mitarbeiter %}
-            <tr>
-                <td>{{ mitarbeiter.vorname }}</td>
-                <td>{{ mitarbeiter.nachname }}</td>
-                <td>{{ mitarbeiter.email }}</td>
-                <td>{{ mitarbeiter.telefon }}</td>
-                <td><a class="btn btn-sm btn-info" href="{% url 'mitarbeiter_aktualisieren' mitarbeiter.id %}"><span
-                        class="far fa-edit
+    <div class="row mt-3">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table table-hover table-sm">
+                    <thead>
+                    <tr>
+                        <th scope="col">Vorname</th>
+                        <th scope="col">Nachname</th>
+                        <th scope="col">E-Mail</th>
+                        <th scope="col">Telefon</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Zur Ausgabe die index-Variable nutzen. Mitarbeiter werden aus DB ausgelesen -->
+                    {% for mitarbeiter in mitarbeiter %}
+                        <tr>
+                            <td>{{ mitarbeiter.vorname }}</td>
+                            <td>{{ mitarbeiter.nachname }}</td>
+                            <td>{{ mitarbeiter.email }}</td>
+                            <td>{{ mitarbeiter.telefon }}</td>
+                            <td><a class="btn btn-sm btn-info"
+                                   href="{% url 'mitarbeiter_aktualisieren' mitarbeiter.id %}"><span
+                                    class="far fa-edit
 
 "></span></a></td>
-                <td><a class="btn btn-sm btn-danger" href="{% url 'mitarbeiter_loeschen' mitarbeiter.id %} "><span
-                        class="fas fa-trash-alt
+                            <td><a class="btn btn-sm btn-danger"
+                                   href="{% url 'mitarbeiter_loeschen' mitarbeiter.id %} "><span
+                                    class="fas fa-trash-alt
 "></span></a></td>
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-</div>
 
 
 {% endblock body %}

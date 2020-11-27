@@ -1,6 +1,11 @@
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.utils import timezone
+
+from .decoraters import nicht_authentifizierter_user, genehmigte_user
 from .models import *
 from .forms import *
 from io import BytesIO
@@ -11,13 +16,15 @@ import csv
 
 
 # Funktion um dashboard.html anzuzeigen mit sämtlichen Mitarbeitern
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['mitarbeiter'])
 def dashboard(request):
     # Objekt erstellen
     mitarbeiter = Mitarbeiter.objects.all()
 
     # Objekt in der HTML Datei zur Verfügung stellen
-    context= {
-        'mitarbeiter':mitarbeiter,
+    context = {
+        'mitarbeiter': mitarbeiter,
     }
 
     # Ausgabe der HTML Datei
@@ -25,8 +32,9 @@ def dashboard(request):
 
 
 # Start Kunden CRUD-Methoden-----------------------------------------------------------------------------------------
-
-def kundenliste(request):  #hole alle kunden aus DB
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['mitarbeiter'])
+def kundenliste(request):  # hole alle kunden aus DB
     kunden = Kunde.objects.all()
 
     context = {"kunden": kunden,
@@ -35,6 +43,8 @@ def kundenliste(request):  #hole alle kunden aus DB
     return render(request, 'crm/kundenliste.html', context)
 
 
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['mitarbeiter'])
 def KundeAnlegen(request):
     form = KundeForm()
     if request.method == "POST":
@@ -47,6 +57,8 @@ def KundeAnlegen(request):
     return render(request, 'crm/kunde_form.html', context)
 
 
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['mitarbeiter'])
 def KundeAktualisieren(request, pk):
     kunde = Kunde.objects.get(id=pk)
     form = KundeForm(instance=kunde)
@@ -62,6 +74,8 @@ def KundeAktualisieren(request, pk):
     return render(request, "crm/kunde_form.html", context)
 
 
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['mitarbeiter'])
 def KundeLoeschen(request, pk):
     kunde = Kunde.objects.get(id=pk)
 
@@ -76,8 +90,9 @@ def KundeLoeschen(request, pk):
 # Ende Kunden CRUD-Methoden-----------------------------------------------------------------------------------------
 
 # Start Mitarbeiter CRUD-Methoden-----------------------------------------------------------------------------------------
-
-def mitarbeiterliste(request): #hole alle Mitarbeiter aus DB
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['mitarbeiter'])
+def mitarbeiterliste(request):  # hole alle Mitarbeiter aus DB
     mitarbeiter = Mitarbeiter.objects.all()
 
     context = {"mitarbeiter": mitarbeiter,
@@ -86,6 +101,8 @@ def mitarbeiterliste(request): #hole alle Mitarbeiter aus DB
     return render(request, 'crm/mitarbeiterliste.html', context)
 
 
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['mitarbeiter'])
 def mitarbeiterAnlegen(request):
     form = MitarbeiterForm()
     if request.method == "POST":
@@ -98,6 +115,8 @@ def mitarbeiterAnlegen(request):
     return render(request, 'crm/mitarbeiter_form.html', context)
 
 
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['mitarbeiter'])
 def mitarbeiterAktualisieren(request, pk):
     mitarbeiter = Mitarbeiter.objects.get(id=pk)
     form = MitarbeiterForm(instance=mitarbeiter)
@@ -113,6 +132,8 @@ def mitarbeiterAktualisieren(request, pk):
     return render(request, "crm/mitarbeiter_form.html", context)
 
 
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['mitarbeiter'])
 def mitarbeiterLoeschen(request, pk):
     mitarbeiter = Mitarbeiter.objects.get(id=pk)
 
@@ -123,18 +144,22 @@ def mitarbeiterLoeschen(request, pk):
     context = {"mitarbeiter": mitarbeiter}
     return render(request, 'crm/delete_mitarbeiter.html', context)
 
-# Ende Mitarbeiter CRUD-Methoden-----------------------------------------------------------------------------------------
 
-def auftragsliste(request):  #hole alle Aufträge aus DB
+# Ende Mitarbeiter CRUD-Methoden-----------------------------------------------------------------------------------------
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['mitarbeiter'])
+def auftragsliste(request):  # hole alle Aufträge aus DB
     auftraege = Auftrag.objects.all()
 
-    context = {"auftraege":auftraege,
+    context = {"auftraege": auftraege,
 
                }
     return render(request, 'crm/auftragsliste.html', context)
 
-def auftragAnlegen(request):
 
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['mitarbeiter'])
+def auftragAnlegen(request):
     form = AuftragForm()
 
     if request.method == "POST":
@@ -147,10 +172,12 @@ def auftragAnlegen(request):
 
     return render(request, "crm/auftrag_form.html", context)
 
-def auftragAktualisieren(request, pk):
-    auftrag =Auftrag.objects.get(id=pk)
-    form =AuftragForm(instance=auftrag)
 
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['mitarbeiter'])
+def auftragAktualisieren(request, pk):
+    auftrag = Auftrag.objects.get(id=pk)
+    form = AuftragForm(instance=auftrag)
 
     if request.method == "POST":
         form = AuftragForm(request.POST, instance=auftrag)
@@ -162,6 +189,9 @@ def auftragAktualisieren(request, pk):
 
     return render(request, "crm/auftrag_form.html", context)
 
+
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['mitarbeiter'])
 def auftragLoeschen(request, pk):
     auftrag = Auftrag.objects.get(id=pk)
 
@@ -169,19 +199,24 @@ def auftragLoeschen(request, pk):
         auftrag.delete()
         return redirect('auftragsliste')
 
-    context = {"auftrag":auftrag}
+    context = {"auftrag": auftrag}
     return render(request, 'crm/delete_auftrag.html', context)
 
-def rechnungsliste(request):  #hole alle Rechnungen aus DB
+
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['mitarbeiter'])
+def rechnungsliste(request):  # hole alle Rechnungen aus DB
     rechnungen = Rechnung.objects.all()
 
-    context = {"rechnungen":rechnungen,
+    context = {"rechnungen": rechnungen,
 
                }
     return render(request, 'crm/rechnungsliste.html', context)
 
-def rechnungAnlegen(request):
 
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['mitarbeiter'])
+def rechnungAnlegen(request):
     form = RechnungForm()
 
     if request.method == "POST":
@@ -194,10 +229,12 @@ def rechnungAnlegen(request):
 
     return render(request, "crm/rechnung_form.html", context)
 
+
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['mitarbeiter'])
 def rechnungAktualisieren(request, pk):
     auftrag = Rechnung.objects.get(id=pk)
-    form =RechnungForm(instance=auftrag)
-
+    form = RechnungForm(instance=auftrag)
 
     if request.method == "POST":
         form = AuftragForm(request.POST, instance=auftrag)
@@ -209,6 +246,9 @@ def rechnungAktualisieren(request, pk):
 
     return render(request, "crm/rechnung_form.html", context)
 
+
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['mitarbeiter'])
 def rechnungLoeschen(request, pk):
     rechnung = Rechnung.objects.get(id=pk)
 
@@ -216,30 +256,30 @@ def rechnungLoeschen(request, pk):
         rechnung.delete()
         return redirect('rechnungsliste')
 
-    context = {"rechnung":rechnung}
+    context = {"rechnung": rechnung}
     return render(request, 'crm/delete_rechnung.html', context)
 
-def render_to_pdf(template_src, context_dict):
 
+def render_to_pdf(template_src, context_dict):
     template = get_template(template_src)
-    html  = template.render(context_dict)
+    html = template.render(context_dict)
     result = BytesIO()
     pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
     if not pdf.err:
         return HttpResponse(result.getvalue(), content_type='application/pdf')
     return None
 
-def csv_download(request, pk):
 
+def csv_download(request, pk):
     rechnung = Rechnung.objects.get(id=pk)
 
     response = HttpResponse(content_type='text/csv')
-    filename = "Rechnung_%s.csv" %(rechnung.id)
+    filename = "Rechnung_%s.csv" % (rechnung.id)
     content = "attachment; filename='%s'" % (filename)
     response['Content-Disposition'] = content
 
-    writer = csv.writer(response, delimiter =",")
-    writer.writerow(["Vorname", "Nachname", "EMail", "Telefon","Web", "Produkt","Preis"])
+    writer = csv.writer(response, delimiter=",")
+    writer.writerow(["Vorname", "Nachname", "EMail", "Telefon", "Web", "Produkt", "Preis"])
 
     writer.writerow([rechnung.kunde.vorname, rechnung.kunde.nachname, rechnung.kunde.email,
                      rechnung.kunde.telefon, rechnung.kunde.web, rechnung.auftrag.produkt,
@@ -247,24 +287,47 @@ def csv_download(request, pk):
 
     return response
 
-#Opens up page as PDF
+
+# Opens up page as PDF
+
 class ViewPDF(View):
     from .models import Kunde, Rechnung, Auftrag
-    def get(self, request,pk,*args, **kwargs):
+    def get(self, request, pk, *args, **kwargs):
         rechnung = Rechnung.objects.get(id=pk)
-        data = {"rechnung":rechnung, "datum":timezone.now()}
+        data = {"rechnung": rechnung, "datum": timezone.now()}
         pdf = render_to_pdf('crm/rechnung_pdf.html', data)
         return HttpResponse(pdf, content_type='application/pdf')
 
 
 class DownloadPDF(View):
-    def get(self, request, pk,*args, **kwargs):
+    def get(self, request, pk, *args, **kwargs):
         rechnung = Rechnung.objects.get(id=pk)
         data = {"rechnung": rechnung, "datum": timezone.now()}
         pdf = render_to_pdf('crm/rechnung_pdf.html', data)
 
         response = HttpResponse(pdf, content_type='application/pdf')
-        filename = "Rechnung_%s.pdf" %(rechnung.id)
-        content = "attachment; filename='%s'" %(filename)
+        filename = "Rechnung_%s.pdf" % (rechnung.id)
+        content = "attachment; filename='%s'" % (filename)
         response['Content-Disposition'] = content
         return response
+
+
+@nicht_authentifizierter_user
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('crm_dashboard')
+        else:
+            messages.info(request, 'Username oder Passwort falsch.')
+    context = {}
+    return render(request, 'crm/login.html', context)
+
+
+def logout_view(request):
+    logout(request)
+    messages.info(request, 'Sie haben sich erfolgreich ausgeloggt.')
+    return redirect('login')
