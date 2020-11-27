@@ -89,7 +89,7 @@ class TestViews(TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, "crm/mitarbeiter_form.html")
         
-    '''
+    
 
     def test_CREATE_mitarbeiter(self):
         Mitarbeiter.objects.all().delete()
@@ -117,7 +117,7 @@ class TestViews(TestCase):
         self.assertEqual(Kunde.objects.last().vorname, "Hallo")
         self.assertEquals(Kunde.objects.count(), 1)
 
-    '''
+    
     def test_UPDATE_auftrag(self):
 
         response = self.client.post(
@@ -129,7 +129,7 @@ class TestViews(TestCase):
 
         self.auftrag1.refresh_from_db()
         self.assertEqual(self.auftrag1.notiz, 'Beispielnotiz1')
-    '''
+    
 
     def test_UPDATE_kunde(self):
         response = self.client.post(
@@ -180,3 +180,4 @@ class TestViews(TestCase):
         post_response = self.client.post(reverse('rechnung_loeschen', kwargs={"pk": rechnung.id}))
         self.assertEquals(post_response.status_code, 302)
         self.assertEquals(Rechnung.objects.count(), 0)
+        '''
