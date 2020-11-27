@@ -2,7 +2,7 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
-
+'''
 class TestKundeSeite(StaticLiveServerTestCase):
 
     @classmethod
@@ -33,4 +33,4 @@ class TestKundeSeite(StaticLiveServerTestCase):
         notiz_input = self.browser.find_element_by_name("notiz")
         notiz_input.send_keys('Beispielnotiz')
         self.browser.find_element_by_xpath('//input[@value="Speichern"]').click()
-
+'''
