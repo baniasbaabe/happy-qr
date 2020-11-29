@@ -7,7 +7,7 @@ class TestViews(TestCase):
 
     def setUp(self):
 
-
+        '''
         self.user = User.objects.create_superuser(username="user1",email="user1@example.de",password="Hallo12345")
         self.client = Client()
 
@@ -18,7 +18,7 @@ class TestViews(TestCase):
 
         self.kundenliste_url = reverse("kundenliste")
 
-        '''
+
         self.dashboard_url = reverse("crm_dashboard")
         self.mitarbeiterliste_url = reverse("mitarbeiterliste")
         self.auftragsliste_url = reverse("auftragsliste")
@@ -26,7 +26,7 @@ class TestViews(TestCase):
         self.mitarbeiteranlegen_url = reverse("mitarbeiter_anlegen")
         self.auftraganlegen_url = reverse("auftrag_anlegen")
         self.rechnunganlegen_url = reverse("rechnung_anlegen")
-        '''
+
 
         self.kunde1 = Kunde.objects.create(
             vorname="TestVorname",
@@ -67,7 +67,7 @@ class TestViews(TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, template_name="crm/kundenliste.html")
 
-    '''
+
     def test_dashboard_GET(self):
         response = self.client.get(self.dashboard_url)
 
@@ -197,4 +197,5 @@ class TestViews(TestCase):
         post_response = self.client.post(reverse('rechnung_loeschen', kwargs={"pk": rechnung.id}))
         self.assertEquals(post_response.status_code, 302)
         self.assertEquals(Rechnung.objects.count(), 0)
-        '''
+    '''
+

@@ -14,6 +14,7 @@ class TestViews(TestCase):
         self.alkhaltigedrinks_url = reverse("alkoholhaltigedrinks")
         self.snacks_url = reverse("snacks")
 
+        '''
         self.vorspeise1 = Vorspeise.objects.create(
             name = "Testname",
             beschreibung="Testbeschreibung",
@@ -51,6 +52,7 @@ class TestViews(TestCase):
             centiliter=1,
             preis=1
         )
+    '''
     '''
     def test_dashboard_GET(self):
 
