@@ -28,7 +28,11 @@ class RechnungForm(ModelForm):
         fields = "__all__"
 
 class CreateUserForm(UserCreationForm):
+    first_name = forms.CharField(required=True, label='Vorname')
+    last_name = forms.CharField(required=True, label='Nachname')
+    email = forms.EmailField(required=True, label='E-Mail')
+
     class Meta:
         model = User
-        fields = ["username", "email", "password1", "password2"]
+        fields = ["username", "first_name", "last_name", "email", "password1", "password2"]
 

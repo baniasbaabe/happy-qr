@@ -1,13 +1,24 @@
 from django.test import TestCase, Client
 from django.urls import reverse
 from crm.models import *
-
+from django.contrib.auth.models import User, Permission,Group
 
 class TestViews(TestCase):
 
     def setUp(self):
+
+        '''
+        self.user = User.objects.create_superuser(username="user1",email="user1@example.de",password="Hallo12345")
         self.client = Client()
+
+        group_name = "mitarbeiter"
+        self.group = Group(name=group_name)
+        self.group.save()
+
+
         self.kundenliste_url = reverse("kundenliste")
+
+
         self.dashboard_url = reverse("crm_dashboard")
         self.mitarbeiterliste_url = reverse("mitarbeiterliste")
         self.auftragsliste_url = reverse("auftragsliste")
@@ -15,6 +26,7 @@ class TestViews(TestCase):
         self.mitarbeiteranlegen_url = reverse("mitarbeiter_anlegen")
         self.auftraganlegen_url = reverse("auftrag_anlegen")
         self.rechnunganlegen_url = reverse("rechnung_anlegen")
+
 
         self.kunde1 = Kunde.objects.create(
             vorname="TestVorname",
@@ -44,12 +56,17 @@ class TestViews(TestCase):
             auftrag=self.auftrag1
         )
 
-    '''
+
     def test_kundenliste_GET(self):
-        response = self.client.get(self.kundenliste_url)
+        self.user.groups.add(self.group)
+        self.user.save()
+        self.client.login(username="user1", password="Hallo12345")
+
+        response = self.client.get(self.kundenliste_url, follow=True)
 
         self.assertEquals(response.status_code, 200)
-        self.assertTemplateUsed(response, "crm/kundenliste.html")
+        self.assertTemplateUsed(response, template_name="crm/kundenliste.html")
+
 
     def test_dashboard_GET(self):
         response = self.client.get(self.dashboard_url)
@@ -180,4 +197,5 @@ class TestViews(TestCase):
         post_response = self.client.post(reverse('rechnung_loeschen', kwargs={"pk": rechnung.id}))
         self.assertEquals(post_response.status_code, 302)
         self.assertEquals(Rechnung.objects.count(), 0)
-        '''
+    '''
+
