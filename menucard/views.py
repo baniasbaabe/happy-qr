@@ -1,4 +1,6 @@
 from django.contrib import messages
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 
@@ -6,37 +8,70 @@ from django.shortcuts import render, redirect
 from menucard.forms import *
 from menucard.models import Vorspeise, Hauptspeise, Nachspeise, Snacks, AlkoholfreieDrinks, AlkoholhaltigeDrinks
 
+from crm.decoraters import *
+
+
+def logout_view(request):
+    logout(request)
+    messages.info(request, 'Sie haben sich erfolgreich ausgeloggt.')
+    return redirect('login')
+
 
 # DASHBOARD
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['kunde'])
 def dashboard(request):
-    count_vorspeisen = Vorspeise.objects.count()
-    count_hauptspeisen = Hauptspeise.objects.count()
-    count_nachspeisen = Nachspeise.objects.count()
-    count_snacks = Snacks.objects.count()
-    count_alkfreidrinks = AlkoholfreieDrinks.objects.count()
-    count_alkdrinks = AlkoholhaltigeDrinks.objects.count()
+    kunde = Kunde.objects.get(email=request.user.email)
+
+
+    # Template ändern
+    form = TemplateForm(instance=kunde)
+    if request.method == 'POST':
+        form = TemplateForm(request.POST, instance=kunde)
+        if form.is_valid():
+            form.save()
+            print('OK')
+        else:
+            print('FEHLER')
+
+    count_vorspeisen = kunde.vorspeise_set.count()
+
+    count_hauptspeisen = kunde.hauptspeise_set.count()
+    count_nachspeisen = kunde.nachspeise_set.count()
+    count_snacks = kunde.snacks_set.count()
+    count_alkfreidrinks = kunde.alkoholfreiedrinks_set.count()
+    count_alkdrinks = kunde.alkoholhaltigedrinks_set.count()
+    template = kunde.template
 
     context = {
+        'form': form,
         'count_vorspeisen': count_vorspeisen,
         'count_hauptspeisen': count_hauptspeisen,
         'count_nachspeisen': count_nachspeisen,
         'count_snacks': count_snacks,
         'count_alkfreidrinks': count_alkfreidrinks,
         'count_alkdrinks': count_alkdrinks,
+        'template':template
     }
     return render(request, 'menucard/dashboard.html', context)
 
 
 # VORSPEISEN CRUD
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['kunde'])
 def vorspeisen(request):
-    vorspeise = Vorspeise.objects.all()
+    kunde = Kunde.objects.get(email=request.user.email)
+    vorspeise = kunde.vorspeise_set.all()
     context = {'vorspeise': vorspeise}
     return render(request, 'menucard/vorspeisen.html', context)
 
 
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['kunde'])
 def vorspeisen_anlegen(request):
-    vorspeise = Vorspeise()
-    form = VorspeiseForm(initial={'vorspeise': vorspeise})
+    kunde = Kunde.objects.get(email=request.user.email)
+
+    form = VorspeiseForm(initial={'kundeId': kunde})
 
     if request.method == "POST":
         form = VorspeiseForm(request.POST)
@@ -51,6 +86,8 @@ def vorspeisen_anlegen(request):
     return render(request, "menucard/vorspeisen_anlegen.html", context)
 
 
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['kunde'])
 def vorspeisen_bearbeiten(request, pk):
     vorspeise = Vorspeise.objects.get(id=pk)
     form = VorspeiseForm(instance=vorspeise)
@@ -70,6 +107,8 @@ def vorspeisen_bearbeiten(request, pk):
     return render(request, 'menucard/vorspeisen_bearbeiten.html', context)
 
 
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['kunde'])
 def vorspeisen_loeschen(request, pk):
     vorspeise = Vorspeise.objects.get(id=pk)
 
@@ -82,15 +121,21 @@ def vorspeisen_loeschen(request, pk):
 
 
 # HAUPTSPEISEN CRUD
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['kunde'])
 def hauptspeisen(request):
     hauptspeise = Hauptspeise.objects.all()
     context = {'hauptspeisen': hauptspeise}
     return render(request, 'menucard/hauptspeisen.html', context)
 
 
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['kunde'])
 def hauptspeisen_anlegen(request):
+    kunde = Kunde.objects.get(email=request.user.email)
+
     hauptspeise = Hauptspeise()
-    form = HauptspeiseForm(initial={'hauptspeise': hauptspeise})
+    form = HauptspeiseForm(initial={'kundeId': kunde})
 
     if request.method == "POST":
         form = HauptspeiseForm(request.POST)
@@ -101,10 +146,13 @@ def hauptspeisen_anlegen(request):
         else:
             messages.info(request, 'Bitte überprüfen Sie Ihre Eingabe.')
 
+
     context = {'form': form}
     return render(request, "menucard/hauptspeisen_anlegen.html", context)
 
 
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['kunde'])
 def hauptspeisen_bearbeiten(request, pk):
     hauptspeise = Hauptspeise.objects.get(id=pk)
     form = HauptspeiseForm(instance=hauptspeise)
@@ -124,6 +172,8 @@ def hauptspeisen_bearbeiten(request, pk):
     return render(request, 'menucard/hauptspeisen_bearbeiten.html', context)
 
 
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['kunde'])
 def hauptspeise_loeschen(request, pk):
     hauptspeise = Hauptspeise.objects.get(id=pk)
 
@@ -136,12 +186,16 @@ def hauptspeise_loeschen(request, pk):
 
 
 # NACHSPEISEN CRUD
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['kunde'])
 def nachspeisen(request):
     nachspeise = Nachspeise.objects.all()
     context = {'nachspeisen': nachspeise}
     return render(request, 'menucard/nachspeisen.html', context)
 
 
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['kunde'])
 def nachspeisen_anlegen(request):
     nachspeise = Nachspeise()
     form = VorspeiseForm(initial={'nachspeisen': nachspeisen})
@@ -159,6 +213,8 @@ def nachspeisen_anlegen(request):
     return render(request, "menucard/nachspeisen_anlegen.html", context)
 
 
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['kunde'])
 def nachspeisen_bearbeiten(request, pk):
     nachspeise = Nachspeise.objects.get(id=pk)
     form = NachspeiseForm(instance=nachspeise)
@@ -178,6 +234,8 @@ def nachspeisen_bearbeiten(request, pk):
     return render(request, 'menucard/nachspeisen_bearbeiten.html', context)
 
 
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['kunde'])
 def nachspeisen_loeschen(request, pk):
     nachspeise = Nachspeise.objects.get(id=pk)
 
@@ -190,12 +248,16 @@ def nachspeisen_loeschen(request, pk):
 
 
 # SNACKS CRUD
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['kunde'])
 def snacks(request):
     snack = Snacks.objects.all()
     context = {'snack': snack}
     return render(request, 'menucard/snacks.html', context)
 
 
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['kunde'])
 def snacks_anlegen(request):
     snack = Snacks()
     form = SnacksForm(initial={'snack': snack})
@@ -212,6 +274,8 @@ def snacks_anlegen(request):
     return render(request, "menucard/snacks_anlegen.html", context)
 
 
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['kunde'])
 def snacks_bearbeiten(request, pk):
     snack = Snacks.objects.get(id=pk)
     form = SnacksForm(instance=snack)
@@ -231,6 +295,8 @@ def snacks_bearbeiten(request, pk):
     return render(request, 'menucard/snacks_bearbeiten.html', context)
 
 
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['kunde'])
 def snacks_loeschen(request, pk):
     snack = Snacks.objects.get(id=pk)
 
@@ -243,12 +309,16 @@ def snacks_loeschen(request, pk):
 
 
 # ALKOHOLHALTIGE GETRÄNKE CRUD
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['kunde'])
 def alkoholhaltigedrinks(request):
     alkdrink = AlkoholhaltigeDrinks.objects.all()
     context = {'alkdrink': alkdrink}
     return render(request, 'menucard/alkoholhaltigedrinks.html', context)
 
 
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['kunde'])
 def alkoholhaltigedrinks_anlegen(request):
     alkdrink = AlkoholhaltigeDrinks()
     form = AlkhaltigeDrinksForm(initial={'alkdrink': alkdrink})
@@ -266,6 +336,8 @@ def alkoholhaltigedrinks_anlegen(request):
     return render(request, "menucard/alkoholhaltigedrinks_anlegen.html", context)
 
 
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['kunde'])
 def alkoholhaltigedrinks_bearbeiten(request, pk):
     alkdrink = AlkoholhaltigeDrinks.objects.get(id=pk)
     form = AlkhaltigeDrinksForm(instance=alkdrink)
@@ -285,6 +357,8 @@ def alkoholhaltigedrinks_bearbeiten(request, pk):
     return render(request, 'menucard/alkoholhaltigedrinks_bearbeiten.html', context)
 
 
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['kunde'])
 def alkoholhaltigedrinks_loeschen(request, pk):
     alkdrink = AlkoholhaltigeDrinks.objects.get(id=pk)
 
@@ -297,12 +371,16 @@ def alkoholhaltigedrinks_loeschen(request, pk):
 
 
 # ALKOHOLFREIE GETRÄNKE CRUD
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['kunde'])
 def alkfreiedrinks(request):
     softdrink = AlkoholfreieDrinks.objects.all()
     context = {'softdrink': softdrink}
     return render(request, 'menucard/alkfreiedrinks.html', context)
 
 
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['kunde'])
 def alkfreiedrinks_anlegen(request):
     softdrink = AlkoholfreieDrinks()
     form = AlkfreieDrinksForm(initial={'softdrink': softdrink})
@@ -320,6 +398,8 @@ def alkfreiedrinks_anlegen(request):
     return render(request, "menucard/alkfreiedrinks_anlegen.html", context)
 
 
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['kunde'])
 def alkfreiedrinks_bearbeiten(request, pk):
     softdrink = AlkoholfreieDrinks.objects.get(id=pk)
     form = AlkfreieDrinksForm(instance=softdrink)
@@ -339,6 +419,8 @@ def alkfreiedrinks_bearbeiten(request, pk):
     return render(request, 'menucard/alkfreiedrinks_bearbeiten.html', context)
 
 
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['kunde'])
 def alkfreiedrinks_loeschen(request, pk):
     softdrink = AlkoholfreieDrinks.objects.get(id=pk)
 
@@ -350,13 +432,17 @@ def alkfreiedrinks_loeschen(request, pk):
     return render(request, 'menucard/alkfreiedrinks_loeschen.html', context)
 
 
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['kunde'])
 def menucard(request):
-    vorspeisen = Vorspeise.objects.all()
+    kunde = Kunde.objects.get(email=request.user.email)
+    vorspeisen = kunde.vorspeise_set.all()
     hauptspeise = Hauptspeise.objects.all()
     nachspeise = Nachspeise.objects.all()
     snacks = Snacks.objects.all()
     softdrink = AlkoholfreieDrinks.objects.all()
     alkdrinks = AlkoholhaltigeDrinks.objects.all()
+    template = kunde.template
 
     context = {
         'vorspeisen': vorspeisen,
@@ -365,5 +451,6 @@ def menucard(request):
         'snacks': snacks,
         'softdrink': softdrink,
         'alkdrinks': alkdrinks,
+        'template': template,
     }
     return render(request, 'menucard/menucard.html', context)

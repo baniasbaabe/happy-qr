@@ -1,3 +1,4 @@
+{% load crispy_forms_filters %}
 {% load static %}
 <!doctype html>
 <html lang="de">
@@ -45,7 +46,6 @@
 
         .account_form {
             margin: auto;
-            top: 30%;
         }
     </style>
 
@@ -56,43 +56,27 @@
     <div class="row">
         <div class="col">
             {% for msg in messages %}
-                <div class="alert alert-primary account_form mt-5 shadow-sm" role="alert" style="max-width: 20rem">
+                <div class="alert alert-primary account_form mt-5 shadow-sm" role="alert">
                     {{ msg }}
                 </div>
             {% endfor %}
 
-            <div class="card account_form mt-3 shadow" style="max-width: 20rem">
+            <div class="card account_form mt-3 shadow">
                 <div class="card-body">
                     <h5 class="card-title">Happy-QR</h5>
                     <h6 class="card-subtitle mb-2 text-muted">Login</h6>
                     <hr>
                     <form action="" method="POST">
                         {% csrf_token %}
-                        <!-- TF USERNAME -->
-                        <label class="sr-only" for="username">Username</label>
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><span class="fas fa-user-circle"></span></div>
-                            </div>
-                            <input type="text" class="form-control" name="username" id="username"
-                                   placeholder="Username">
-                        </div>
-                        <!-- TF PASSWORT -->
-                        <label class="sr-only" for="passwort">Passwort</label>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><span class="fas fa-lock"></span></div>
-                            </div>
-                            <input type="password" class="form-control" name="password" id="password"
-                                   placeholder="Passwort">
-                        </div>
+
+                       {{ form | crispy }}
                         <!-- BUTTON -->
-                        <button type="submit" class="btn btn-primary btn-block btn-sm">Login</button>
+                        <button type="submit" class="btn btn-primary btn-block btn-sm">Registrieren</button>
                     </form>
                     <br>
                     <!-- LINK -->
                     <small class="text-muted text-small">
-                        Kein Account? <a href="{% url 'register' %}">Registrieren</a>
+                        Schon registriert? <a href="{% url 'login' %}">Login</a>
                     </small>
                 </div>
             </div>

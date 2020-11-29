@@ -112,1034 +112,1036 @@
 
 
 <!-- TEMPLATE ONE -->
-<section>
-    <img src="{% static 'img/texturOben.png' %}" alt="" style="width: 100%">
-    <div class="container-sm">
-        <div class="row mt-3">
-            <div class="col">
-                <h1 class="text-center menuHeader">Menu</h1>
-                <hr>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col">
-                <!-- VORSPEISEN -->
-                <div class="card mb-4 shadow" data-toggle="modal" data-target="#vorspeisen">
-                    <div class="card-body">
-                        <h5 class="text-center categoryDescription1">Vorspeisen</h5>
-                    </div>
-                </div>
-                <!-- VORSPEISEN MODAL -->
-                <div class="modal fade modalCenter" id="vorspeisen" tabindex="-1" aria-labelledby="lblVorspeisen"
-                     aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="lblVorspeisen">Vorspeisen</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="table-responsive">
-                                    <table class="table table-sm table-borderless">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">Vorspeise</th>
-                                            <th scope="col" class="text-right">Preis</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for i in vorspeisen %}
-                                            <tr>
-                                                <td>
-                                                    {{ i.name }} <br>
-                                                    <small class="text-small text-muted">{{ i.beschreibung }}</small>
-                                                </td>
-                                                <td class="text-right">{{ i.preis }}€</td>
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
-                                    <span class="fas fa-times-circle"></span> Schließen
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- HAUPTSPEISEN -->
-                <div class="card mb-4 shadow" data-toggle="modal" data-target="#hauptspeisen">
-                    <div class="card-body">
-                        <h5 class="text-center categoryDescription1">Hauptspeisen</h5>
-                    </div>
-                </div>
-                <!-- HAUPTSPEISEN MODAL -->
-                <div class="modal fade" id="hauptspeisen" tabindex="-1" aria-labelledby="lblHauptspeisen"
-                     aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="lblHauptspeisen">Hauptspeisen</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="table-responsive">
-                                    <table class="table table-sm table-borderless">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">Hauptspeise</th>
-                                            <th scope="col" class="text-right">Preis</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for i in hauptspeise %}
-                                            <tr>
-                                                <td>
-                                                    {{ i.name }} <br>
-                                                    <small class="text-small text-muted">{{ i.beschreibung }}</small>
-                                                </td>
-                                                <td class="text-right">{{ i.preis }}€</td>
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
-                                    <span class="fas fa-times-circle"></span> Schließen
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- NACHSPEISEN -->
-                <div class="card mb-4 shadow" data-toggle="modal" data-target="#nachspeisen">
-                    <div class="card-body">
-                        <h5 class="text-center categoryDescription1">Nachspeisen</h5>
-                    </div>
-                </div>
-                <!-- NACHSPEISEN MODAL -->
-                <div class="modal fade" id="nachspeisen" tabindex="-1" aria-labelledby="lblNachspeisen"
-                     aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="lblHauptspeisen">Nachspeisen</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="table-responsive">
-                                    <table class="table table-sm table-borderless">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">Nachspeise</th>
-                                            <th scope="col" class="text-right">Preis</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for i in nachspeise %}
-                                            <tr>
-                                                <td>
-                                                    {{ i.name }} <br>
-                                                    <small class="text-small text-muted">{{ i.beschreibung }}</small>
-                                                </td>
-                                                <td class="text-right">{{ i.preis }}€</td>
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
-                                    <span class="fas fa-times-circle"></span> Schließen
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- SNACKS -->
-                <div class="card mb-4 shadow" data-toggle="modal" data-target="#snacks">
-                    <div class="card-body">
-                        <h5 class="text-center categoryDescription1">Snacks</h5>
-                    </div>
-                </div>
-                <!-- SNACKS MODAL -->
-                <div class="modal fade" id="snacks" tabindex="-1" aria-labelledby="lblSnacks"
-                     aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="lblSnacks">Snacks</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="table-responsive">
-                                    <table class="table table-sm table-borderless">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">Snacks</th>
-                                            <th scope="col" class="text-right">Preis</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for i in snacks %}
-                                            <tr>
-                                                <td>
-                                                    {{ i.name }} <br>
-                                                    <small class="text-small text-muted">{{ i.beschreibung }}</small>
-                                                </td>
-                                                <td class="text-right">{{ i.preis }}€</td>
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
-                                    <span class="fas fa-times-circle"></span> Schließen
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- SOFTDRINKS -->
-                <div class="card mb-4 shadow" data-toggle="modal" data-target="#softdrinks">
-                    <div class="card-body">
-                        <h5 class="text-center categoryDescription1">Softdrinks</h5>
-                    </div>
-                </div>
-                <!-- SOFTDRINKS MODAL -->
-                <div class="modal fade" id="softdrinks" tabindex="-1" aria-labelledby="lblSoftdrinks"
-                     aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="lblSoftdrinks">Softdrinks</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="table-responsive">
-                                    <table class="table table-sm table-borderless">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">Drink</th>
-                                            <th scope="col">Liter</th>
-                                            <th scope="col" class="text-right">Preis</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for i in softdrink %}
-                                            <tr>
-                                                <td>
-                                                    {{ i.name }} <br>
-                                                    <small class="text-small text-muted">{{ i.beschreibung }}</small>
-                                                </td>
-                                                <td class="text-muted">{{ i.liter }}</td>
-                                                <td class="text-right">{{ i.preis }}€</td>
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
-                                    <span class="fas fa-times-circle"></span> Schließen
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ALKDRINKS -->
-                <div class="card mb-4 shadow" data-toggle="modal" data-target="#drinks">
-                    <div class="card-body">
-                        <h5 class="text-center categoryDescription1">Alkoholhaltige Drinks</h5>
-                    </div>
-                </div>
-                <!-- ALKDRINKS MODAL -->
-                <div class="modal fade" id="drinks" tabindex="-1" aria-labelledby="lblDrinks"
-                     aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="lblDrinks">Alkoholhaltige Drinks</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="table-responsive">
-                                    <table class="table table-sm table-borderless">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">Drink</th>
-                                            <th scope="col">cl</th>
-                                            <th scope="col" class="text-right">Preis</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for i in alkdrinks %}
-                                            <tr>
-                                                <td>
-                                                    {{ i.name }} <br>
-                                                    <small class="text-small text-muted">{{ i.beschreibung }}</small>
-                                                </td>
-                                                <td class="text-muted">{{ i.centiliter }}</td>
-                                                <td class="text-right">{{ i.preis }}€</td>
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
-                                    <span class="fas fa-times-circle"></span> Schließen
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- FOOTER -->
-        <footer class="my-5 pt-5 text-muted text-center text-small">
-            <hr width="50%">
-            <p class="mb-1 text-sm"> Powered by: <br> &copy; 2020 HappyQR</p>
-            <ul class="list-inline">
-                <li class="list-inline-item">
-                    <a target="_blank" href="#" class="fab fa-instagram"></a>
-                </li>
-                <li class="list-inline-item"></li>
-                <li class="list-inline-item">
-                    <a target="_blank" href="#" class="fa fa-link"></a>
-                </li>
-                <li class="list-inline-item"></li>
-                <li class="list-inline-item">
-                    <a target="_blank" href="#" class="fa fa-envelope"></a>
-                </li>
-            </ul>
-        </footer>
-    </div>
-    <img src="{% static 'img/texturUnten.png' %}" alt="" style="width: 100%">
-</section>
-
-
-<!-- TEMPLATE TWO -->
-<section style="background: black">
-    <div class="container-sm">
-        <div class="row mb-4 mt-3">
-            <div class="col mt-5">
-                <h1 class="text-center menuHeader" style="color: #f3f3f3">Menükarte</h1>
-                <hr style="border-color:#f3f3f3;" width="70%">
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col">
-                <!-- VORSPEISEN -->
-                <div class="card mb-3 shadow-sm category" data-toggle="modal" data-target="#vorspeisen"
-                     style="background-image: url('{% static 'img/Vorspeise.png' %}')">
-                    <div class="card-body">
-                        <h5 class="text-center categoryDescription">Vorspeisen</h5>
-                    </div>
-                </div>
-                <!-- VORSPEISEN MODAL -->
-                <div class="modal fade" id="vorspeisen" tabindex="-1" aria-labelledby="lblVorspeisen"
-                     aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header modalColor">
-                                <h5 class="modal-title" id="lblVorspeisen">Vorspeisen</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body modalColor">
-                                <div class="table-responsive">
-                                    <table class="table table-sm table-borderless">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">Vorspeise</th>
-                                            <th scope="col" class="text-right">Preis</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for i in vorspeisen %}
-                                            <tr>
-                                                <td>
-                                                    {{ i.name }} <br>
-                                                    <small class="text-small text-muted">{{ i.beschreibung }}</small>
-                                                </td>
-                                                <td class="text-right">{{ i.preis }}€</td>
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="modal-footer modalColor">
-                                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
-                                    <span class="fas fa-times-circle"></span> Schließen
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- HAUPTSPEISEN -->
-                <div class="card mb-3 shadow-sm category" data-toggle="modal" data-target="#hauptspeisen"
-                     style="background-image: url('{% static 'img/Hauptspeise.png' %}')">
-                    <div class="card-body">
-                        <h5 class="text-center categoryDescription">Hauptspeisen</h5>
-                    </div>
-                </div>
-                <!-- HAUPTSPEISEN MODAL -->
-                <div class="modal fade" id="hauptspeisen" tabindex="-1" aria-labelledby="lblHauptspeisen"
-                     aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="lblHauptspeisen">Hauptspeisen</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="table-responsive">
-                                    <table class="table table-sm table-borderless">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">Hauptspeise</th>
-                                            <th scope="col" class="text-right">Preis</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for i in hauptspeise %}
-                                            <tr>
-                                                <td>
-                                                    {{ i.name }} <br>
-                                                    <small class="text-small text-muted">{{ i.beschreibung }}</small>
-                                                </td>
-                                                <td class="text-right">{{ i.preis }}€</td>
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
-                                    <span class="fas fa-times-circle"></span> Schließen
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- NACHSPEISEN -->
-                <div class="card mb-3 shadow-sm category" data-toggle="modal" data-target="#nachspeisen"
-                     style="background-image: url('{% static 'img/Nachspeise.png' %}')">
-                    <div class="card-body">
-                        <h5 class="text-center categoryDescription">Nachspeisen</h5>
-                    </div>
-                </div>
-                <!-- NACHSPEISEN MODAL -->
-                <div class="modal fade" id="nachspeisen" tabindex="-1" aria-labelledby="lblNachspeisen"
-                     aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="lblHauptspeisen">Nachspeisen</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="table-responsive">
-                                    <table class="table table-sm table-borderless">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">Nachspeise</th>
-                                            <th scope="col" class="text-right">Preis</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for i in nachspeise %}
-                                            <tr>
-                                                <td>
-                                                    {{ i.name }} <br>
-                                                    <small class="text-small text-muted">{{ i.beschreibung }}</small>
-                                                </td>
-                                                <td class="text-right">{{ i.preis }}€</td>
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
-                                    <span class="fas fa-times-circle"></span> Schließen
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- SNACKS -->
-                <div class="card mb-3 shadow-sm category" data-toggle="modal" data-target="#snacks"
-                     style="background-image: url('{% static 'img/Snacks.png' %}')">
-                    <div class="card-body">
-                        <h5 class="text-center categoryDescription">Snacks</h5>
-                    </div>
-                </div>
-                <!-- SNACKS MODAL -->
-                <div class="modal fade" id="snacks" tabindex="-1" aria-labelledby="lblSnacks"
-                     aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="lblSnacks">Snacks</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="table-responsive">
-                                    <table class="table table-sm table-borderless">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">Snacks</th>
-                                            <th scope="col" class="text-right">Preis</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for i in snacks %}
-                                            <tr>
-                                                <td>
-                                                    {{ i.name }} <br>
-                                                    <small class="text-small text-muted">{{ i.beschreibung }}</small>
-                                                </td>
-                                                <td class="text-right">{{ i.preis }}€</td>
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
-                                    <span class="fas fa-times-circle"></span> Schließen
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- SOFTDRINKS -->
-                <div class="card mb-3 shadow-sm category" data-toggle="modal" data-target="#softdrinks"
-                     style="background-image: url('{% static 'img/Softdrinks.png' %}')">
-                    <div class="card-body">
-                        <h5 class="text-center categoryDescription">Softdrinks</h5>
-                    </div>
-                </div>
-                <!-- SOFTDRINKS MODAL -->
-                <div class="modal fade" id="softdrinks" tabindex="-1" aria-labelledby="lblSoftdrinks"
-                     aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="lblSoftdrinks">Softdrinks</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="table-responsive">
-                                    <table class="table table-sm table-borderless">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">Drink</th>
-                                            <th scope="col">Liter</th>
-                                            <th scope="col" class="text-right">Preis</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for i in softdrink %}
-                                            <tr>
-                                                <td>
-                                                    {{ i.name }} <br>
-                                                    <small class="text-small text-muted">{{ i.beschreibung }}</small>
-                                                </td>
-                                                <td class="text-muted">{{ i.liter }}</td>
-                                                <td class="text-right">{{ i.preis }}€</td>
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
-                                    <span class="fas fa-times-circle"></span> Schließen
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ALKDRINKS -->
-                <div class="card mb-3 shadow-sm category" data-toggle="modal" data-target="#drinks"
-                     style="background-image: url('{% static 'img/Alkohol.png' %}')">
-                    <div class="card-body">
-                        <h5 class="text-center categoryDescription">Alkoholhaltige Drinks</h5>
-                    </div>
-                </div>
-                <!-- ALKDRINKS MODAL -->
-                <div class="modal fade" id="drinks" tabindex="-1" aria-labelledby="lblDrinks"
-                     aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="lblDrinks">Alkoholhaltige Drinks</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="table-responsive">
-                                    <table class="table table-sm table-borderless">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">Drink</th>
-                                            <th scope="col">cl</th>
-                                            <th scope="col" class="text-right">Preis</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for i in alkdrinks %}
-                                            <tr>
-                                                <td>
-                                                    {{ i.name }} <br>
-                                                    <small class="text-small text-muted">{{ i.beschreibung }}</small>
-                                                </td>
-                                                <td class="text-muted">{{ i.centiliter }}</td>
-                                                <td class="text-right">{{ i.preis }}€</td>
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
-                                    <span class="fas fa-times-circle"></span> Schließen
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+{% if template == 'Template 1' %}
+    <section>
+        <img src="{% static 'img/texturOben.png' %}" alt="" style="width: 100%">
+        <div class="container-sm">
+            <div class="row mt-3">
+                <div class="col">
+                    <h1 class="text-center menuHeader">Menu</h1>
+                    <hr>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col">
+                    <!-- VORSPEISEN -->
+                    <div class="card mb-4 shadow" data-toggle="modal" data-target="#vorspeisen">
+                        <div class="card-body">
+                            <h5 class="text-center categoryDescription1">Vorspeisen</h5>
+                        </div>
+                    </div>
+                    <!-- VORSPEISEN MODAL -->
+                    <div class="modal fade modalCenter" id="vorspeisen" tabindex="-1" aria-labelledby="lblVorspeisen"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="lblVorspeisen">Vorspeisen</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-borderless">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Vorspeise</th>
+                                                <th scope="col" class="text-right">Preis</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for i in vorspeisen %}
+                                                <tr>
+                                                    <td>
+                                                        {{ i.name }} <br>
+                                                        <small class="text-small text-muted">{{ i.beschreibung }}</small>
+                                                    </td>
+                                                    <td class="text-right">{{ i.preis }}€</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
+                                        <span class="fas fa-times-circle"></span> Schließen
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- HAUPTSPEISEN -->
+                    <div class="card mb-4 shadow" data-toggle="modal" data-target="#hauptspeisen">
+                        <div class="card-body">
+                            <h5 class="text-center categoryDescription1">Hauptspeisen</h5>
+                        </div>
+                    </div>
+                    <!-- HAUPTSPEISEN MODAL -->
+                    <div class="modal fade" id="hauptspeisen" tabindex="-1" aria-labelledby="lblHauptspeisen"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="lblHauptspeisen">Hauptspeisen</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-borderless">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Hauptspeise</th>
+                                                <th scope="col" class="text-right">Preis</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for i in hauptspeise %}
+                                                <tr>
+                                                    <td>
+                                                        {{ i.name }} <br>
+                                                        <small class="text-small text-muted">{{ i.beschreibung }}</small>
+                                                    </td>
+                                                    <td class="text-right">{{ i.preis }}€</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
+                                        <span class="fas fa-times-circle"></span> Schließen
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- NACHSPEISEN -->
+                    <div class="card mb-4 shadow" data-toggle="modal" data-target="#nachspeisen">
+                        <div class="card-body">
+                            <h5 class="text-center categoryDescription1">Nachspeisen</h5>
+                        </div>
+                    </div>
+                    <!-- NACHSPEISEN MODAL -->
+                    <div class="modal fade" id="nachspeisen" tabindex="-1" aria-labelledby="lblNachspeisen"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="lblHauptspeisen">Nachspeisen</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-borderless">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Nachspeise</th>
+                                                <th scope="col" class="text-right">Preis</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for i in nachspeise %}
+                                                <tr>
+                                                    <td>
+                                                        {{ i.name }} <br>
+                                                        <small class="text-small text-muted">{{ i.beschreibung }}</small>
+                                                    </td>
+                                                    <td class="text-right">{{ i.preis }}€</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
+                                        <span class="fas fa-times-circle"></span> Schließen
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- SNACKS -->
+                    <div class="card mb-4 shadow" data-toggle="modal" data-target="#snacks">
+                        <div class="card-body">
+                            <h5 class="text-center categoryDescription1">Snacks</h5>
+                        </div>
+                    </div>
+                    <!-- SNACKS MODAL -->
+                    <div class="modal fade" id="snacks" tabindex="-1" aria-labelledby="lblSnacks"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="lblSnacks">Snacks</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-borderless">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Snacks</th>
+                                                <th scope="col" class="text-right">Preis</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for i in snacks %}
+                                                <tr>
+                                                    <td>
+                                                        {{ i.name }} <br>
+                                                        <small class="text-small text-muted">{{ i.beschreibung }}</small>
+                                                    </td>
+                                                    <td class="text-right">{{ i.preis }}€</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
+                                        <span class="fas fa-times-circle"></span> Schließen
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- SOFTDRINKS -->
+                    <div class="card mb-4 shadow" data-toggle="modal" data-target="#softdrinks">
+                        <div class="card-body">
+                            <h5 class="text-center categoryDescription1">Softdrinks</h5>
+                        </div>
+                    </div>
+                    <!-- SOFTDRINKS MODAL -->
+                    <div class="modal fade" id="softdrinks" tabindex="-1" aria-labelledby="lblSoftdrinks"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="lblSoftdrinks">Softdrinks</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-borderless">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Drink</th>
+                                                <th scope="col">Liter</th>
+                                                <th scope="col" class="text-right">Preis</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for i in softdrink %}
+                                                <tr>
+                                                    <td>
+                                                        {{ i.name }} <br>
+                                                        <small class="text-small text-muted">{{ i.beschreibung }}</small>
+                                                    </td>
+                                                    <td class="text-muted">{{ i.liter }}</td>
+                                                    <td class="text-right">{{ i.preis }}€</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
+                                        <span class="fas fa-times-circle"></span> Schließen
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ALKDRINKS -->
+                    <div class="card mb-4 shadow" data-toggle="modal" data-target="#drinks">
+                        <div class="card-body">
+                            <h5 class="text-center categoryDescription1">Alkoholhaltige Drinks</h5>
+                        </div>
+                    </div>
+                    <!-- ALKDRINKS MODAL -->
+                    <div class="modal fade" id="drinks" tabindex="-1" aria-labelledby="lblDrinks"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="lblDrinks">Alkoholhaltige Drinks</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-borderless">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Drink</th>
+                                                <th scope="col">cl</th>
+                                                <th scope="col" class="text-right">Preis</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for i in alkdrinks %}
+                                                <tr>
+                                                    <td>
+                                                        {{ i.name }} <br>
+                                                        <small class="text-small text-muted">{{ i.beschreibung }}</small>
+                                                    </td>
+                                                    <td class="text-muted">{{ i.centiliter }}</td>
+                                                    <td class="text-right">{{ i.preis }}€</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
+                                        <span class="fas fa-times-circle"></span> Schließen
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- FOOTER -->
+            <footer class="my-5 pt-5 text-muted text-center text-small">
+                <hr width="50%">
+                <p class="mb-1 text-sm"> Powered by: <br> &copy; 2020 HappyQR</p>
+                <ul class="list-inline">
+                    <li class="list-inline-item">
+                        <a target="_blank" href="#" class="fab fa-instagram"></a>
+                    </li>
+                    <li class="list-inline-item"></li>
+                    <li class="list-inline-item">
+                        <a target="_blank" href="#" class="fa fa-link"></a>
+                    </li>
+                    <li class="list-inline-item"></li>
+                    <li class="list-inline-item">
+                        <a target="_blank" href="#" class="fa fa-envelope"></a>
+                    </li>
+                </ul>
+            </footer>
         </div>
+        <img src="{% static 'img/texturUnten.png' %}" alt="" style="width: 100%">
+    </section>
 
-        <!-- FOOTER -->
-        <footer class="my-5 pt-5 text-muted text-center text-small">
-            <hr width="50%" style="border-color: #0087A2">
-            <p class="mb-1 text-sm"> Powered by: <br> &copy; 2020 HappyQR</p>
-            <ul class="list-inline">
-                <li class="list-inline-item">
-                    <a target="_blank" href="#" class="fab fa-instagram"
-                       style="color: #0087A2"></a>
-                </li>
-                <li class="list-inline-item"></li>
-                <li class="list-inline-item">
-                    <a target="_blank" href="#" class="fa fa-link" style="color: #0087A2"></a>
-                </li>
-                <li class="list-inline-item"></li>
-                <li class="list-inline-item">
-                    <a target="_blank" href="#" class="fa fa-envelope" style="color: #0087A2"></a>
-                </li>
-            </ul>
-        </footer>
-    </div>
-</section>
+{% elif template == 'Template 2' %}
+    <!-- TEMPLATE TWO -->
+    <section style="background: black">
+        <div class="container-sm">
+            <div class="row mb-4 mt-3">
+                <div class="col mt-5">
+                    <h1 class="text-center menuHeader" style="color: #f3f3f3">Menükarte</h1>
+                    <hr style="border-color:#f3f3f3;" width="70%">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <!-- VORSPEISEN -->
+                    <div class="card mb-3 shadow-sm category" data-toggle="modal" data-target="#vorspeisen"
+                         style="background-image: url('{% static 'img/Vorspeise.png' %}')">
+                        <div class="card-body">
+                            <h5 class="text-center categoryDescription">Vorspeisen</h5>
+                        </div>
+                    </div>
+                    <!-- VORSPEISEN MODAL -->
+                    <div class="modal fade" id="vorspeisen" tabindex="-1" aria-labelledby="lblVorspeisen"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header modalColor">
+                                    <h5 class="modal-title" id="lblVorspeisen">Vorspeisen</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body modalColor">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-borderless">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Vorspeise</th>
+                                                <th scope="col" class="text-right">Preis</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for i in vorspeisen %}
+                                                <tr>
+                                                    <td>
+                                                        {{ i.name }} <br>
+                                                        <small class="text-small text-muted">{{ i.beschreibung }}</small>
+                                                    </td>
+                                                    <td class="text-right">{{ i.preis }}€</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="modal-footer modalColor">
+                                    <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
+                                        <span class="fas fa-times-circle"></span> Schließen
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
-<!-- TEMPLATE THREE -->
-<section style="background: #e3e3e3">
+                    <!-- HAUPTSPEISEN -->
+                    <div class="card mb-3 shadow-sm category" data-toggle="modal" data-target="#hauptspeisen"
+                         style="background-image: url('{% static 'img/Hauptspeise.png' %}')">
+                        <div class="card-body">
+                            <h5 class="text-center categoryDescription">Hauptspeisen</h5>
+                        </div>
+                    </div>
+                    <!-- HAUPTSPEISEN MODAL -->
+                    <div class="modal fade" id="hauptspeisen" tabindex="-1" aria-labelledby="lblHauptspeisen"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="lblHauptspeisen">Hauptspeisen</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-borderless">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Hauptspeise</th>
+                                                <th scope="col" class="text-right">Preis</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for i in hauptspeise %}
+                                                <tr>
+                                                    <td>
+                                                        {{ i.name }} <br>
+                                                        <small class="text-small text-muted">{{ i.beschreibung }}</small>
+                                                    </td>
+                                                    <td class="text-right">{{ i.preis }}€</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
+                                        <span class="fas fa-times-circle"></span> Schließen
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-    <div class="container-sm">
-        <div class="row">
-            <div class="col mt-3">
-                <p class="myMenuText">Herzlich willkommen</p>
+
+                    <!-- NACHSPEISEN -->
+                    <div class="card mb-3 shadow-sm category" data-toggle="modal" data-target="#nachspeisen"
+                         style="background-image: url('{% static 'img/Nachspeise.png' %}')">
+                        <div class="card-body">
+                            <h5 class="text-center categoryDescription">Nachspeisen</h5>
+                        </div>
+                    </div>
+                    <!-- NACHSPEISEN MODAL -->
+                    <div class="modal fade" id="nachspeisen" tabindex="-1" aria-labelledby="lblNachspeisen"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="lblHauptspeisen">Nachspeisen</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-borderless">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Nachspeise</th>
+                                                <th scope="col" class="text-right">Preis</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for i in nachspeise %}
+                                                <tr>
+                                                    <td>
+                                                        {{ i.name }} <br>
+                                                        <small class="text-small text-muted">{{ i.beschreibung }}</small>
+                                                    </td>
+                                                    <td class="text-right">{{ i.preis }}€</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
+                                        <span class="fas fa-times-circle"></span> Schließen
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- SNACKS -->
+                    <div class="card mb-3 shadow-sm category" data-toggle="modal" data-target="#snacks"
+                         style="background-image: url('{% static 'img/Snacks.png' %}')">
+                        <div class="card-body">
+                            <h5 class="text-center categoryDescription">Snacks</h5>
+                        </div>
+                    </div>
+                    <!-- SNACKS MODAL -->
+                    <div class="modal fade" id="snacks" tabindex="-1" aria-labelledby="lblSnacks"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="lblSnacks">Snacks</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-borderless">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Snacks</th>
+                                                <th scope="col" class="text-right">Preis</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for i in snacks %}
+                                                <tr>
+                                                    <td>
+                                                        {{ i.name }} <br>
+                                                        <small class="text-small text-muted">{{ i.beschreibung }}</small>
+                                                    </td>
+                                                    <td class="text-right">{{ i.preis }}€</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
+                                        <span class="fas fa-times-circle"></span> Schließen
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- SOFTDRINKS -->
+                    <div class="card mb-3 shadow-sm category" data-toggle="modal" data-target="#softdrinks"
+                         style="background-image: url('{% static 'img/Softdrinks.png' %}')">
+                        <div class="card-body">
+                            <h5 class="text-center categoryDescription">Softdrinks</h5>
+                        </div>
+                    </div>
+                    <!-- SOFTDRINKS MODAL -->
+                    <div class="modal fade" id="softdrinks" tabindex="-1" aria-labelledby="lblSoftdrinks"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="lblSoftdrinks">Softdrinks</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-borderless">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Drink</th>
+                                                <th scope="col">Liter</th>
+                                                <th scope="col" class="text-right">Preis</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for i in softdrink %}
+                                                <tr>
+                                                    <td>
+                                                        {{ i.name }} <br>
+                                                        <small class="text-small text-muted">{{ i.beschreibung }}</small>
+                                                    </td>
+                                                    <td class="text-muted">{{ i.liter }}</td>
+                                                    <td class="text-right">{{ i.preis }}€</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
+                                        <span class="fas fa-times-circle"></span> Schließen
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ALKDRINKS -->
+                    <div class="card mb-3 shadow-sm category" data-toggle="modal" data-target="#drinks"
+                         style="background-image: url('{% static 'img/Alkohol.png' %}')">
+                        <div class="card-body">
+                            <h5 class="text-center categoryDescription">Alkoholhaltige Drinks</h5>
+                        </div>
+                    </div>
+                    <!-- ALKDRINKS MODAL -->
+                    <div class="modal fade" id="drinks" tabindex="-1" aria-labelledby="lblDrinks"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="lblDrinks">Alkoholhaltige Drinks</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-borderless">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Drink</th>
+                                                <th scope="col">cl</th>
+                                                <th scope="col" class="text-right">Preis</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for i in alkdrinks %}
+                                                <tr>
+                                                    <td>
+                                                        {{ i.name }} <br>
+                                                        <small class="text-small text-muted">{{ i.beschreibung }}</small>
+                                                    </td>
+                                                    <td class="text-muted">{{ i.centiliter }}</td>
+                                                    <td class="text-right">{{ i.preis }}€</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
+                                        <span class="fas fa-times-circle"></span> Schließen
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOOTER -->
+            <footer class="my-5 pt-5 text-muted text-center text-small">
+                <hr width="50%" style="border-color: #0087A2">
+                <p class="mb-1 text-sm"> Powered by: <br> &copy; 2020 HappyQR</p>
+                <ul class="list-inline">
+                    <li class="list-inline-item">
+                        <a target="_blank" href="#" class="fab fa-instagram"
+                           style="color: #0087A2"></a>
+                    </li>
+                    <li class="list-inline-item"></li>
+                    <li class="list-inline-item">
+                        <a target="_blank" href="#" class="fa fa-link" style="color: #0087A2"></a>
+                    </li>
+                    <li class="list-inline-item"></li>
+                    <li class="list-inline-item">
+                        <a target="_blank" href="#" class="fa fa-envelope" style="color: #0087A2"></a>
+                    </li>
+                </ul>
+            </footer>
+        </div>
+    </section>
+
+{% else %}
+    <!-- TEMPLATE THREE -->
+    <section style="background: #e3e3e3">
+
+        <div class="container-sm">
+            <div class="row">
+                <div class="col mt-3">
+                    <p class="myMenuText">Herzlich willkommen</p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="myDivMenu">
-        <p class="myMenu">Menu</p>
-    </div>
-
-    <div class="container-sm">
-        <div class="row">
-            <div class="col">
-                <!-- VORSPEISEN -->
-                <div class="card mb-4 shadow happyColor borderColor3" data-toggle="modal" data-target="#vorspeisen">
-                    <div class="card-body">
-                        <h5 class="text-center categoryDescription1">Vorspeisen</h5>
-                    </div>
-                </div>
-                <!-- VORSPEISEN MODAL -->
-                <div class="modal fade modalCenter" id="vorspeisen" tabindex="-1" aria-labelledby="lblVorspeisen"
-                     aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="lblVorspeisen">Vorspeisen</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="table-responsive">
-                                    <table class="table table-sm table-borderless">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">Vorspeise</th>
-                                            <th scope="col" class="text-right">Preis</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for i in vorspeisen %}
-                                            <tr>
-                                                <td>
-                                                    {{ i.name }} <br>
-                                                    <small class="text-small text-muted">{{ i.beschreibung }}</small>
-                                                </td>
-                                                <td class="text-right">{{ i.preis }}€</td>
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
-                                    <span class="fas fa-times-circle"></span> Schließen
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- HAUPTSPEISEN -->
-                <div class="card mb-4 shadow happyColor borderColor3" data-toggle="modal"
-                     data-target="#hauptspeisen">
-                    <div class="card-body">
-                        <h5 class="text-center categoryDescription1">Hauptspeisen</h5>
-                    </div>
-                </div>
-                <!-- HAUPTSPEISEN MODAL -->
-                <div class="modal fade" id="hauptspeisen" tabindex="-1" aria-labelledby="lblHauptspeisen"
-                     aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="lblHauptspeisen">Hauptspeisen</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="table-responsive">
-                                    <table class="table table-sm table-borderless">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">Hauptspeise</th>
-                                            <th scope="col" class="text-right">Preis</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for i in hauptspeise %}
-                                            <tr>
-                                                <td>
-                                                    {{ i.name }} <br>
-                                                    <small class="text-small text-muted">{{ i.beschreibung }}</small>
-                                                </td>
-                                                <td class="text-right">{{ i.preis }}€</td>
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
-                                    <span class="fas fa-times-circle"></span> Schließen
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- NACHSPEISEN -->
-                <div class="card mb-4 shadow happyColor borderColor3" data-toggle="modal"
-                     data-target="#nachspeisen">
-                    <div class="card-body">
-                        <h5 class="text-center categoryDescription1">Nachspeisen</h5>
-                    </div>
-                </div>
-                <!-- NACHSPEISEN MODAL -->
-                <div class="modal fade" id="nachspeisen" tabindex="-1" aria-labelledby="lblNachspeisen"
-                     aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="lblHauptspeisen">Nachspeisen</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="table-responsive">
-                                    <table class="table table-sm table-borderless">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">Nachspeise</th>
-                                            <th scope="col" class="text-right">Preis</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for i in nachspeise %}
-                                            <tr>
-                                                <td>
-                                                    {{ i.name }} <br>
-                                                    <small class="text-small text-muted">{{ i.beschreibung }}</small>
-                                                </td>
-                                                <td class="text-right">{{ i.preis }}€</td>
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
-                                    <span class="fas fa-times-circle"></span> Schließen
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- SNACKS -->
-                <div class="card mb-4 shadow happyColor borderColor3" data-toggle="modal" data-target="#snacks">
-                    <div class="card-body">
-                        <h5 class="text-center categoryDescription1">Snacks</h5>
-                    </div>
-                </div>
-                <!-- SNACKS MODAL -->
-                <div class="modal fade" id="snacks" tabindex="-1" aria-labelledby="lblSnacks"
-                     aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="lblSnacks">Snacks</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="table-responsive">
-                                    <table class="table table-sm table-borderless">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">Snacks</th>
-                                            <th scope="col" class="text-right">Preis</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for i in snacks %}
-                                            <tr>
-                                                <td>
-                                                    {{ i.name }} <br>
-                                                    <small class="text-small text-muted">{{ i.beschreibung }}</small>
-                                                </td>
-                                                <td class="text-right">{{ i.preis }}€</td>
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
-                                    <span class="fas fa-times-circle"></span> Schließen
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- SOFTDRINKS -->
-                <div class="card mb-4 shadow happyColor borderColor3" data-toggle="modal" data-target="#softdrinks">
-                    <div class="card-body">
-                        <h5 class="text-center categoryDescription1">Softdrinks</h5>
-                    </div>
-                </div>
-                <!-- SOFTDRINKS MODAL -->
-                <div class="modal fade" id="softdrinks" tabindex="-1" aria-labelledby="lblSoftdrinks"
-                     aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="lblSoftdrinks">Softdrinks</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="table-responsive">
-                                    <table class="table table-sm table-borderless">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">Drink</th>
-                                            <th scope="col">Liter</th>
-                                            <th scope="col" class="text-right">Preis</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for i in softdrink %}
-                                            <tr>
-                                                <td>
-                                                    {{ i.name }} <br>
-                                                    <small class="text-small text-muted">{{ i.beschreibung }}</small>
-                                                </td>
-                                                <td class="text-muted">{{ i.liter }}</td>
-                                                <td class="text-right">{{ i.preis }}€</td>
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
-                                    <span class="fas fa-times-circle"></span> Schließen
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ALKDRINKS -->
-                <div class="card mb-4 shadow happyColor borderColor3" data-toggle="modal" data-target="#drinks">
-                    <div class="card-body">
-                        <h5 class="text-center categoryDescription1">Alkoholhaltige Drinks</h5>
-                    </div>
-                </div>
-                <!-- ALKDRINKS MODAL -->
-                <div class="modal fade" id="drinks" tabindex="-1" aria-labelledby="lblDrinks"
-                     aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="lblDrinks">Alkoholhaltige Drinks</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="table-responsive">
-                                    <table class="table table-sm table-borderless">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">Drink</th>
-                                            <th scope="col">cl</th>
-                                            <th scope="col" class="text-right">Preis</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for i in alkdrinks %}
-                                            <tr>
-                                                <td>
-                                                    {{ i.name }} <br>
-                                                    <small class="text-small text-muted">{{ i.beschreibung }}</small>
-                                                </td>
-                                                <td class="text-muted">{{ i.centiliter }}</td>
-                                                <td class="text-right">{{ i.preis }}€</td>
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
-                                    <span class="fas fa-times-circle"></span> Schließen
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+        <div class="myDivMenu">
+            <p class="myMenu">Menu</p>
         </div>
 
-        <!-- FOOTER -->
-        <footer class="my-5 pt-5 text-muted text-center text-small">
-            <hr width="50%">
-            <p class="mb-1 text-sm"> Powered by: <br> &copy; 2020 HappyQR</p>
-            <ul class="list-inline">
-                <li class="list-inline-item">
-                    <a target="_blank" href="#" class="fab fa-instagram"></a>
-                </li>
-                <li class="list-inline-item"></li>
-                <li class="list-inline-item">
-                    <a target="_blank" href="#" class="fa fa-link"></a>
-                </li>
-                <li class="list-inline-item"></li>
-                <li class="list-inline-item">
-                    <a target="_blank" href="#" class="fa fa-envelope"></a>
-                </li>
-            </ul>
-        </footer>
-    </div>
-</section>
+        <div class="container-sm">
+            <div class="row">
+                <div class="col">
+                    <!-- VORSPEISEN -->
+                    <div class="card mb-4 shadow happyColor borderColor3" data-toggle="modal" data-target="#vorspeisen">
+                        <div class="card-body">
+                            <h5 class="text-center categoryDescription1">Vorspeisen</h5>
+                        </div>
+                    </div>
+                    <!-- VORSPEISEN MODAL -->
+                    <div class="modal fade modalCenter" id="vorspeisen" tabindex="-1" aria-labelledby="lblVorspeisen"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="lblVorspeisen">Vorspeisen</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-borderless">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Vorspeise</th>
+                                                <th scope="col" class="text-right">Preis</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for i in vorspeisen %}
+                                                <tr>
+                                                    <td>
+                                                        {{ i.name }} <br>
+                                                        <small class="text-small text-muted">{{ i.beschreibung }}</small>
+                                                    </td>
+                                                    <td class="text-right">{{ i.preis }}€</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
+                                        <span class="fas fa-times-circle"></span> Schließen
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- HAUPTSPEISEN -->
+                    <div class="card mb-4 shadow happyColor borderColor3" data-toggle="modal"
+                         data-target="#hauptspeisen">
+                        <div class="card-body">
+                            <h5 class="text-center categoryDescription1">Hauptspeisen</h5>
+                        </div>
+                    </div>
+                    <!-- HAUPTSPEISEN MODAL -->
+                    <div class="modal fade" id="hauptspeisen" tabindex="-1" aria-labelledby="lblHauptspeisen"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="lblHauptspeisen">Hauptspeisen</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-borderless">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Hauptspeise</th>
+                                                <th scope="col" class="text-right">Preis</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for i in hauptspeise %}
+                                                <tr>
+                                                    <td>
+                                                        {{ i.name }} <br>
+                                                        <small class="text-small text-muted">{{ i.beschreibung }}</small>
+                                                    </td>
+                                                    <td class="text-right">{{ i.preis }}€</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
+                                        <span class="fas fa-times-circle"></span> Schließen
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- NACHSPEISEN -->
+                    <div class="card mb-4 shadow happyColor borderColor3" data-toggle="modal"
+                         data-target="#nachspeisen">
+                        <div class="card-body">
+                            <h5 class="text-center categoryDescription1">Nachspeisen</h5>
+                        </div>
+                    </div>
+                    <!-- NACHSPEISEN MODAL -->
+                    <div class="modal fade" id="nachspeisen" tabindex="-1" aria-labelledby="lblNachspeisen"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="lblHauptspeisen">Nachspeisen</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-borderless">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Nachspeise</th>
+                                                <th scope="col" class="text-right">Preis</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for i in nachspeise %}
+                                                <tr>
+                                                    <td>
+                                                        {{ i.name }} <br>
+                                                        <small class="text-small text-muted">{{ i.beschreibung }}</small>
+                                                    </td>
+                                                    <td class="text-right">{{ i.preis }}€</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
+                                        <span class="fas fa-times-circle"></span> Schließen
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- SNACKS -->
+                    <div class="card mb-4 shadow happyColor borderColor3" data-toggle="modal" data-target="#snacks">
+                        <div class="card-body">
+                            <h5 class="text-center categoryDescription1">Snacks</h5>
+                        </div>
+                    </div>
+                    <!-- SNACKS MODAL -->
+                    <div class="modal fade" id="snacks" tabindex="-1" aria-labelledby="lblSnacks"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="lblSnacks">Snacks</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-borderless">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Snacks</th>
+                                                <th scope="col" class="text-right">Preis</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for i in snacks %}
+                                                <tr>
+                                                    <td>
+                                                        {{ i.name }} <br>
+                                                        <small class="text-small text-muted">{{ i.beschreibung }}</small>
+                                                    </td>
+                                                    <td class="text-right">{{ i.preis }}€</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
+                                        <span class="fas fa-times-circle"></span> Schließen
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- SOFTDRINKS -->
+                    <div class="card mb-4 shadow happyColor borderColor3" data-toggle="modal" data-target="#softdrinks">
+                        <div class="card-body">
+                            <h5 class="text-center categoryDescription1">Softdrinks</h5>
+                        </div>
+                    </div>
+                    <!-- SOFTDRINKS MODAL -->
+                    <div class="modal fade" id="softdrinks" tabindex="-1" aria-labelledby="lblSoftdrinks"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="lblSoftdrinks">Softdrinks</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-borderless">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Drink</th>
+                                                <th scope="col">Liter</th>
+                                                <th scope="col" class="text-right">Preis</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for i in softdrink %}
+                                                <tr>
+                                                    <td>
+                                                        {{ i.name }} <br>
+                                                        <small class="text-small text-muted">{{ i.beschreibung }}</small>
+                                                    </td>
+                                                    <td class="text-muted">{{ i.liter }}</td>
+                                                    <td class="text-right">{{ i.preis }}€</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
+                                        <span class="fas fa-times-circle"></span> Schließen
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ALKDRINKS -->
+                    <div class="card mb-4 shadow happyColor borderColor3" data-toggle="modal" data-target="#drinks">
+                        <div class="card-body">
+                            <h5 class="text-center categoryDescription1">Alkoholhaltige Drinks</h5>
+                        </div>
+                    </div>
+                    <!-- ALKDRINKS MODAL -->
+                    <div class="modal fade" id="drinks" tabindex="-1" aria-labelledby="lblDrinks"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="lblDrinks">Alkoholhaltige Drinks</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-borderless">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Drink</th>
+                                                <th scope="col">cl</th>
+                                                <th scope="col" class="text-right">Preis</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for i in alkdrinks %}
+                                                <tr>
+                                                    <td>
+                                                        {{ i.name }} <br>
+                                                        <small class="text-small text-muted">{{ i.beschreibung }}</small>
+                                                    </td>
+                                                    <td class="text-muted">{{ i.centiliter }}</td>
+                                                    <td class="text-right">{{ i.preis }}€</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
+                                        <span class="fas fa-times-circle"></span> Schließen
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- FOOTER -->
+            <footer class="my-5 pt-5 text-muted text-center text-small">
+                <hr width="50%">
+                <p class="mb-1 text-sm"> Powered by: <br> &copy; 2020 HappyQR</p>
+                <ul class="list-inline">
+                    <li class="list-inline-item">
+                        <a target="_blank" href="#" class="fab fa-instagram"></a>
+                    </li>
+                    <li class="list-inline-item"></li>
+                    <li class="list-inline-item">
+                        <a target="_blank" href="#" class="fa fa-link"></a>
+                    </li>
+                    <li class="list-inline-item"></li>
+                    <li class="list-inline-item">
+                        <a target="_blank" href="#" class="fa fa-envelope"></a>
+                    </li>
+                </ul>
+            </footer>
+        </div>
+    </section>
+{% endif %}
 
 
 <!-- jQuery and Bootstrap Bundle (includes Popper) -->

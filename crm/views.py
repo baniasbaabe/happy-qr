@@ -31,8 +31,9 @@ def register_view(request):
             group = Group.objects.get(name="kunde")
 
             user.groups.add(group)
-
-            messages.success(request, "User wurde erfolgreich erstellt für" + username)
+            Kunde.objects.create(user=user, vorname=user.first_name, nachname=user.last_name, email=user.email)
+            messages.success(request, "User wurde erfolgreich erstellt für " + username)
+            return redirect('login')
 
     context = {"form":form}
     return render(request, 'crm/registrierung.html', context)
@@ -44,8 +45,13 @@ def login_view(request):
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            login(request, user)
-            return redirect('crm_dashboard')
+            if user.groups.filter(name__in=['mitarbeiter']):
+                login(request, user)
+                return redirect('crm_dashboard')
+            elif user.groups.filter(name__in=['kunde']):
+                login(request, user)
+                return redirect('menucard_dashboard')
+
         else:
             messages.info(request, 'Username oder Passwort falsch.')
     context = {}
@@ -302,6 +308,7 @@ def rechnungLoeschen(request, pk):
     return render(request, 'crm/delete_rechnung.html', context)
 
 
+
 def render_to_pdf(template_src, context_dict):
     template = get_template(template_src)
     html = template.render(context_dict)
@@ -310,6 +317,7 @@ def render_to_pdf(template_src, context_dict):
     if not pdf.err:
         return HttpResponse(result.getvalue(), content_type='application/pdf')
     return None
+
 
 
 def csv_download(request, pk):
@@ -334,6 +342,7 @@ def csv_download(request, pk):
 
 class ViewPDF(View):
     from .models import Kunde, Rechnung, Auftrag
+
     def get(self, request, pk, *args, **kwargs):
         rechnung = Rechnung.objects.get(id=pk)
         data = {"rechnung": rechnung, "datum": timezone.now()}
@@ -342,6 +351,8 @@ class ViewPDF(View):
 
 
 class DownloadPDF(View):
+
+
     def get(self, request, pk, *args, **kwargs):
         rechnung = Rechnung.objects.get(id=pk)
         data = {"rechnung": rechnung, "datum": timezone.now()}
