@@ -7,7 +7,7 @@ class TestViews(TestCase):
 
     def setUp(self):
 
-        '''
+
         self.user = User.objects.create_superuser(username="user1",email="user1@example.de",password="Hallo12345")
         self.client = Client()
 
@@ -34,7 +34,8 @@ class TestViews(TestCase):
             email="kunde@kunde.de",
             telefon="+4912345678910",
             web="kunde.de",
-            notiz="Beispielnotiz"
+            notiz="Beispielnotiz",
+            template="Template 1"
         )
         self.mitarbeiter1 = Mitarbeiter.objects.create(
             vorname="Testvorname",
@@ -69,18 +70,31 @@ class TestViews(TestCase):
 
 
     def test_dashboard_GET(self):
+        self.user.groups.add(self.group)
+        self.user.save()
+        self.client.login(username="user1", password="Hallo12345")
+
         response = self.client.get(self.dashboard_url)
 
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, "crm/dashboard.html")
+        
 
     def test_mitarbeiterliste_GET(self):
+        self.user.groups.add(self.group)
+        self.user.save()
+        self.client.login(username="user1", password="Hallo12345")
+
         response = self.client.get(self.mitarbeiterliste_url)
 
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, "crm/mitarbeiterliste.html")
 
+
     def test_auftragsliste_GET(self):
+        self.user.groups.add(self.group)
+        self.user.save()
+        self.client.login(username="user1", password="Hallo12345")
         response = self.client.get(self.auftragsliste_url)
 
         self.assertEquals(response.status_code, 200)
@@ -89,18 +103,27 @@ class TestViews(TestCase):
         
 
     def test_auftraganlegen_GET(self):
+        self.user.groups.add(self.group)
+        self.user.save()
+        self.client.login(username="user1", password="Hallo12345")
         response = self.client.get(self.auftraganlegen_url)
 
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, "crm/auftrag_form.html")
 
     def test_rechnunganlegen_GET(self):
+        self.user.groups.add(self.group)
+        self.user.save()
+        self.client.login(username="user1", password="Hallo12345")
         response = self.client.get(self.rechnunganlegen_url)
 
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, "crm/rechnung_form.html")
 
     def test_mitarbeiteranlegen_GET(self):
+        self.user.groups.add(self.group)
+        self.user.save()
+        self.client.login(username="user1", password="Hallo12345")
         response = self.client.get(self.mitarbeiteranlegen_url)
 
         self.assertEquals(response.status_code, 200)
@@ -109,6 +132,9 @@ class TestViews(TestCase):
     
 
     def test_CREATE_mitarbeiter(self):
+        self.user.groups.add(self.group)
+        self.user.save()
+        self.client.login(username="user1", password="Hallo12345")
         Mitarbeiter.objects.all().delete()
         post_response = self.client.post(reverse("mitarbeiter_anlegen"), {
             "vorname": "Hallo",
@@ -120,7 +146,11 @@ class TestViews(TestCase):
         self.assertEqual(Mitarbeiter.objects.last().vorname, "Hallo")
         self.assertEquals(Mitarbeiter.objects.count(), 1)
 
+
     def test_CREATE_kunde(self):
+        self.user.groups.add(self.group)
+        self.user.save()
+        self.client.login(username="user1", password="Hallo12345")
         Kunde.objects.all().delete()
         post_response = self.client.post(reverse("kunde_anlegen"), {
             "vorname": "Hallo",
@@ -128,31 +158,24 @@ class TestViews(TestCase):
             "telefon": "+4917611111111",
             "email": "ma@ma.de",
             "web": "kunde.de",
-            "notiz": "Beispiel"
+            "notiz": "Beispiel",
+            "template":"Template 1"
         })
         self.assertEquals(post_response.status_code, 302)
         self.assertEqual(Kunde.objects.last().vorname, "Hallo")
         self.assertEquals(Kunde.objects.count(), 1)
 
-    
-    def test_UPDATE_auftrag(self):
 
-        response = self.client.post(
-            reverse('auftrag_aktualisieren', kwargs={'pk':self.auftrag1.id}),
-            {'kunde': self.kunde1, 'produkt': 'Digital Menucard', 'status':'Eingegangen', 'auftrag_vom':self.auftrag1.auftrag_vom,
-             'preis':100.00 ,'notiz':'Beispielnotiz1'})
-
-        self.assertEqual(response.status_code, 302)
-
-        self.auftrag1.refresh_from_db()
-        self.assertEqual(self.auftrag1.notiz, 'Beispielnotiz1')
     
 
     def test_UPDATE_kunde(self):
+        self.user.groups.add(self.group)
+        self.user.save()
+        self.client.login(username="user1", password="Hallo12345")
         response = self.client.post(
             reverse('kunde_aktualisieren', kwargs={'pk': self.kunde1.id}),
             {'vorname': 'Update', 'nachname': 'Mustermann', 'telefon': "+4917611111111",
-             "email": "hallo@test.de", "web": "test.de", "notiz": "Beispielnotiz"})
+             "email": "hallo@test.de", "web": "test.de", "notiz": "Beispielnotiz","template":"Template 1"})
 
         self.assertEqual(response.status_code, 302)
 
@@ -160,6 +183,9 @@ class TestViews(TestCase):
         self.assertEqual(self.kunde1.vorname, 'Update')
 
     def test_UPDATE_mitarbeiter(self):
+        self.user.groups.add(self.group)
+        self.user.save()
+        self.client.login(username="user1", password="Hallo12345")
         response = self.client.post(
             reverse('mitarbeiter_aktualisieren', kwargs={'pk': self.mitarbeiter1.id}),
             {'vorname': 'Update', 'nachname': 'Mustermann', 'telefon': "+4917611111111",
@@ -171,6 +197,9 @@ class TestViews(TestCase):
         self.assertEqual(self.mitarbeiter1.vorname, 'Update')
 
     def test_DELETE_mitarbeiter(self):
+        self.user.groups.add(self.group)
+        self.user.save()
+        self.client.login(username="user1", password="Hallo12345")
         mitarbeiter = self.mitarbeiter1
 
         post_response = self.client.post(reverse('mitarbeiter_loeschen', kwargs={"pk": mitarbeiter.id}))
@@ -178,6 +207,9 @@ class TestViews(TestCase):
         self.assertEquals(Mitarbeiter.objects.count(), 0)
 
     def test_DELETE_kunde(self):
+        self.user.groups.add(self.group)
+        self.user.save()
+        self.client.login(username="user1", password="Hallo12345")
         kunde = self.kunde1
 
         post_response = self.client.post(reverse('kunde_loeschen', kwargs={"pk": kunde.id}))
@@ -185,6 +217,9 @@ class TestViews(TestCase):
         self.assertEquals(Kunde.objects.count(), 0)
 
     def test_DELETE_auftrag(self):
+        self.user.groups.add(self.group)
+        self.user.save()
+        self.client.login(username="user1", password="Hallo12345")
         auftrag = self.auftrag1
 
         post_response = self.client.post(reverse('auftrag_loeschen', kwargs={"pk": auftrag.id}))
@@ -192,10 +227,13 @@ class TestViews(TestCase):
         self.assertEquals(Auftrag.objects.count(), 0)
 
     def test_DELETE_rechnung(self):
+        self.user.groups.add(self.group)
+        self.user.save()
+        self.client.login(username="user1", password="Hallo12345")
         rechnung = self.rechnung1
 
         post_response = self.client.post(reverse('rechnung_loeschen', kwargs={"pk": rechnung.id}))
         self.assertEquals(post_response.status_code, 302)
         self.assertEquals(Rechnung.objects.count(), 0)
-    '''
+
 
