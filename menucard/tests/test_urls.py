@@ -1,9 +1,20 @@
-from django.test import SimpleTestCase
+from django.test import TestCase, Client
 from django.urls import reverse, resolve
 from menucard.views import *
+from django.contrib.auth.models import User, Permission,Group
 
-class TestUrls(SimpleTestCase):
-    '''
+
+class TestUrls(TestCase):
+    def setUp(self):
+
+        self.user = User.objects.create_superuser(username="user1",email="user1@example.de",password="Hallo12345")
+        self.client = Client()
+
+        group_name = "mitarbeiter"
+        self.group = Group(name=group_name)
+        self.group.save()
+
+
     def test_vorspeisen_is_resolved(self):
         url = reverse('vorspeisen')
         self.assertEquals(resolve(url).func, vorspeisen)
@@ -27,4 +38,3 @@ class TestUrls(SimpleTestCase):
     def test_nachspeisen_anlegen_is_resolved(self):
         url = reverse('nachspeisen_anlegen')
         self.assertEquals(resolve(url).func, nachspeisen_anlegen)
-    '''
