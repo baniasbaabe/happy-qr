@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 
 # Create your views here.
+from crm.models import Auftrag
 from menucard.forms import *
 from menucard.models import Vorspeise, Hauptspeise, Nachspeise, Snacks, AlkoholfreieDrinks, AlkoholhaltigeDrinks
 
@@ -22,6 +23,7 @@ def logout_view(request):
 @genehmigte_user(allowed_roles=['kunde'])
 def dashboard(request):
     kunde = Kunde.objects.get(email=request.user.email)
+    auftrag = request.user.kunde.auftrag_set.first()
 
     # Template ändern
     form = TemplateForm(instance=kunde)
@@ -29,12 +31,11 @@ def dashboard(request):
         form = TemplateForm(request.POST, instance=kunde)
         if form.is_valid():
             form.save()
-            print('OK')
+            messages.success(request, 'Sie haben das Template erfolgreich geändert.')
         else:
-            print('FEHLER')
+            messages.info(request, 'Es ist ein Fehler aufgetreten. Versuchen Sie es nochmal.')
 
     count_vorspeisen = kunde.vorspeise_set.count()
-
     count_hauptspeisen = kunde.hauptspeise_set.count()
     count_nachspeisen = kunde.nachspeise_set.count()
     count_snacks = kunde.snacks_set.count()
@@ -50,7 +51,8 @@ def dashboard(request):
         'count_snacks': count_snacks,
         'count_alkfreidrinks': count_alkfreidrinks,
         'count_alkdrinks': count_alkdrinks,
-        'template': template
+        'template': template,
+        'auftrag': auftrag
     }
     return render(request, 'menucard/dashboard.html', context)
 
@@ -453,7 +455,7 @@ def alkfreiedrinks_loeschen(request, pk):
 
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
-def menucard(request,email):
+def menucard(request, email):
     kunde = Kunde.objects.get(email=request.user.email)
     vorspeisen = kunde.vorspeise_set.all()
     hauptspeise = Hauptspeise.objects.all()

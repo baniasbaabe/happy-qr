@@ -454,6 +454,11 @@
 
 {% elif template == 'Template 2' %}
     <!-- TEMPLATE TWO -->
+    <style>
+        html {
+            background: black;
+        }
+    </style>
     <section style="background: black">
         <div class="container-sm">
             <div class="row mb-4 mt-3">
@@ -799,7 +804,12 @@
 
 {% else %}
     <!-- TEMPLATE THREE -->
-    <section style="background: #e3e3e3">
+    <style>
+        html {
+            background: #f8f8f8;
+        }
+    </style>
+    <section style="background: #f8f8f8">
 
         <div class="container-sm">
             <div class="row">
@@ -816,7 +826,8 @@
             <div class="row">
                 <div class="col">
                     <!-- VORSPEISEN -->
-                    <div class="card mb-4 shadow happyColor borderColor3" data-toggle="modal" data-target="#vorspeisen">
+                    <div class="card mb-4 shadow happyColor borderColor3" data-toggle="modal"
+                         data-target="#vorspeisen">
                         <div class="card-body">
                             <h5 class="text-center categoryDescription1">Vorspeisen</h5>
                         </div>
