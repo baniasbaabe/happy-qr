@@ -17,9 +17,9 @@ import csv
 from django.contrib import messages
 from django.contrib.auth.models import Group
 
+
 @nicht_authentifizierter_user
 def register_view(request):
-
     form = CreateUserForm()
 
     if request.method == "POST":
@@ -29,14 +29,14 @@ def register_view(request):
             username = form.cleaned_data.get('username')
 
             group = Group.objects.get(name="kunde")
-
             user.groups.add(group)
             Kunde.objects.create(user=user, vorname=user.first_name, nachname=user.last_name, email=user.email)
             messages.success(request, "User wurde erfolgreich erstellt für " + username)
             return redirect('login')
 
-    context = {"form":form}
+    context = {"form": form}
     return render(request, 'crm/registrierung.html', context)
+
 
 @nicht_authentifizierter_user
 def login_view(request):
@@ -62,6 +62,7 @@ def logout_view(request):
     logout(request)
     messages.info(request, 'Sie haben sich erfolgreich ausgeloggt.')
     return redirect('login')
+
 
 # Funktion um dashboard.html anzuzeigen mit sämtlichen Mitarbeitern
 @login_required(login_url='login')
@@ -308,7 +309,6 @@ def rechnungLoeschen(request, pk):
     return render(request, 'crm/delete_rechnung.html', context)
 
 
-
 def render_to_pdf(template_src, context_dict):
     template = get_template(template_src)
     html = template.render(context_dict)
@@ -317,7 +317,6 @@ def render_to_pdf(template_src, context_dict):
     if not pdf.err:
         return HttpResponse(result.getvalue(), content_type='application/pdf')
     return None
-
 
 
 def csv_download(request, pk):
@@ -352,7 +351,6 @@ class ViewPDF(View):
 
 class DownloadPDF(View):
 
-
     def get(self, request, pk, *args, **kwargs):
         rechnung = Rechnung.objects.get(id=pk)
         data = {"rechnung": rechnung, "datum": timezone.now()}
@@ -363,6 +361,3 @@ class DownloadPDF(View):
         content = "attachment; filename='%s'" % (filename)
         response['Content-Disposition'] = content
         return response
-
-
-

@@ -39,11 +39,14 @@
                             <span class="fas fa-home"></span> Home
                         </a>
                     </li>
+                    <!--
                     <li class="nav-item active">
-                        <a class="nav-link" href="{% url 'menucard' %}">
+                        <a class="nav-link" href="#">
                             <span class="fas fa-eye"></span> Menükarte
                         </a>
                     </li>
+                     -->
+
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active dropdown">
@@ -52,7 +55,8 @@
                             <span class="fas fa-user-circle"></span> {{ request.user }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{% url 'logout' %}"><span class="fas fa-sign-out-alt"></span> Logout</a>
+                            <a class="dropdown-item" href="{% url 'logout' %}"><span class="fas fa-sign-out-alt"></span>
+                                Logout</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">
                                 <span class="fas fa-cog"></span> Profil
