@@ -2,6 +2,7 @@ from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 
 class Mitarbeiter(models.Model):
@@ -15,7 +16,7 @@ class Mitarbeiter(models.Model):
 
 
 class Kunde(models.Model):
-    TEMPLATE= [
+    TEMPLATE = [
         ('Template 1', 'Template 1'),
         ('Template 2', 'Template 2'),
         ('Template 3', 'Template 3')
@@ -63,6 +64,3 @@ class Rechnung(models.Model):
 
     def __str__(self):
         return f'Rechnungsnummer: {self.id}, Kunde: {self.kunde}'
-
-
-
