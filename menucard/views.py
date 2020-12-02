@@ -23,7 +23,8 @@ def logout_view(request):
 @genehmigte_user(allowed_roles=['kunde'])
 def dashboard(request):
     kunde = Kunde.objects.get(email=request.user.email)
-    auftrag = request.user.kunde.auftrag_set.first()
+    auftrag = kunde.auftrag_set.first()
+    #auftrag = request.user.kunde.auftrag_set.first()
 
     # Template ändern
     form = TemplateForm(instance=kunde)
