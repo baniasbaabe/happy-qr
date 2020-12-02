@@ -23,7 +23,6 @@ def logout_view(request):
 def dashboard(request):
     kunde = Kunde.objects.get(email=request.user.email)
 
-
     # Template ändern
     form = TemplateForm(instance=kunde)
     if request.method == 'POST':
@@ -51,7 +50,7 @@ def dashboard(request):
         'count_snacks': count_snacks,
         'count_alkfreidrinks': count_alkfreidrinks,
         'count_alkdrinks': count_alkdrinks,
-        'template':template
+        'template': template
     }
     return render(request, 'menucard/dashboard.html', context)
 
@@ -148,7 +147,6 @@ def hauptspeisen_anlegen(request):
         else:
             messages.info(request, 'Bitte überprüfen Sie Ihre Eingabe.')
 
-
     context = {'form': form}
     return render(request, "menucard/hauptspeisen_anlegen.html", context)
 
@@ -194,7 +192,6 @@ def nachspeisen(request):
     kunde = Kunde.objects.get(email=request.user.email)
     nachspeise = kunde.nachspeise_set.all()
 
-
     context = {'nachspeisen': nachspeise}
     return render(request, 'menucard/nachspeisen.html', context)
 
@@ -202,15 +199,11 @@ def nachspeisen(request):
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 def nachspeisen_anlegen(request):
-
-
-
     kunde = Kunde.objects.get(email=request.user.email)
 
     form = NachspeiseForm(initial={'kundeId': kunde})
 
     nachspeise = Nachspeise()
-
 
     if request.method == "POST":
         form = NachspeiseForm(request.POST)
@@ -279,7 +272,6 @@ def snacks_anlegen(request):
 
     snack = Snacks()
 
-
     if request.method == "POST":
         form = SnacksForm(request.POST)
         if form.is_valid():
@@ -333,7 +325,6 @@ def alkoholhaltigedrinks(request):
     kunde = Kunde.objects.get(email=request.user.email)
     alkdrink = kunde.alkoholhaltigedrinks_set.all()
 
-
     context = {'alkdrink': alkdrink}
     return render(request, 'menucard/alkoholhaltigedrinks.html', context)
 
@@ -345,7 +336,6 @@ def alkoholhaltigedrinks_anlegen(request):
     form = AlkhaltigeDrinksForm(initial={'kundeId': kunde})
 
     alkdrink = AlkoholhaltigeDrinks()
-
 
     if request.method == "POST":
         form = AlkhaltigeDrinksForm(request.POST)
@@ -401,7 +391,6 @@ def alkfreiedrinks(request):
     kunde = Kunde.objects.get(email=request.user.email)
     softdrink = kunde.alkoholfreiedrinks_set.all()
 
-
     context = {'softdrink': softdrink}
     return render(request, 'menucard/alkfreiedrinks.html', context)
 
@@ -414,7 +403,6 @@ def alkfreiedrinks_anlegen(request):
     form = AlkfreieDrinksForm(initial={'kundeId': kunde})
 
     softdrink = AlkoholfreieDrinks()
-
 
     if request.method == "POST":
         form = AlkfreieDrinksForm(request.POST)
@@ -465,7 +453,7 @@ def alkfreiedrinks_loeschen(request, pk):
 
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
-def menucard(request):
+def menucard(request,email):
     kunde = Kunde.objects.get(email=request.user.email)
     vorspeisen = kunde.vorspeise_set.all()
     hauptspeise = Hauptspeise.objects.all()
@@ -483,5 +471,6 @@ def menucard(request):
         'softdrink': softdrink,
         'alkdrinks': alkdrinks,
         'template': template,
+        'kunde': kunde.email
     }
     return render(request, 'menucard/menucard.html', context)

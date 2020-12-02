@@ -42,7 +42,7 @@ urlpatterns = [
     path('snacks-loeschen/<str:pk>/', views.snacks_loeschen, name='snacks_loeschen'),
 
     # Menucard URL
-    path('menucard/', views.menucard, name='menucard'),
+    path(r'menucard_view/<str:email>', views.menucard, name='menucard'),
 
     path('logout/', views.logout_view, name='logout'),
 
