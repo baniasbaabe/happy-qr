@@ -17,8 +17,8 @@ class TestViews(TestCase):
 
 
         self.kundenliste_url = reverse("kundenliste")
-
-
+        self.register_url = reverse("register")
+        self.login_url = reverse("login")
         self.dashboard_url = reverse("crm_dashboard")
         self.mitarbeiterliste_url = reverse("mitarbeiterliste")
         self.auftragsliste_url = reverse("auftragsliste")
@@ -41,7 +41,7 @@ class TestViews(TestCase):
             vorname="Testvorname",
             nachname="Testnachname",
             email="test@gmail.com",
-            telefon="+4912345678910"
+
         )
 
         self.auftrag1 = Auftrag.objects.create(
@@ -78,7 +78,19 @@ class TestViews(TestCase):
 
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, "crm/dashboard.html")
-        
+
+    def test_login_GET(self):
+
+        response = self.client.get(self.login_url)
+
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, "crm/login.html")
+
+    def test_register_GET(self):
+        response = self.client.get(self.register_url)
+
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, "crm/registrierung.html")
 
     def test_mitarbeiterliste_GET(self):
         self.user.groups.add(self.group)
@@ -188,7 +200,7 @@ class TestViews(TestCase):
         self.client.login(username="user1", password="Hallo12345")
         response = self.client.post(
             reverse('mitarbeiter_aktualisieren', kwargs={'pk': self.mitarbeiter1.id}),
-            {'vorname': 'Update', 'nachname': 'Mustermann', 'telefon': "+4917611111111",
+            {'vorname': 'Update', 'nachname': 'Mustermann',
              "email": "hallo@test.de"})
 
         self.assertEqual(response.status_code, 302)

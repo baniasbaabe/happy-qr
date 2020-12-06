@@ -72,7 +72,6 @@ def vorspeisen(request):
 @genehmigte_user(allowed_roles=['kunde'])
 def vorspeisen_anlegen(request):
     kunde = Kunde.objects.get(email=request.user.email)
-
     form = VorspeiseForm(initial={'kundeId': kunde})
 
     if request.method == "POST":

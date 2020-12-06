@@ -3,7 +3,9 @@
 {% block body %}
     <div class="row mt-3">
         <div class="col">
-            <h2>Dashboard</h2>
+            <h2>
+                Dashboard &ndash; <span id="willkommenText"></span> {{ request.user.first_name }}
+            </h2>
             <hr>
         </div>
     </div>
@@ -15,6 +17,17 @@
     </div>
 
 
+    <script type="text/javascript">
+        let date = new Date()
+        let hour = date.getHours()
+        if (hour >= 6 && hour <= 12) {
+            document.getElementById('willkommenText').innerHTML = 'Guten Morgen'
+        } else if (hour >= 13 && hour < 18) {
+            document.getElementById('willkommenText').innerHTML = 'Guten Tag'
+        } else {
+            document.getElementById('willkommenText').innerHTML = 'Guten Abend'
+        }
+    </script>
 {% endblock body %}
 
 

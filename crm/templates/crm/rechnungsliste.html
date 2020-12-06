@@ -34,20 +34,29 @@
                             <td>{{ rechnung.datum }}</td>
 
 
-                            <td><a class="btn btn-sm btn-danger" href="{% url 'rechnung_loeschen' rechnung.id %}"><span
-                                    class="fas fa-trash-alt
-"></span></a></td>
+                            <td>
+                                <a class="btn btn-sm btn-danger" href="{% url 'rechnung_loeschen' rechnung.id %}"
+                                   data-toggle="tooltip" data-placement="top" title="Rechnung löschen">
+                                    <span class="fas fa-trash-alt"></span>
+                                </a>
+                            </td>
                             <td>
                                 <a class="btn btn-sm btn-dark" href="{% url 'pdf_view' rechnung.id %}"
-                                   target="_blank"><span class="fas fa-file-pdf"></span></a>
+                                   target="_blank" data-toggle="tooltip" data-placement="top" title="PDF öffnen">
+                                    <span class="fas fa-file-pdf"></span></a>
                             </td>
                             <td>
                                 <a class="btn btn-sm btn-dark" href="{% url 'pdf_download' rechnung.id %}"
-                                   target="_blank"><span class="fas fa-file-download"></span></a>
+                                   target="_blank" data-toggle="tooltip" data-placement="top"
+                                   title="Rechnung herunterladen">
+                                    <span class="fas fa-file-download"></span>
+                                </a>
                             </td>
                             <td>
                                 <a class="btn btn-sm btn-dark" href="{% url 'csv_download' rechnung.id %}"
-                                   target="_blank"><span class="fas fa-file-csv"></span></a>
+                                   target="_blank" data-toggle="tooltip" data-placement="top"
+                                   title="Als CSV herunterladen"><span class="fas fa-file-csv"></span>
+                                </a>
                             </td>
                         </tr>
                     {% endfor %}

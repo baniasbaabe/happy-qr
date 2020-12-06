@@ -22,9 +22,8 @@
                         <th scope="col">Erstellungsdatum</th>
                         <th scope="col">Preis</th>
                         <th scope="col">Notiz</th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
+                        <th scope="col" class="text-center"><span class="far fa-edit"></span></th>
+                        <th scope="col" class="text-center"><span class="fas fa-trash-alt"></span></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -37,16 +36,17 @@
                             <td>{{ auftrag.preis }}</td>
                             <td>{{ auftrag.notiz }}</td>
 
-                            <td><a class="btn btn-sm btn-info" href="{% url 'auftrag_aktualisieren' auftrag.id %}"><span
-                                    class="far fa-edit
+                            <td class="text-center"><a class="btn btn-sm btn-info"
+                                                       href="{% url 'auftrag_aktualisieren' auftrag.id %}"
+                                                       data-toggle="tooltip" data-placement="top"
+                                                       title="Auftrag bearbeiten"><span
+                                    class="far fa-edit"></span></a></td>
+                            <td class="text-center"><a class="btn btn-sm btn-danger"
+                                                       href="{% url 'auftrag_loeschen' auftrag.id %} "
+                                                       data-toggle="tooltip" data-placement="top"
+                                                       title="Auftrag löschen"><span
+                                    class="fas fa-trash-alt"></span></a></td>
 
-"></span></a></td>
-                            <td><a class="btn btn-sm btn-danger" href="{% url 'auftrag_loeschen' auftrag.id %} "><span
-                                    class="fas fa-trash-alt
-"></span></a></td>
-                            <td>
-                                <a class="btn btn-sm btn-dark" href="#"><span class="fas fa-file-alt"></span></a>
-                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>

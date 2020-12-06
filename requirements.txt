@@ -6,3 +6,4 @@ django-crispy-forms==1.9.2
 xhtml2pdf==0.2.5
 Selenium==3.141.0
 Webdriver_manager==3.2.2
+django-selenium-login==2.0.0

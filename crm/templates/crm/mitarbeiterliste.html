@@ -21,8 +21,8 @@
                         <th scope="col">Nachname</th>
                         <th scope="col">E-Mail</th>
                         <th scope="col">Telefon</th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
+                        <th scope="col" class="text-center"><span class="far fa-edit"></span></th>
+                        <th scope="col" class="text-center"><span class="fas fa-trash-alt"></span></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -33,15 +33,19 @@
                             <td>{{ mitarbeiter.nachname }}</td>
                             <td>{{ mitarbeiter.email }}</td>
                             <td>{{ mitarbeiter.telefon }}</td>
-                            <td><a class="btn btn-sm btn-info"
-                                   href="{% url 'mitarbeiter_aktualisieren' mitarbeiter.id %}"><span
-                                    class="far fa-edit
-
-"></span></a></td>
-                            <td><a class="btn btn-sm btn-danger"
-                                   href="{% url 'mitarbeiter_loeschen' mitarbeiter.id %} "><span
-                                    class="fas fa-trash-alt
-"></span></a></td>
+                            <td class="text-center">
+                                <a class="btn btn-sm btn-info"
+                                   href="{% url 'mitarbeiter_aktualisieren' mitarbeiter.id %}"
+                                   data-toggle="tooltip" data-placement="top" title="Rechnung bearbeiten">
+                                    <span class="far fa-edit"></span></a>
+                            </td>
+                            <td class="text-center">
+                                <a class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top"
+                                   title="Rechnung löschen"
+                                   href="{% url 'mitarbeiter_loeschen' mitarbeiter.id %}">
+                                    <span class="fas fa-trash-alt"></span>
+                                </a>
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>

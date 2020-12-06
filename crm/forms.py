@@ -10,6 +10,8 @@ class KundeForm(ModelForm):
     class Meta:
         model = Kunde
         fields = '__all__'
+        widgets = {'user': forms.HiddenInput(),
+                   'template': forms.HiddenInput()}
 
 
 class MitarbeiterForm(ModelForm):

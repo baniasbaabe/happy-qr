@@ -27,6 +27,14 @@ class TestUrls(TestCase):
         url = reverse('hauptspeisen')
         self.assertEquals(resolve(url).func, hauptspeisen)
 
+    def test_snacks_is_resolved(self):
+        url = reverse('snacks')
+        self.assertEquals(resolve(url).func, snacks)
+
+    def test_alkfreiedrinks_is_resolved(self):
+        url = reverse('alkfreiedrinks')
+        self.assertEquals(resolve(url).func, alkfreiedrinks)
+
     def test_hauptspeisen_anlegen_is_resolved(self):
         url = reverse('hauptspeisen_anlegen')
         self.assertEquals(resolve(url).func, hauptspeisen_anlegen)
@@ -38,3 +46,9 @@ class TestUrls(TestCase):
     def test_nachspeisen_anlegen_is_resolved(self):
         url = reverse('nachspeisen_anlegen')
         self.assertEquals(resolve(url).func, nachspeisen_anlegen)
+
+    def test_snacks_anlegen_is_anlegen(self):
+        url = reverse("snacks_anlegen")
+        self.assertEquals(resolve(url).func, snacks_anlegen)
+
+
