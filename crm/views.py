@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.utils import timezone
 from django.contrib.auth.forms import UserCreationForm
+from urllib3.filepost import writer
 
 from .decoraters import nicht_authentifizierter_user, genehmigte_user
 from .models import *
@@ -16,6 +17,8 @@ from xhtml2pdf import pisa
 import csv
 from django.contrib import messages
 from django.contrib.auth.models import Group
+import sqlite3
+from sqlite3 import Error
 
 
 @nicht_authentifizierter_user
@@ -308,7 +311,7 @@ def rechnungLoeschen(request, pk):
     context = {"rechnung": rechnung}
     return render(request, 'crm/delete_rechnung.html', context)
 
-
+#Lassen
 def render_to_pdf(template_src, context_dict):
     template = get_template(template_src)
     html = template.render(context_dict)
@@ -339,6 +342,7 @@ def csv_download(request, pk):
 
 # Opens up page as PDF
 
+
 class ViewPDF(View):
     from .models import Kunde, Rechnung, Auftrag
 
@@ -361,3 +365,59 @@ class DownloadPDF(View):
         content = "attachment; filename='%s'" % (filename)
         response['Content-Disposition'] = content
         return response
+
+#Kundenliste PDF/CSV
+
+
+
+def csv_download_kundenliste(request):
+    kunden_liste = Kunde.objects.all()
+
+    response = HttpResponse(content_type='text/csv')
+    filename = "Kundenliste.csv"
+    content = "attachment; filename='%s'" % (filename)
+    response['Content-Disposition'] = content
+
+    writer = csv.writer(response, delimiter=",")
+    writer.writerow(["Vorname", "Nachname", "EMail", "Telefon", "Web"])
+
+    for row in kunden_liste:
+        rowobj = [row.nachname,row.vorname,row.telefon ]
+        writer.writerow(rowobj)
+
+
+
+    return response
+
+class ViewKundenListePDF(View):
+    from .models import Kunde
+
+    def get(self, request,):
+        kunden_liste= Kunde.objects.all()
+        data = {"kunden_liste": kunden_liste, "datum": timezone.now()}
+        pdf = render_to_pdf('crm/kundenliste_pdf.html', data)
+        return HttpResponse(pdf, content_type='application/pdf')
+
+
+class DownloadKundenlistePDF(View):
+
+    def get(self, request,):
+        kunden_liste = Kunde.objects.all()
+        data = {"kunden_liste": kunden_liste, "datum": timezone.now()}
+        pdf = render_to_pdf('crm/kundenliste_pdf.html', data)
+
+        response = HttpResponse(pdf, content_type='application/pdf')
+        filename = "Kundenliste_%s.pdf"
+        content = "attachment; filename='%s'" % (filename)
+        response['Content-Disposition'] = content
+
+
+
+        return response
+
+
+
+
+
+
+

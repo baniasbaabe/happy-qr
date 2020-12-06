@@ -43,7 +43,6 @@ urlpatterns = [
 
     # Menucard URL
     path(r'menucard_view/<str:email>', views.menucard, name='menucard'),
-
     path('logout/', views.logout_view, name='logout'),
 
 ]
