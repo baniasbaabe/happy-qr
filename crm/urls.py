@@ -9,7 +9,11 @@ urlpatterns = [
     path('kundenliste/', views.kundenliste, name='kundenliste'),
     path("kunde_anlegen/", views.KundeAnlegen, name='kunde_anlegen'),
     path("kunde_loeschen/<str:pk>/", views.KundeLoeschen, name='kunde_loeschen'),
+    path('pdf_view_kundenliste/', views.ViewKundenListePDF.as_view(), name="pdf_view_kundenliste"),
+    path('pdf_download_kundenliste/', views.DownloadKundenlistePDF.as_view(), name="pdf_download_kundenliste"),
     path("kunde_aktualisieren/<str:pk>/", views.KundeAktualisieren, name='kunde_aktualisieren'),
+    path('csv_download_kundenliste/', views.csv_download_kundenliste, name="csv_download_kundenliste"),
+
     # Mitarbeiter-URLs-------------------------------------------------------------
     path('mitarbeiterliste/', views.mitarbeiterliste, name='mitarbeiterliste'),
     path("mitarbeiter_anlegen/", views.mitarbeiterAnlegen, name='mitarbeiter_anlegen'),
@@ -32,4 +36,5 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
     path('register/', views.register_view, name='register'),
+
 ]
