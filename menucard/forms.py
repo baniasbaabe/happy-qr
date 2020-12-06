@@ -7,7 +7,7 @@ class VorspeiseForm(ModelForm):
     class Meta:
         model = Vorspeise
         fields = '__all__'
-        widgets = {'kundeId':forms.HiddenInput()}
+        widgets = {'kundeId': forms.HiddenInput()}
 
 
 class HauptspeiseForm(ModelForm):
@@ -23,11 +23,13 @@ class NachspeiseForm(ModelForm):
         fields = '__all__'
         widgets = {'kundeId': forms.HiddenInput()}
 
+
 class SnacksForm(ModelForm):
     class Meta:
         model = Snacks
         fields = '__all__'
         widgets = {'kundeId': forms.HiddenInput()}
+
 
 class AlkfreieDrinksForm(ModelForm):
     class Meta:
@@ -35,11 +37,13 @@ class AlkfreieDrinksForm(ModelForm):
         fields = '__all__'
         widgets = {'kundeId': forms.HiddenInput()}
 
+
 class AlkhaltigeDrinksForm(ModelForm):
     class Meta:
         model = AlkoholhaltigeDrinks
         fields = '__all__'
         widgets = {'kundeId': forms.HiddenInput()}
+
 
 class TemplateForm(ModelForm):
     class Meta:

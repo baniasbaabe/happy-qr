@@ -5,25 +5,28 @@
         <div class="col">
             <h2>Kundenliste</h2>
             <hr>
-            <a class="btn btn-primary" href="{% url 'kunde_anlegen' %}">
-                <span class="fas fa-plus"></span> Kunden anlegen
-            </a>
-            <td>
-                <a class="btn btn-sm btn-dark" href="{% url 'csv_download_kundenliste' %}"
-                   target="_blank"><span class="fas fa-file-download"></span></a>
-            </td>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a class="btn btn-primary" href="{% url 'kunde_anlegen' %}">
+                    <span class="fas fa-plus"></span> Kunden anlegen
+                </a>
+                <a class="btn btn-primary" href="{% url 'csv_download_kundenliste' %}"
+                   target="_blank">
+                    <span class="fas fa-file-download"></span> CSV Export
+                </a>
 
-            <td>
-                <a class="btn btn-sm btn-dark" href="{% url 'pdf_view_kundenliste' %}"
-                   target="_blank"><span class="fas fa-file-pdf"></span></a>
-            </td>
-            <td>
-                <a class="btn btn-sm btn-dark" href="{% url 'pdf_download_kundenliste' %}"
-                   target="_blank"><span class="fas fa-file-download"></span></a>
-            </td>
+                <a class="btn btn-primary" href="{% url 'pdf_download_kundenliste' %}"
+                   target="_blank">
+                    <span class="fas fa-file-download"></span> PDF Export
+                </a>
+
+                <a class="btn btn-primary" href="{% url 'pdf_view_kundenliste' %}"
+                   target="_blank">
+                    <span class="fas fa-file-pdf"></span> Kundenliste anzeigen
+                </a>
+
+            </div>
         </div>
     </div>
-
 
     <div class="row mt-3">
         <div class="col">
@@ -54,12 +57,12 @@
                             <td>{{ kunde.notiz }}</td>
                             <td class="text-center">
                                 <a class="btn btn-sm btn-info" href="{% url 'kunde_aktualisieren' kunde.id %}"
-                                data-toggle="tooltip" data-placement="top" title="Kundendaten bearbeiten">
+                                   data-toggle="tooltip" data-placement="top" title="Kundendaten bearbeiten">
                                     <span class="far fa-edit"></span></a>
                             </td>
                             <td class="text-center">
                                 <a class="btn btn-sm btn-danger" href="{% url 'kunde_loeschen' kunde.id %}"
-                                data-toggle="tooltip" data-placement="top" title="Kunde löschen">
+                                   data-toggle="tooltip" data-placement="top" title="Kunde löschen">
                                     <span class="fas fa-trash-alt"></span></a>
                             </td>
 

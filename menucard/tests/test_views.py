@@ -1,8 +1,9 @@
 from django.test import TestCase, Client
 from django.urls import reverse
 from menucard.models import *
-from django.contrib.auth.models import User, Permission,Group
+from django.contrib.auth.models import User, Permission, Group
 from django.test import TestCase, Client
+
 
 class TestViews(TestCase):
 
@@ -14,7 +15,8 @@ class TestViews(TestCase):
         self.group = Group(name=group_name)
         self.group.save()
 
-        self.kunde = Kunde.objects.create(vorname="Hallo", nachname="Tschüss", email=self.user.email, telefon="+4917666994073",
+        self.kunde = Kunde.objects.create(vorname="Hallo", nachname="Tschüss", email=self.user.email,
+                                          telefon="+4917666994073",
                                           notiz="hi", web="hi.de", template="Template 1")
 
         self.dashboard_url = reverse("menucard_dashboard")
@@ -75,7 +77,6 @@ class TestViews(TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, "menucard/dashboard.html")
 
-
     def test_vorspeisen_GET(self):
         self.user.groups.add(self.group)
         self.user.save()
@@ -84,7 +85,6 @@ class TestViews(TestCase):
 
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, "menucard/vorspeisen.html")
-
 
     def test_hauptspeisen_GET(self):
         self.user.groups.add(self.group)
@@ -136,23 +136,20 @@ class TestViews(TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, "menucard/snacks.html")
 
-
-
     def test_CREATE_vorspeise(self):
         self.user.groups.add(self.group)
         self.user.save()
         self.client.login(username="user1", password="Hallo12345")
 
         post_response = self.client.post(reverse("vorspeisen_anlegen"), {
-            "name":"Vorspeisename",
-            "beschreibung":"Createbeschreibung",
-            "preis":1,
-            "kundeId":self.kunde.id
+            "name": "Vorspeisename",
+            "beschreibung": "Createbeschreibung",
+            "preis": 1,
+            "kundeId": self.kunde.id
         })
         self.assertEquals(post_response.status_code, 302)
         self.assertEqual(Vorspeise.objects.last().name, "Vorspeisename")
-        #self.assertEquals(Vorspeise.objects.count(), 2)
-
+        # self.assertEquals(Vorspeise.objects.count(), 2)
 
     def test_CREATE_hauptspeise(self):
         self.user.groups.add(self.group)
@@ -160,14 +157,14 @@ class TestViews(TestCase):
         self.client.login(username="user1", password="Hallo12345")
 
         post_response = self.client.post(reverse("hauptspeisen_anlegen"), {
-            "name":"Hauptspeisename",
-            "beschreibung":"Createbeschreibung",
-            "preis":1,
-            "kundeId":self.kunde.id
+            "name": "Hauptspeisename",
+            "beschreibung": "Createbeschreibung",
+            "preis": 1,
+            "kundeId": self.kunde.id
         })
         self.assertEquals(post_response.status_code, 302)
         self.assertEqual(Hauptspeise.objects.last().name, "Hauptspeisename")
-        #self.assertEquals(Hauptspeise.objects.count(), 2)
+        # self.assertEquals(Hauptspeise.objects.count(), 2)
 
     '''
     def test_CREATE_nachspeise(self):
@@ -256,6 +253,3 @@ class TestViews(TestCase):
         self.assertEquals(post_response.status_code, 302)
         self.assertEquals(AlkoholhaltigeDrinks.objects.count(), 0)
     '''
-
-
-

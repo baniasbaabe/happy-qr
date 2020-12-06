@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 from django import forms
 
 
-
 class KundeForm(ModelForm):
     class Meta:
         model = Kunde
@@ -19,15 +18,18 @@ class MitarbeiterForm(ModelForm):
         model = Mitarbeiter
         fields = '__all__'
 
+
 class AuftragForm(ModelForm):
     class Meta:
         model = Auftrag
         fields = "__all__"
 
+
 class RechnungForm(ModelForm):
     class Meta:
         model = Rechnung
         fields = "__all__"
+
 
 class CreateUserForm(UserCreationForm):
     first_name = forms.CharField(required=True, label='Vorname')
@@ -37,4 +39,3 @@ class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ["username", "first_name", "last_name", "email", "password1", "password2"]
-

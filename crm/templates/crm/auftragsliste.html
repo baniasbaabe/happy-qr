@@ -5,9 +5,19 @@
         <div class="col">
             <h2>Auftragsliste</h2>
             <hr>
-            <a class="btn btn-primary" href="{% url 'auftrag_anlegen' %}">
-                <span class="fas fa-plus"></span> Aufrag anlegen
-            </a>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a class="btn btn-primary" href="{% url 'auftrag_anlegen' %}">
+                    <span class="fas fa-plus"></span> Aufrag anlegen
+                </a>
+                <a class="btn btn-primary"
+                   href="{% url 'auftragsliste_pdf_download' %}">
+                    <span class="fas fa-file-pdf"></span> PDF Export
+                </a>
+                <a class="btn btn-primary"
+                   href="{% url 'csv_auftragsliste_download' %}">
+                    <span class="fas fa-file-csv"></span> CSV Export
+                </a>
+            </div>
         </div>
     </div>
 
@@ -27,7 +37,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <!-- Zur Ausgabe die index-Variable nutzen. In diesem Fall ma -->
+                    <!-- Zur Ausgabe die index-Variable nutzen. In diesem Fall 'auftrag' -->
                     {% for auftrag in auftraege %}
                         <tr>
                             <td>{{ auftrag.kunde }}</td>
@@ -35,18 +45,16 @@
                             <td>{{ auftrag.auftrag_vom }}</td>
                             <td>{{ auftrag.preis }}</td>
                             <td>{{ auftrag.notiz }}</td>
-
                             <td class="text-center"><a class="btn btn-sm btn-info"
                                                        href="{% url 'auftrag_aktualisieren' auftrag.id %}"
                                                        data-toggle="tooltip" data-placement="top"
-                                                       title="Auftrag bearbeiten"><span
-                                    class="far fa-edit"></span></a></td>
+                                                       title="Auftrag bearbeiten">
+                                <span class="far fa-edit"></span></a></td>
                             <td class="text-center"><a class="btn btn-sm btn-danger"
                                                        href="{% url 'auftrag_loeschen' auftrag.id %} "
                                                        data-toggle="tooltip" data-placement="top"
-                                                       title="Auftrag löschen"><span
-                                    class="fas fa-trash-alt"></span></a></td>
-
+                                                       title="Auftrag löschen">
+                                <span class="fas fa-trash-alt"></span></a></td>
                         </tr>
                     {% endfor %}
                     </tbody>

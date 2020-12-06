@@ -24,6 +24,8 @@ urlpatterns = [
     path("auftrag_anlegen", views.auftragAnlegen, name="auftrag_anlegen"),
     path("auftrag_aktualisieren/<str:pk>/", views.auftragAktualisieren, name='auftrag_aktualisieren'),
     path("auftrag_loeschen/<str:pk>/", views.auftragLoeschen, name='auftrag_loeschen'),
+    path('pdf_download/auftragsliste/', views.DownloadAuftragslistePDF.as_view(), name="auftragsliste_pdf_download"),
+    path('csv_download/auftragsliste/', views.csv_download_auftragsliste, name="csv_auftragsliste_download"),
     # Rechnungs-URLs-------------------------------------------------------------
     path("rechnungsliste/", views.rechnungsliste, name="rechnungsliste"),
     path("rechnung_anlegen", views.rechnungAnlegen, name="rechnung_anlegen"),

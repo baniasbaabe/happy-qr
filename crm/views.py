@@ -89,9 +89,7 @@ def dashboard(request):
 def kundenliste(request):  # hole alle kunden aus DB
     kunden = Kunde.objects.all()
 
-    context = {"kunden": kunden,
-
-               }
+    context = {"kunden": kunden}
     return render(request, 'crm/kundenliste.html', context)
 
 
@@ -197,7 +195,7 @@ def mitarbeiterLoeschen(request, pk):
     return render(request, 'crm/delete_mitarbeiter.html', context)
 
 
-# Ende Mitarbeiter CRUD-Methoden-----------------------------------------------------------------------------------------
+# Ende Mitarbeiter CRUD-Methoden----------------------------------------------------------------------------------------
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['mitarbeiter'])
 def auftragsliste(request):  # hole alle Aufträge aus DB
@@ -311,7 +309,8 @@ def rechnungLoeschen(request, pk):
     context = {"rechnung": rechnung}
     return render(request, 'crm/delete_rechnung.html', context)
 
-#Lassen
+
+# Lassen
 def render_to_pdf(template_src, context_dict):
     template = get_template(template_src)
     html = template.render(context_dict)
@@ -330,7 +329,7 @@ def csv_download(request, pk):
     content = "attachment; filename='%s'" % (filename)
     response['Content-Disposition'] = content
 
-    writer = csv.writer(response, delimiter=",")
+    writer = csv.writer(response, delimiter=";")
     writer.writerow(["Vorname", "Nachname", "EMail", "Telefon", "Web", "Produkt", "Preis"])
 
     writer.writerow([rechnung.kunde.vorname, rechnung.kunde.nachname, rechnung.kunde.email,
@@ -366,8 +365,8 @@ class DownloadPDF(View):
         response['Content-Disposition'] = content
         return response
 
-#Kundenliste PDF/CSV
 
+# Kundenliste PDF/CSV
 
 
 def csv_download_kundenliste(request):
@@ -378,22 +377,21 @@ def csv_download_kundenliste(request):
     content = "attachment; filename='%s'" % (filename)
     response['Content-Disposition'] = content
 
-    writer = csv.writer(response, delimiter=",")
+    writer = csv.writer(response, delimiter=";")
     writer.writerow(["Vorname", "Nachname", "EMail", "Telefon", "Web"])
 
     for row in kunden_liste:
-        rowobj = [row.nachname,row.vorname,row.telefon ]
+        rowobj = [row.nachname, row.vorname, row.telefon]
         writer.writerow(rowobj)
 
-
-
     return response
+
 
 class ViewKundenListePDF(View):
     from .models import Kunde
 
-    def get(self, request,):
-        kunden_liste= Kunde.objects.all()
+    def get(self, request, *args, **kwargs):
+        kunden_liste = Kunde.objects.all()
         data = {"kunden_liste": kunden_liste, "datum": timezone.now()}
         pdf = render_to_pdf('crm/kundenliste_pdf.html', data)
         return HttpResponse(pdf, content_type='application/pdf')
@@ -401,23 +399,47 @@ class ViewKundenListePDF(View):
 
 class DownloadKundenlistePDF(View):
 
-    def get(self, request,):
+    def get(self, request, *args, **kwargs):
         kunden_liste = Kunde.objects.all()
         data = {"kunden_liste": kunden_liste, "datum": timezone.now()}
         pdf = render_to_pdf('crm/kundenliste_pdf.html', data)
 
         response = HttpResponse(pdf, content_type='application/pdf')
-        filename = "Kundenliste_%s.pdf"
+        filename = "Kundenliste.pdf"
         content = "attachment; filename='%s'" % (filename)
         response['Content-Disposition'] = content
-
-
 
         return response
 
 
+class DownloadAuftragslistePDF(View):
+
+    def get(self, request, *args, **kwargs):
+        auftrags_liste = Auftrag.objects.all()
+        data = {"auftrags_liste": auftrags_liste, "datum": timezone.now()}
+        pdf = render_to_pdf('crm/auftragsliste_pdf.html', data)
+
+        response = HttpResponse(pdf, content_type='application/pdf')
+        filename = 'Auftragsliste.pdf'
+        content = "attachment; filename='%s'" % (filename)
+        response['Content-Disposition'] = content
+
+        return response
 
 
+def csv_download_auftragsliste(request):
+    auftrags_liste = Auftrag.objects.all()
 
+    response = HttpResponse(content_type='text/csv')
+    filename = "Auftragsliste.csv"
+    content = "attachment; filename='%s'" % (filename)
+    response['Content-Disposition'] = content
 
+    writer = csv.writer(response, delimiter=";")
+    writer.writerow(["ID", "Kunde", "Datum", "Preis", "Notiz"])
 
+    for row in auftrags_liste:
+        rowobj = [row.id, row.kunde, row.auftrag_vom, row.preis, row.notiz]
+        writer.writerow(rowobj)
+
+    return response

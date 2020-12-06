@@ -1,20 +1,18 @@
 from django.test import TestCase, Client
 from django.urls import reverse
 from crm.models import *
-from django.contrib.auth.models import User, Permission,Group
+from django.contrib.auth.models import User, Permission, Group
+
 
 class TestViews(TestCase):
 
     def setUp(self):
-
-
-        self.user = User.objects.create_superuser(username="user1",email="user1@example.de",password="Hallo12345")
+        self.user = User.objects.create_superuser(username="user1", email="user1@example.de", password="Hallo12345")
         self.client = Client()
 
         group_name = "mitarbeiter"
         self.group = Group(name=group_name)
         self.group.save()
-
 
         self.kundenliste_url = reverse("kundenliste")
         self.register_url = reverse("register")
@@ -26,7 +24,6 @@ class TestViews(TestCase):
         self.mitarbeiteranlegen_url = reverse("mitarbeiter_anlegen")
         self.auftraganlegen_url = reverse("auftrag_anlegen")
         self.rechnunganlegen_url = reverse("rechnung_anlegen")
-
 
         self.kunde1 = Kunde.objects.create(
             vorname="TestVorname",
@@ -57,7 +54,6 @@ class TestViews(TestCase):
             auftrag=self.auftrag1
         )
 
-
     def test_kundenliste_GET(self):
         self.user.groups.add(self.group)
         self.user.save()
@@ -67,7 +63,6 @@ class TestViews(TestCase):
 
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, template_name="crm/kundenliste.html")
-
 
     def test_dashboard_GET(self):
         self.user.groups.add(self.group)
@@ -80,7 +75,6 @@ class TestViews(TestCase):
         self.assertTemplateUsed(response, "crm/dashboard.html")
 
     def test_login_GET(self):
-
         response = self.client.get(self.login_url)
 
         self.assertEquals(response.status_code, 200)
@@ -102,7 +96,6 @@ class TestViews(TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, "crm/mitarbeiterliste.html")
 
-
     def test_auftragsliste_GET(self):
         self.user.groups.add(self.group)
         self.user.save()
@@ -111,8 +104,6 @@ class TestViews(TestCase):
 
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, "crm/auftragsliste.html")
-        
-        
 
     def test_auftraganlegen_GET(self):
         self.user.groups.add(self.group)
@@ -140,8 +131,6 @@ class TestViews(TestCase):
 
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, "crm/mitarbeiter_form.html")
-        
-    
 
     def test_CREATE_mitarbeiter(self):
         self.user.groups.add(self.group)
@@ -158,7 +147,6 @@ class TestViews(TestCase):
         self.assertEqual(Mitarbeiter.objects.last().vorname, "Hallo")
         self.assertEquals(Mitarbeiter.objects.count(), 1)
 
-
     def test_CREATE_kunde(self):
         self.user.groups.add(self.group)
         self.user.save()
@@ -171,14 +159,11 @@ class TestViews(TestCase):
             "email": "ma@ma.de",
             "web": "kunde.de",
             "notiz": "Beispiel",
-            "template":"Template 1"
+            "template": "Template 1"
         })
         self.assertEquals(post_response.status_code, 302)
         self.assertEqual(Kunde.objects.last().vorname, "Hallo")
         self.assertEquals(Kunde.objects.count(), 1)
-
-
-    
 
     def test_UPDATE_kunde(self):
         self.user.groups.add(self.group)
@@ -187,7 +172,7 @@ class TestViews(TestCase):
         response = self.client.post(
             reverse('kunde_aktualisieren', kwargs={'pk': self.kunde1.id}),
             {'vorname': 'Update', 'nachname': 'Mustermann', 'telefon': "+4917611111111",
-             "email": "hallo@test.de", "web": "test.de", "notiz": "Beispielnotiz","template":"Template 1"})
+             "email": "hallo@test.de", "web": "test.de", "notiz": "Beispielnotiz", "template": "Template 1"})
 
         self.assertEqual(response.status_code, 302)
 
@@ -247,5 +232,3 @@ class TestViews(TestCase):
         post_response = self.client.post(reverse('rechnung_loeschen', kwargs={"pk": rechnung.id}))
         self.assertEquals(post_response.status_code, 302)
         self.assertEquals(Rechnung.objects.count(), 0)
-
-

@@ -56,17 +56,8 @@
 
     </style>
 </head>
-<a><img src="{% static 'img/Happy_QR.png' %}" alt="Trulli" width="500" height="333">
-</a>
-
 <body>
-
-
-
-<div>
-
-
-</div>
+<img src="{% static 'img/Happy_QR.png' %}" alt="Trulli" width="500" height="333">
 <br>
 <br>
 <br>
@@ -74,34 +65,31 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <h3>Happy-Qr - {{ datum }}</h3>
+            <h3>Happy-QR &ndash; {{ datum }}</h3>
         </div>
-
-
-        <table class="table" >
+        <table class="table">
             <thead>
             <tr>
-                <th>Vorname</th>
-                <th>Nachname</th>
-                <th>Email</th>
-                <th>Telefon</th>
-                <th>Template</th>
+                <th>Auftrags-Nummer</th>
+                <th>Kunde</th>
+                <th>Erstellungsdatum</th>
+                <th>Preis</th>
+                <th>Notiz</th>
             </tr>
             </thead>
             <tbody>
-            {% for kunde in kunden_liste %}
+            {% for auftrag in auftrags_liste %}
                 <tr>
-                    <td>{{ kunde.vorname}}</td>
-                    <td>{{ kunde.nachname }}</td>
-                    <td>{{ kunde.email }}</td>
-                    <td>{{ kunde.telefon }}</td>
-                    <td>{{ kunde.template }}</td>
+                    <td>{{ auftrag.id }}</td>
+                    <td>{{ auftrag.kunde }}</td>
+                    <td>{{ auftrag.auftrag_vom }}</td>
+                    <td>{{ auftrag.preis }}</td>
+                    <td>{{ auftrag.notiz }}</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
     </div>
 </div>
-
 </body>
 </html>

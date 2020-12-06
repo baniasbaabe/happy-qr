@@ -8,6 +8,7 @@ from django.test import Client
 from django.contrib.auth.models import User, Group
 from seleniumlogin import force_login
 
+
 class TestKundeSeite(LiveServerTestCase):
 
     @classmethod
@@ -18,9 +19,7 @@ class TestKundeSeite(LiveServerTestCase):
         chrome_options.add_argument('--disable-gpu')
         cls.client = Client()
         cls.browser = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
-        #cls.user = User.objects.create_superuser(username="hallo123",password="dasisteintest123!")
-
-
+        # cls.user = User.objects.create_superuser(username="hallo123",password="dasisteintest123!")
 
     @classmethod
     def tearDownClass(cls):
@@ -28,7 +27,7 @@ class TestKundeSeite(LiveServerTestCase):
         super().tearDownClass()
 
     def test_kunde_auftrag(self, ):
-        self.user = User.objects.create_superuser(username="hallo123",password="dasisteintest123!")
+        self.user = User.objects.create_superuser(username="hallo123", password="dasisteintest123!")
         self.group = Group(name='mitarbeiter')
         self.group.save()
         self.user.groups.add(self.group)
@@ -37,7 +36,7 @@ class TestKundeSeite(LiveServerTestCase):
 
         self.browser.get('%s%s' % (self.live_server_url, '/crm/kundenliste'))
         self.browser.find_element_by_class_name("btn-primary").click()
-        vorname_input= self.browser.find_element_by_name("vorname")
+        vorname_input = self.browser.find_element_by_name("vorname")
         vorname_input.send_keys('Max')
         nachname_input = self.browser.find_element_by_name("nachname")
         nachname_input.send_keys('Mustermann')
@@ -49,12 +48,13 @@ class TestKundeSeite(LiveServerTestCase):
         self.browser.find_element_by_class_name("navbar-toggler-icon").click()
         self.browser.get('%s%s' % (self.live_server_url, '/crm/auftragsliste'))
         self.browser.find_element_by_class_name("btn-primary").click()
-        #self.browser.find_element_by_class_name("form-control").click()
+        # self.browser.find_element_by_class_name("form-control").click()
         self.browser.find_element_by_xpath("//select[@name='kunde']/option[text()='Max Mustermann']").click()
         self.browser.find_element_by_class_name("btn-success").click()
         self.browser.get('%s%s' % (self.live_server_url, '/crm/rechnungsliste'))
         self.browser.find_element_by_class_name("btn-primary").click()
         self.browser.find_element_by_xpath("//select[@name='kunde']/option[text()='Max Mustermann']").click()
 
-        self.browser.find_element_by_xpath("//select[@name='auftrag']/option[text()='Auftragsnummer: 1, Kunde Max Mustermann']").click()
+        self.browser.find_element_by_xpath(
+            "//select[@name='auftrag']/option[text()='Auftragsnummer: 1, Kunde Max Mustermann']").click()
         self.browser.find_element_by_class_name("btn-success").click()
