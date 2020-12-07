@@ -377,11 +377,11 @@ def csv_download_kundenliste(request):
     content = "attachment; filename='%s'" % (filename)
     response['Content-Disposition'] = content
 
-    writer = csv.writer(response, delimiter=";")
-    writer.writerow(["Vorname", "Nachname", "EMail", "Telefon", "Web"])
+    writer = csv.writer(response, delimiter="\t")
+    writer.writerow(["Vorname", "Nachname", "E-Mail", "Telefon", "Web", "Notiz"])
 
     for row in kunden_liste:
-        rowobj = [row.nachname, row.vorname, row.telefon]
+        rowobj = [row.nachname, row.vorname, row.email, row.telefon, row.web, row.notiz]
         writer.writerow(rowobj)
 
     return response
@@ -435,7 +435,7 @@ def csv_download_auftragsliste(request):
     content = "attachment; filename='%s'" % (filename)
     response['Content-Disposition'] = content
 
-    writer = csv.writer(response, delimiter=";")
+    writer = csv.writer(response, delimiter="\t")
     writer.writerow(["ID", "Kunde", "Datum", "Preis", "Notiz"])
 
     for row in auftrags_liste:
