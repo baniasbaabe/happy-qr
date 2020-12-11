@@ -3,6 +3,8 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 
 # Create your views here.
 from crm.models import Auftrag
@@ -24,7 +26,7 @@ def logout_view(request):
 def dashboard(request):
     kunde = Kunde.objects.get(email=request.user.email)
     auftrag = kunde.auftrag_set.first()
-    #auftrag = request.user.kunde.auftrag_set.first()
+    # auftrag = request.user.kunde.auftrag_set.first()
 
     # Template ändern
     form = TemplateForm(instance=kunde)
@@ -476,3 +478,34 @@ def menucard(request, email):
         'kunde': kunde.email
     }
     return render(request, 'menucard/menucard.html', context)
+
+
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['kunde'])
+def profil_bearbeiten(request):
+    # PROFIL BEARBEITEN
+    kunde = Kunde.objects.get(email=request.user.email)
+    form = ProfilForm(instance=kunde)
+    if request.method == 'POST':
+        form = ProfilForm(request.POST, instance=kunde)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Profil aktualisiert')
+
+    # PASSWORT ÄNDERN
+    pwform = PasswordChangeForm(request.user)
+    if request.method == 'POST':
+        pwform = PasswordChangeForm(request.user, request.POST)
+        if pwform.is_valid():
+            user = pwform.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Passwort erfolgreich geändert.')
+        else:
+            pwform = PasswordChangeForm(request.user)
+
+    context = {
+        'form': form,
+        'pwform': pwform
+    }
+
+    return render(request, 'menucard/profil.html', context)
