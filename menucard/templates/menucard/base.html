@@ -17,7 +17,7 @@
             crossorigin="anonymous"></script>
 
     {% block title %}
-        <title>Happy-QR</title>
+    <title>Happy-QR</title>
     {% endblock %}
 </head>
 <body>
@@ -55,12 +55,12 @@
                             <span class="fas fa-user-circle"></span> {{ request.user }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{% url 'logout' %}"><span class="fas fa-sign-out-alt"></span>
-                                Logout</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="{% url 'profil' %}">
                                 <span class="fas fa-cog"></span> Profil
                             </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{% url 'logout' %}"><span class="fas fa-sign-out-alt"></span>
+                                Logout</a>
                         </div>
                     </li>
                 </ul>

@@ -5,6 +5,8 @@ from . import views
 urlpatterns = [
     path('', views.dashboard, name='menucard_dashboard'),
 
+    path('profil/', views.profil_bearbeiten, name="profil"),
+
     # Vorspeisen URLs
     path('vorspeisen/', views.vorspeisen, name='vorspeisen'),
     path('vorspeisen-add/', views.vorspeisen_anlegen, name='vorspeisen_anlegen'),

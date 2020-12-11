@@ -49,3 +49,10 @@ class TemplateForm(ModelForm):
     class Meta:
         model = Kunde
         fields = ['template']
+
+
+class ProfilForm(ModelForm):
+    class Meta:
+        model = Kunde
+        fields = ['web', 'telefon']
+
