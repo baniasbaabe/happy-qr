@@ -28,8 +28,10 @@ urlpatterns = [
     # Alkoholhaltige Drinks URLs
     path('alkoholhaltigedrinks/', views.alkoholhaltigedrinks, name='alkoholhaltigedrinks'),
     path('alkoholhaltigedrinks-add/', views.alkoholhaltigedrinks_anlegen, name='alkoholhaltigedrinks_anlegen'),
-    path('alkoholhaltigedrinks-bearbeiten/<str:pk>/', views.alkoholhaltigedrinks_bearbeiten, name='alkoholhaltigedrinks_bearbeiten'),
-    path('alkoholhaltigedrinks-loeschen/<str:pk>/', views.alkoholhaltigedrinks_loeschen, name='alkoholhaltigedrinks_loeschen'),
+    path('alkoholhaltigedrinks-bearbeiten/<str:pk>/', views.alkoholhaltigedrinks_bearbeiten,
+         name='alkoholhaltigedrinks_bearbeiten'),
+    path('alkoholhaltigedrinks-loeschen/<str:pk>/', views.alkoholhaltigedrinks_loeschen,
+         name='alkoholhaltigedrinks_loeschen'),
 
     # Alkoholfreie Drinks URLs
     path('alkoholfreiedrinks/', views.alkfreiedrinks, name='alkfreiedrinks'),
@@ -47,4 +49,12 @@ urlpatterns = [
     path(r'menucard_view/<str:email>', views.menucard, name='menucard'),
     path('logout/', views.logout_view, name='logout'),
 
+    # covidform URLs
+    path(r'menucard_view/covidform/', views.besucher_anlegen, name='covidform'),
+    path('besucher_daten/', views.besucher_daten, name='besucherdaten'),
+    path('besucher_loeschen/<str:pk>/', views.besucher_loeschen, name='besucher_loeschen'),
+    # covidfomr export urls
+    path('besucherliste_pdf_view/', views.ViewBesucherListePDF.as_view(), name="besucherliste_pdf_view"),
+    path('besucherliste_pdf_download/', views.DownloadBesucherlistePDF.as_view(), name="besucherliste_pdf_download"),
+    path('besucherliste_csv_download/', views.csv_download_besucherliste, name="besucherliste_csv_download"),
 ]

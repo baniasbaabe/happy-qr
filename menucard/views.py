@@ -1,3 +1,5 @@
+from django.utils import timezone
+
 from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
@@ -12,6 +14,17 @@ from menucard.forms import *
 from menucard.models import Vorspeise, Hauptspeise, Nachspeise, Snacks, AlkoholfreieDrinks, AlkoholhaltigeDrinks
 
 from crm.decoraters import *
+from .models import *
+from .forms import *
+from io import BytesIO
+from django.template.loader import get_template
+from django.views import View
+from xhtml2pdf import pisa
+import csv
+from django.contrib import messages
+from django.contrib.auth.models import Group
+import sqlite3
+from sqlite3 import Error
 
 
 def logout_view(request):
@@ -509,3 +522,96 @@ def profil_bearbeiten(request):
     }
 
     return render(request, 'menucard/profil.html', context)
+
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['kunde'])
+# Covid Datenerfassung
+def besucher_anlegen(request):
+    kunde = Kunde.objects.get(email=request.user.email)
+
+    form = CovidForm(initial={'kundeId': kunde})
+    if request.method == "POST":
+        form = CovidForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('menucard', request.user.email)
+
+    context = {
+        'kunde': kunde,
+        'form': form,
+    }
+    return render(request, "menucard/covidform.html", context)
+
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['kunde'])
+def besucher_daten(request):  # hole alle besucher aus DB
+    kunde = Kunde.objects.get(email=request.user.email)
+    besucher = kunde.besucher_set.all()
+
+    context = {"besucher": besucher}
+    return render(request, 'menucard/besucher_daten.html', context)
+
+@login_required(login_url='login')
+@genehmigte_user(allowed_roles=['kunde'])
+def besucher_loeschen(request, pk):
+        besucher = Besucher.objects.get(id=pk)
+
+
+        if request.method == "POST":
+            besucher.delete()
+            return redirect('besucherdaten')
+
+        context = {"besucher": besucher}
+        return render(request, 'menucard/besucher_loeschen.html', context)
+
+def render_to_pdf(template_src, context_dict):
+    template = get_template(template_src)
+    html = template.render(context_dict)
+    result = BytesIO()
+    pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+    if not pdf.err:
+        return HttpResponse(result.getvalue(), content_type='application/pdf')
+    return None
+
+
+def csv_download_besucherliste(request):
+    besucher_liste = Besucher.objects.all()
+
+    response = HttpResponse(content_type='text/csv')
+    filename = "Besucherliste.csv"
+    content = "attachment; filename='%s'" % (filename)
+    response['Content-Disposition'] = content
+
+    writer = csv.writer(response, delimiter="\t")
+    writer.writerow(["Vorname", "Nachname", "E-Mail", "Telefon", "Strasse", "Hausnummer", "PLZ", "Stadt",  "besucht_am"])
+
+    for row in besucher_liste:
+        rowobj = [row.nachname, row.vorname, row.email, row.telefon, row.strasse, row.hausnummer, row.plz, row.stadt, row.besucht_am]
+        writer.writerow(rowobj)
+
+    return response
+
+
+class ViewBesucherListePDF(View):
+    from .models import Besucher
+
+    def get(self, request, *args, **kwargs):
+        besucher_liste = Besucher.objects.all()
+        data = {"besucher_liste": besucher_liste, "datum": timezone.now()}
+        pdf = render_to_pdf('menucard/besucherliste_pdf.html', data)
+        return HttpResponse(pdf, content_type='application/pdf')
+
+
+class DownloadBesucherlistePDF(View):
+
+    def get(self, request, *args, **kwargs):
+        besucher_liste = Besucher.objects.all()
+        data = {"besucher_liste": besucher_liste, "datum": timezone.now()}
+        pdf = render_to_pdf('menucard/besucherliste_pdf.html', data)
+
+        response = HttpResponse(pdf, content_type='application/pdf')
+        filename = "Besucherliste.pdf"
+        content = "attachment; filename='%s'" % (filename)
+        response['Content-Disposition'] = content
+
+        return response
