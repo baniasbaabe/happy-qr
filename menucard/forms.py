@@ -56,3 +56,7 @@ class ProfilForm(ModelForm):
         model = Kunde
         fields = ['web', 'telefon']
 
+class CovidForm(ModelForm):
+    class Meta:
+        model = Besucher
+        fields = "__all__"

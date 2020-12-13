@@ -1,0 +1,24 @@
+{% extends 'menucard/base.html' %}
+{% load crispy_forms_filters %}
+
+{% block body %}
+    <div class="row mt-3">
+        <div class="col">
+            <h2>COVID-19-Daten erfassen</h2>
+            <hr>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col">
+            <form method="post">
+                {% csrf_token %}
+                {{ form | crispy }}
+
+                <a href="{% url 'menucard' kunde.email %}" class="btn btn-danger">Abbrechen</a>
+                <input class="btn btn-success" type="submit" name="Submit" value="Speichern">
+                <br>
+            </form>
+            <!-- Modal -->
+        </div>
+    </div>
+{% endblock body %}

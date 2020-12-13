@@ -1,0 +1,42 @@
+{% extends 'menucard/base.html' %}
+{% load crispy_forms_filters %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block body %}
+
+    <div class="row mt-3">
+        <div class="col">
+            <h2>Besucher löschen</h2>
+            <hr>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col mt-3">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="alert alert-danger" role="alert">
+                        <span class="fas fa-exclamation-triangle"></span>
+                        Möchten Sie den folgenden Besucher wirklich löschen?
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Besucher</strong><br>
+                            {{ besucher.vorname }} {{ besucher.nachname }}</li>
+
+                    </ul>
+                    <br>
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">
+                            <span class="fas fa-trash"></span> Löschen
+                        </button>
+                        <a href="{% url 'besucherdaten' %}" class="btn btn-secondary">
+                            <span class="fas fa-times-circle"></span> Abbrechen
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}

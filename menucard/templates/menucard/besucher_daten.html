@@ -1,0 +1,79 @@
+{% extends 'menucard/base.html' %}
+
+{% block body %}
+    <div class="row mt-3">
+        <div class="col">
+            <h2>Besucherliste</h2>
+            <hr>
+            <div class="btn-group" role="group" aria-label="Basic example">
+
+                <a class="btn btn-primary" href="{% url 'besucherliste_csv_download' %}"
+                   target="_blank">
+                    <span class="fas fa-file-download"></span> CSV Export
+                </a>
+
+                <a class="btn btn-primary" href="{% url 'besucherliste_pdf_download' %}"
+                   target="_blank">
+                    <span class="fas fa-file-download"></span> PDF Export
+                </a>
+
+                <a class="btn btn-primary" href="{% url 'besucherliste_pdf_view' %}"
+                   target="_blank">
+                    <span class="fas fa-file-pdf"></span> Besucherliste als PDF anzeigen
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table table-hover table-sm">
+                    <thead>
+                    <tr>
+
+                        <th scope="col">Vorname</th>
+                        <th scope="col">Nachname</th>
+                        <th scope="col">E-Mail</th>
+                        <th scope="col">Telefon</th>
+                        <th scope="col">strasse</th>
+                        <th scope="col">hausnummer</th>
+                        <th scope="col">plz</th>
+                        <th scope="col">stadt</th>
+
+                        <th scope="col" class="text-center"><span class="fas fa-trash-alt"></span></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Zur Ausgabe die index-Variable nutzen. In diesem Fall ma -->
+                    {% for besucher in besucher %}
+                        <tr>
+                            <td>{{ besucher.vorname }}</td>
+                            <td>{{ besucher.nachname }}</td>
+                            <td>{{ besucher.email }}</td>
+                            <td>{{ besucher.telefon }}</td>
+                            <td>{{ besucher.strasse }}</td>
+                            <td>{{ besucher.hausnummer }}</td>
+                            <td>{{ besucher.plz }}</td>
+                            <td>{{ besucher.stadt }}</td>
+
+
+                            <td class="text-center">
+                                <a class="btn btn-sm btn-danger" href="{% url "besucher_loeschen" besucher.id %}"
+                                   data-toggle="tooltip" data-placement="top" title="Besucher löschen">
+                                    <span class="fas fa-trash-alt"></span></a>
+                            </td>
+
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock body %}
+
+
+
