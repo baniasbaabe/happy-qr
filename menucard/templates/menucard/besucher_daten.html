@@ -19,7 +19,7 @@
 
                 <a class="btn btn-primary" href="{% url 'besucherliste_pdf_view' %}"
                    target="_blank">
-                    <span class="fas fa-file-pdf"></span> Besucherliste als PDF anzeigen
+                    <span class="fas fa-file-pdf"></span> PDF anzeigen
                 </a>
             </div>
         </div>
@@ -40,6 +40,7 @@
                         <th scope="col">hausnummer</th>
                         <th scope="col">plz</th>
                         <th scope="col">stadt</th>
+                        <th scope="col">Besucht</th>
 
                         <th scope="col" class="text-center"><span class="fas fa-trash-alt"></span></th>
                     </tr>
@@ -56,6 +57,7 @@
                             <td>{{ besucher.hausnummer }}</td>
                             <td>{{ besucher.plz }}</td>
                             <td>{{ besucher.stadt }}</td>
+                            <td>{{ besucher.besucht_am }}</td>
 
 
                             <td class="text-center">
