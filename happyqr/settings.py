@@ -24,7 +24,7 @@ SECRET_KEY = '5(5oeehrcc^k6bz)ti37c&@8n-pv4b5&$kz5r&j^#iy9za0y9g'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['http://happy-qr.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['https://happy-qr.herokuapp.com', '127.0.0.1']
 
 # Application definition
 
