@@ -630,7 +630,7 @@ def test_qr(request):
 
     p = canvas.Canvas(response)
 
-    qrw = QrCodeWidget(f"www.python.org/{request.user.username}")
+    qrw = QrCodeWidget(f"happy-qr.herokuapp.com/menucard/menucard_view/{request.user.username}")
     b = qrw.getBounds()
 
     w = b[2] - b[0]
