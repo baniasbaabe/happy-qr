@@ -22,7 +22,7 @@ from django.views import View
 from xhtml2pdf import pisa
 import csv
 from django.contrib import messages
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
 import sqlite3
 from sqlite3 import Error
 
@@ -479,7 +479,12 @@ def alkfreiedrinks_loeschen(request, pk):
 #@login_required(login_url='login')
 #@genehmigte_user(allowed_roles=['kunde'])
 def menucard(request, username):
-    kunde = Kunde.objects.get(email=request.user.email)
+    # Änderung mit url
+    print(request.get_full_path())
+    url = request.get_full_path().split('/')
+    aktueller_user = User.objects.get(username=url[-1])
+    #kunde = Kunde.objects.get(email=request.user.email)
+    kunde = Kunde.objects.get(email=aktueller_user.email)
     vorspeisen = kunde.vorspeise_set.all()
     hauptspeise = Hauptspeise.objects.all()
     nachspeise = Nachspeise.objects.all()
