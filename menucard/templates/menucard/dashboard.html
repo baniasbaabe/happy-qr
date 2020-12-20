@@ -26,8 +26,12 @@
             <!-- KARTE -->
             <div class="row">
                 <div class="col">
-                    <a class="btn btn-outline-primary" href="{% url 'menucard' request.user.email %}">
+                    <a class="btn btn-outline-primary" href="{% url 'menucard' request.user.username %}">
                         Zur Menükarte <span class="fas fa-angle-right"></span>
+                    </a>
+
+                    <a class="btn btn-outline-primary" href="{% url 'test_qr' %}">
+                        QR-Code generieren <span class="fas fa-angle-right"></span>
                     </a>
                 </div>
             </div>

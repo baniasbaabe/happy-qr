@@ -46,7 +46,7 @@ urlpatterns = [
     path('snacks-loeschen/<str:pk>/', views.snacks_loeschen, name='snacks_loeschen'),
 
     # Menucard URL
-    path(r'menucard_view/<str:email>', views.menucard, name='menucard'),
+    path(r'menucard_view/<str:username>', views.menucard, name='menucard'),
     path('logout/', views.logout_view, name='logout'),
 
     # covidform URLs
@@ -57,4 +57,7 @@ urlpatterns = [
     path('besucherliste_pdf_view/', views.ViewBesucherListePDF.as_view(), name="besucherliste_pdf_view"),
     path('besucherliste_pdf_download/', views.DownloadBesucherlistePDF.as_view(), name="besucherliste_pdf_download"),
     path('besucherliste_csv_download/', views.csv_download_besucherliste, name="besucherliste_csv_download"),
+
+    #QR Code url
+    path("qr/", views.test_qr, name="test_qr"),
 ]

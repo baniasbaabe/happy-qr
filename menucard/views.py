@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 
-# Create your views here.
+
 from crm.models import Auftrag
 from menucard.forms import *
 from menucard.models import Vorspeise, Hauptspeise, Nachspeise, Snacks, AlkoholfreieDrinks, AlkoholhaltigeDrinks
@@ -25,6 +25,14 @@ from django.contrib import messages
 from django.contrib.auth.models import Group
 import sqlite3
 from sqlite3 import Error
+
+# Create your views here.
+
+from reportlab.pdfgen import canvas
+from django.http import HttpResponse
+from reportlab.graphics.shapes import Drawing
+from reportlab.graphics.barcode.qr import QrCodeWidget
+from reportlab.graphics import renderPDF
 
 
 def logout_view(request):
@@ -468,9 +476,9 @@ def alkfreiedrinks_loeschen(request, pk):
     return render(request, 'menucard/alkfreiedrinks_loeschen.html', context)
 
 
-@login_required(login_url='login')
-@genehmigte_user(allowed_roles=['kunde'])
-def menucard(request, email):
+#@login_required(login_url='login')
+#@genehmigte_user(allowed_roles=['kunde'])
+def menucard(request, username):
     kunde = Kunde.objects.get(email=request.user.email)
     vorspeisen = kunde.vorspeise_set.all()
     hauptspeise = Hauptspeise.objects.all()
@@ -488,7 +496,7 @@ def menucard(request, email):
         'softdrink': softdrink,
         'alkdrinks': alkdrinks,
         'template': template,
-        'kunde': kunde.email
+        'kunde': kunde.user.username
     }
     return render(request, 'menucard/menucard.html', context)
 
@@ -615,3 +623,24 @@ class DownloadBesucherlistePDF(View):
         response['Content-Disposition'] = content
 
         return response
+
+def test_qr(request):
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="QRCode.pdf"'
+
+    p = canvas.Canvas(response)
+
+    qrw = QrCodeWidget(f"www.python.org/{request.user.username}")
+    b = qrw.getBounds()
+
+    w = b[2] - b[0]
+    h = b[3] - b[1]
+
+    d = Drawing(45, 45, transform=[45. / w, 0, 0, 45. / h, 0, 0])
+    d.add(qrw)
+
+    renderPDF.draw(d, p, 1, 1)
+
+    p.showPage()
+    p.save()
+    return response
