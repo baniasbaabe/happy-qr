@@ -1,0 +1,1 @@
+web: gunicorn happy-qr.wsgi --log-file -
