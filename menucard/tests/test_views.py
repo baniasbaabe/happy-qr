@@ -27,45 +27,7 @@ class TestViews(TestCase):
         self.alkhaltigedrinks_url = reverse("alkoholhaltigedrinks")
         self.snacks_url = reverse("snacks")
 
-        '''
-        self.vorspeise1 = Vorspeise.objects.create(
-            name = "Testname",
-            beschreibung="Testbeschreibung",
-            preis=1
-        )
 
-        self.hauptspeise1 = Hauptspeise.objects.create(
-            name="Testname",
-            beschreibung="Testbeschreibung",
-            preis=1
-        )
-
-        self.nachspeise1 = Nachspeise.objects.create(
-            name="Testname",
-            beschreibung="Testbeschreibung",
-            preis=1
-        )
-
-        self.snacks1 = Snacks.objects.create(
-            name="Testname",
-            beschreibung="Testbeschreibung",
-            preis=1
-        )
-
-        self.alkoholfreiedrinks1 = AlkoholfreieDrinks.objects.create(
-            name="Testname",
-            beschreibung="Testbeschreibung",
-            liter=1,
-            preis=1
-        )
-
-        self.alkoholhaltigedrinks1 = AlkoholhaltigeDrinks.objects.create(
-            name="Testname",
-            beschreibung="Testbeschreibung",
-            centiliter=1,
-            preis=1
-        )
-    '''
 
     def test_dashboard_GET(self):
         self.user.groups.add(self.group)

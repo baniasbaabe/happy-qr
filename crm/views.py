@@ -21,6 +21,8 @@ import sqlite3
 from sqlite3 import Error
 
 
+
+
 @nicht_authentifizierter_user
 def register_view(request):
     form = CreateUserForm()
