@@ -130,4 +130,4 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # Django Heroku Settings
 
-django_heroku.settings(locals())
+#django_heroku.settings(locals())
