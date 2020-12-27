@@ -25,7 +25,7 @@ SECRET_KEY = '5(5oeehrcc^k6bz)ti37c&@8n-pv4b5&$kz5r&j^#iy9za0y9g'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['happy-qr.herokuapp.com']
+ALLOWED_HOSTS = ['happy-qr.herokuapp.com', '127.0.0.1']
 
 # Application definition
 
@@ -131,5 +131,5 @@ STATIC_URL = '/static/'
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # Django Heroku Settings
-
+django_heroku.settings(locals())
 
