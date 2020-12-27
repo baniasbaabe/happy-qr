@@ -21,8 +21,6 @@ import sqlite3
 from sqlite3 import Error
 
 
-
-
 @nicht_authentifizierter_user
 def register_view(request):
     form = CreateUserForm()
@@ -88,11 +86,10 @@ def dashboard(request):
 # Start Kunden CRUD-Methoden-----------------------------------------------------------------------------------------
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['mitarbeiter'])
-def kundenliste(request):  # hole alle kunden aus DB
-    kunden = Kunde.objects.all()
-
-    context = {"kunden": kunden}
-    return render(request, 'crm/kundenliste.html', context)
+def kundenliste(request):
+    kunden = Kunde.objects.all()  # In der Variable 'kunden' werden nun sämtliche Kunden aus der DB gespeichert
+    context = {"kunden": kunden}  # Übergebe 'kunden' an den Render-Parameter
+    return render(request, 'crm/kundenliste.html', context)  # kundenliste.html kann nun auf die Variable 'kunden' zugreifen
 
 
 @login_required(login_url='login')

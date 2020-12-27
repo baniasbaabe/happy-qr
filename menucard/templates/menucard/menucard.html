@@ -97,6 +97,7 @@
 
         .modalColor {
             background: #1d2124;
+            color: white;
         }
 
         .happyColor {
@@ -128,8 +129,8 @@
                     <div class="card mb-4 shadow" data-toggle="modal" data-target="#covidform">
                         <div class="card-body">
                             <h5 class="text-center categoryDescription1">
-                                <a href="{% url 'covidform' %}" class="stretched-link">
-                                    COVID-Daten erfassen
+                                <a href="{% url 'covidform' %}" class="stretched-link" style="color: black">
+                                    Corona-Anmeldung
                                 </a>
                             </h5>
                         </div>
@@ -479,11 +480,12 @@
 
             <div class="row">
                 <div class="col">
-                    <div class="card mb-3 shadow-sm category" data-toggle="modal" data-target="#covidform">
+                    <div class="card mb-3 shadow-sm category" data-toggle="modal" data-target="#covidform"
+                         style="background: transparent; height: 70px">
                         <div class="card-body">
                             <h5 class="text-center categoryDescription1">
-                                <a href="{% url 'covidform' %}" class="stretched-link">
-                                    COVID-Daten erfassen
+                                <a href="{% url 'covidform' %}" class="stretched-link" style="color: white;">
+                                    Corona-Anmeldung
                                 </a>
                             </h5>
                         </div>
@@ -508,7 +510,7 @@
                                 </div>
                                 <div class="modal-body modalColor">
                                     <div class="table-responsive">
-                                        <table class="table table-sm table-borderless">
+                                        <table class="table table-sm table-borderless modalColor">
                                             <thead>
                                             <tr>
                                                 <th scope="col">Vorspeise</th>
@@ -551,15 +553,15 @@
                          aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <div class="modal-header">
+                                <div class="modal-header modalColor">
                                     <h5 class="modal-title" id="lblHauptspeisen">Hauptspeisen</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">
+                                <div class="modal-body modalColor">
                                     <div class="table-responsive">
-                                        <table class="table table-sm table-borderless">
+                                        <table class="table table-sm table-borderless modalColor">
                                             <thead>
                                             <tr>
                                                 <th scope="col">Hauptspeise</th>
@@ -580,7 +582,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="modal-footer">
+                                <div class="modal-footer modalColor">
                                     <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
                                         <span class="fas fa-times-circle"></span> Schließen
                                     </button>
@@ -602,15 +604,15 @@
                          aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <div class="modal-header">
+                                <div class="modal-header modalColor">
                                     <h5 class="modal-title" id="lblHauptspeisen">Nachspeisen</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">
+                                <div class="modal-body modalColor">
                                     <div class="table-responsive">
-                                        <table class="table table-sm table-borderless">
+                                        <table class="table table-sm table-borderless modalColor">
                                             <thead>
                                             <tr>
                                                 <th scope="col">Nachspeise</th>
@@ -631,7 +633,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="modal-footer">
+                                <div class="modal-footer modalColor">
                                     <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
                                         <span class="fas fa-times-circle"></span> Schließen
                                     </button>
@@ -653,15 +655,15 @@
                          aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <div class="modal-header">
+                                <div class="modal-header modalColor">
                                     <h5 class="modal-title" id="lblSnacks">Snacks</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">
+                                <div class="modal-body modalColor">
                                     <div class="table-responsive">
-                                        <table class="table table-sm table-borderless">
+                                        <table class="table table-sm table-borderless modalColor">
                                             <thead>
                                             <tr>
                                                 <th scope="col">Snacks</th>
@@ -682,7 +684,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="modal-footer">
+                                <div class="modal-footer modalColor">
                                     <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
                                         <span class="fas fa-times-circle"></span> Schließen
                                     </button>
@@ -704,15 +706,15 @@
                          aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <div class="modal-header">
+                                <div class="modal-header modalColor">
                                     <h5 class="modal-title" id="lblSoftdrinks">Softdrinks</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">
+                                <div class="modal-body modalColor">
                                     <div class="table-responsive">
-                                        <table class="table table-sm table-borderless">
+                                        <table class="table table-sm table-borderless modalColor">
                                             <thead>
                                             <tr>
                                                 <th scope="col">Drink</th>
@@ -735,7 +737,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="modal-footer">
+                                <div class="modal-footer modalColor">
                                     <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
                                         <span class="fas fa-times-circle"></span> Schließen
                                     </button>
@@ -756,15 +758,15 @@
                          aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <div class="modal-header">
+                                <div class="modal-header modalColor">
                                     <h5 class="modal-title" id="lblDrinks">Alkoholhaltige Drinks</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">
+                                <div class="modal-body modalColor">
                                     <div class="table-responsive">
-                                        <table class="table table-sm table-borderless">
+                                        <table class="table table-sm table-borderless modalColor">
                                             <thead>
                                             <tr>
                                                 <th scope="col">Drink</th>
@@ -787,7 +789,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="modal-footer">
+                                <div class="modal-footer modalColor">
                                     <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
                                         <span class="fas fa-times-circle"></span> Schließen
                                     </button>
@@ -836,7 +838,6 @@
         hr {
             border-color: #CCC;
         }
-
     </style>
     <section>
 
@@ -857,8 +858,8 @@
                     <div class="card mb-4 happyColor borderColor3" data-toggle="modal" data-target="#covidform">
                         <div class="card-body">
                             <h5 class="text-center categoryDescription1">
-                                <a href="{% url 'covidform' %}" class="stretched-link">
-                                    COVID-Daten erfassen
+                                <a href="{% url 'covidform' %}" class="stretched-link" style="color: black">
+                                    Corona-Anmeldung
                                 </a>
                             </h5>
                         </div>

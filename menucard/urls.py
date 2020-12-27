@@ -60,4 +60,7 @@ urlpatterns = [
 
     #QR Code url
     path("qr/", views.test_qr, name="test_qr"),
+
+    # Datenschutz
+    path('datenschutzerklaerung/', views.datenschutz, name='datenschutz'),
 ]
