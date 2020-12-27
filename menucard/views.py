@@ -550,8 +550,8 @@ def besucher_anlegen(request):
             return redirect('menucard', request.user.email)
 
     context = {
-        'kunde': kunde,
-        'form': form,
+        'kunde':kunde,
+        'form':form,
     }
     return render(request, "menucard/covidform.html", context)
 
