@@ -127,7 +127,7 @@ STATIC_URL = '/static/'
 
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Django Heroku Settings
 
 django_heroku.settings(locals())
