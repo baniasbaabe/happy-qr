@@ -647,7 +647,8 @@ def test_qr(request):
     w = b[2] - b[0]
     h = b[3] - b[1]
 
-    d = Drawing(45, 45, transform=[45. / w, 0, 0, 45. / h, 0, 0])
+    d = Drawing(490, 490, transform=[490. / w, 0, 0, 490. / h, 0, 0])
+
     d.add(qrw)
 
     renderPDF.draw(d, p, 1, 1)
