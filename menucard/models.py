@@ -2,13 +2,15 @@ from django.db import models
 from crm.models import Kunde
 from phonenumber_field.modelfields import PhoneNumberField
 
+
 # Create your models here.
+
 
 class Vorspeise(models.Model):
     name = models.CharField(max_length=55, null=False, blank=False)
     beschreibung = models.TextField(blank=True, default='')
-    preis = models.FloatField(blank=False)
-    kundeId = models.ForeignKey(Kunde,null=True,on_delete=models.SET_NULL)
+    preis = models.DecimalField(max_length=8, max_digits=8, decimal_places=2, default=600.00)
+    kundeId = models.ForeignKey(Kunde, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return f'{self.name}'
@@ -17,8 +19,8 @@ class Vorspeise(models.Model):
 class Hauptspeise(models.Model):
     name = models.CharField(max_length=55, null=False, blank=False)
     beschreibung = models.TextField(blank=True, default='')
-    preis = models.FloatField(blank=False)
-    kundeId = models.ForeignKey(Kunde,null=True,on_delete=models.SET_NULL)
+    preis = models.DecimalField(max_length=8, max_digits=8, decimal_places=2, default=600.00)
+    kundeId = models.ForeignKey(Kunde, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return f'{self.name}'
@@ -27,8 +29,8 @@ class Hauptspeise(models.Model):
 class Nachspeise(models.Model):
     name = models.CharField(max_length=55, null=False, blank=False)
     beschreibung = models.TextField(blank=True, default='')
-    preis = models.FloatField(blank=False)
-    kundeId = models.ForeignKey(Kunde,null=True,on_delete=models.SET_NULL)
+    preis = models.DecimalField(max_length=8, max_digits=8, decimal_places=2, default=600.00)
+    kundeId = models.ForeignKey(Kunde, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return f'{self.name}'
@@ -37,8 +39,8 @@ class Nachspeise(models.Model):
 class Snacks(models.Model):
     name = models.CharField(max_length=55, null=False, blank=False)
     beschreibung = models.TextField(blank=True, default='')
-    preis = models.FloatField(blank=False)
-    kundeId = models.ForeignKey(Kunde,null=True,on_delete=models.SET_NULL)
+    preis = models.DecimalField(max_length=8, max_digits=8, decimal_places=2, default=600.00)
+    kundeId = models.ForeignKey(Kunde, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return f'{self.name}'
@@ -48,8 +50,8 @@ class AlkoholfreieDrinks(models.Model):
     name = models.CharField(max_length=55, null=False, blank=False)
     liter = models.FloatField()
     beschreibung = models.TextField(blank=True, default='')
-    preis = models.FloatField(blank=False)
-    kundeId = models.ForeignKey(Kunde,null=True,on_delete=models.SET_NULL)
+    preis = models.DecimalField(max_length=8, max_digits=8, decimal_places=2, default=600.00)
+    kundeId = models.ForeignKey(Kunde, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return f'{self.name}'
@@ -59,14 +61,14 @@ class AlkoholhaltigeDrinks(models.Model):
     name = models.CharField(max_length=55, null=False, blank=False)
     centiliter = models.FloatField()
     beschreibung = models.TextField(blank=True, default='')
-    preis = models.FloatField(blank=False)
-    kundeId = models.ForeignKey(Kunde,null=True,on_delete=models.SET_NULL)
+    preis = models.DecimalField(max_length=8, max_digits=8, decimal_places=2, default=600.00)
+    kundeId = models.ForeignKey(Kunde, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return f'{self.name}'
 
-class Besucher(models.Model):
 
+class Besucher(models.Model):
     vorname = models.CharField(max_length=45, null=False)
     nachname = models.CharField(max_length=45, null=False)
     email = models.EmailField(null=True, blank=True)
@@ -77,8 +79,6 @@ class Besucher(models.Model):
     stadt = models.CharField(max_length=45, null=False)
     besucht_am = models.DateTimeField(auto_now_add=True, null=True)
     kundeId = models.ForeignKey(Kunde, null=True, on_delete=models.SET_NULL)
-
-
 
     def __str__(self):
         return f'{self.vorname} {self.nachname}'

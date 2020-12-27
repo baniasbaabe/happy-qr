@@ -8,7 +8,6 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 
-
 from crm.models import Auftrag
 from menucard.forms import *
 from menucard.models import Vorspeise, Hauptspeise, Nachspeise, Snacks, AlkoholfreieDrinks, AlkoholhaltigeDrinks
@@ -476,8 +475,8 @@ def alkfreiedrinks_loeschen(request, pk):
     return render(request, 'menucard/alkfreiedrinks_loeschen.html', context)
 
 
-#@login_required(login_url='login')
-#@genehmigte_user(allowed_roles=['kunde'])
+# @login_required(login_url='login')
+# @genehmigte_user(allowed_roles=['kunde'])
 def menucard(request, username):
     # Änderung mit url
     print(request.get_full_path())
@@ -536,6 +535,7 @@ def profil_bearbeiten(request):
 
     return render(request, 'menucard/profil.html', context)
 
+
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 # Covid Datenerfassung
@@ -555,6 +555,7 @@ def besucher_anlegen(request):
     }
     return render(request, "menucard/covidform.html", context)
 
+
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 def besucher_daten(request):  # hole alle besucher aus DB
@@ -564,18 +565,19 @@ def besucher_daten(request):  # hole alle besucher aus DB
     context = {"besucher": besucher}
     return render(request, 'menucard/besucher_daten.html', context)
 
+
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 def besucher_loeschen(request, pk):
-        besucher = Besucher.objects.get(id=pk)
+    besucher = Besucher.objects.get(id=pk)
 
+    if request.method == "POST":
+        besucher.delete()
+        return redirect('besucherdaten')
 
-        if request.method == "POST":
-            besucher.delete()
-            return redirect('besucherdaten')
+    context = {"besucher": besucher}
+    return render(request, 'menucard/besucher_loeschen.html', context)
 
-        context = {"besucher": besucher}
-        return render(request, 'menucard/besucher_loeschen.html', context)
 
 def render_to_pdf(template_src, context_dict):
     template = get_template(template_src)
@@ -596,10 +598,11 @@ def csv_download_besucherliste(request):
     response['Content-Disposition'] = content
 
     writer = csv.writer(response, delimiter="\t")
-    writer.writerow(["Vorname", "Nachname", "E-Mail", "Telefon", "Strasse", "Hausnummer", "PLZ", "Stadt",  "besucht_am"])
+    writer.writerow(["Vorname", "Nachname", "E-Mail", "Telefon", "Strasse", "Hausnummer", "PLZ", "Stadt", "besucht_am"])
 
     for row in besucher_liste:
-        rowobj = [row.nachname, row.vorname, row.email, row.telefon, row.strasse, row.hausnummer, row.plz, row.stadt, row.besucht_am]
+        rowobj = [row.nachname, row.vorname, row.email, row.telefon, row.strasse, row.hausnummer, row.plz, row.stadt,
+                  row.besucht_am]
         writer.writerow(rowobj)
 
     return response
@@ -629,6 +632,7 @@ class DownloadBesucherlistePDF(View):
 
         return response
 
+
 def test_qr(request):
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="QRCode.pdf"'
@@ -649,3 +653,7 @@ def test_qr(request):
     p.showPage()
     p.save()
     return response
+
+
+def datenschutz(request):
+    return render(request, 'menucard/datenerfassung_info.html')
