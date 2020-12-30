@@ -381,7 +381,7 @@ def alkoholhaltigedrinks_bearbeiten(request, pk):
     form = AlkhaltigeDrinksForm(instance=alkdrink)
 
     if request.method == 'POST':
-        form = AlkfreieDrinksForm(request.POST, instance=alkdrink)
+        form = AlkhaltigeDrinksForm(request.POST, instance=alkdrink)
         if form.is_valid():
             form.save()
             return redirect('alkoholhaltigedrinks')

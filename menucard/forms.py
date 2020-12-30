@@ -35,6 +35,10 @@ class AlkfreieDrinksForm(ModelForm):
     class Meta:
         model = AlkoholfreieDrinks
         fields = '__all__'
+        labels = {
+            'name' : 'Name',
+
+        }
         widgets = {'kundeId': forms.HiddenInput()}
 
 

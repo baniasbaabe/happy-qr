@@ -32,8 +32,9 @@
                     <thead>
                     <tr>
                         <th scope="col">Getränk</th>
-                        <th scope="col">Liter</th>
+                        <th scope="col">Centiliter</th>
                         <th scope="col">Beschreibung</th>
+                        <th scope="col">Zusatzstoffe</th>
                         <th scope="col" class="text-right">Preis</th>
                         <th scope="col" class="text-center">
                             <span class="fas fa-edit"></span>
@@ -47,8 +48,9 @@
                     {% for i in alkdrink %}
                         <tr>
                             <td>{{ i.name }}</td>
-                            <td>{{ i.liter }}</td>
+                            <td>{{ i.centiliter }}</td>
                             <td>{{ i.beschreibung }}</td>
+                            <td>{{ i.zusatzstoffe }}</td>
                             <td class="text-right">{{ i.preis }} EUR</td>
                             <td data-toggle="tooltip" data-placement="top" title="Alkoholhaltige Drink bearbeiten"
                                 class="text-center">
