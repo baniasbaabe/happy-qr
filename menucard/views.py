@@ -489,7 +489,7 @@ def menucard(request, username):
     nachspeise = kunde.nachspeise_set.all()
     snacks = kunde.snacks_set.all()
     softdrink = kunde.alkoholfreiedrinks_set.all()
-    alkdrinks = kunde.alkoholhaltigedrinks_set
+    alkdrinks = kunde.alkoholhaltigedrinks_set.all()
     template = kunde.template
 
     context = {
