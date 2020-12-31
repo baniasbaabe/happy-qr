@@ -488,7 +488,7 @@ def menucard(request, username):
     hauptspeise = kunde.hauptspeise_set.all()
     nachspeise = kunde.nachspeise_set.all()
     snacks = kunde.snacks_set.all()
-    softdrink = kunde.softdrink_set.all()
+    softdrink = kunde.alkoholfreiedrinks_set.all()
     alkdrinks = kunde.alkdrinks_set.all()
     template = kunde.template
 
