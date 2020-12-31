@@ -485,11 +485,11 @@ def menucard(request, username):
     #kunde = Kunde.objects.get(email=request.user.email)
     kunde = Kunde.objects.get(email=aktueller_user.email)
     vorspeisen = kunde.vorspeise_set.all()
-    hauptspeise = Hauptspeise.objects.all()
-    nachspeise = Nachspeise.objects.all()
-    snacks = Snacks.objects.all()
-    softdrink = AlkoholfreieDrinks.objects.all()
-    alkdrinks = AlkoholhaltigeDrinks.objects.all()
+    hauptspeise = kunde.hauptspeise_set.all()
+    nachspeise = kunde.nachspeise_set.all()
+    snacks = kunde.snacks_set.all()
+    softdrink = kunde.softdrink_set.all()
+    alkdrinks = kunde.alkdrinks_set.all()
     template = kunde.template
 
     context = {
