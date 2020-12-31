@@ -26,13 +26,17 @@
             <!-- KARTE -->
             <div class="row">
                 <div class="col">
-                    <a class="btn btn-outline-primary" href="{% url 'menucard' request.user.username %}">
-                        Zur Menükarte <span class="fas fa-angle-right"></span>
-                    </a>
+                    <!-- BUTTON GROUP -->
+                    <div class="btn-group" role="group" aria-label="Buttons">
+                        <a class="btn btn-outline-primary" href="{% url 'menucard' request.user.username %}"
+                           target="_blank">
+                            <span class="fas fa-external-link-alt"></span> Zur Menükarte
+                        </a>
 
-                    <a class="btn btn-outline-primary" href="{% url 'test_qr' %}">
-                        QR-Code generieren <span class="fas fa-angle-right"></span>
-                    </a>
+                        <a class="btn btn-outline-primary" href="{% url 'test_qr' %}">
+                            <span class="fas fa-qrcode"></span> QR-Code generieren
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="row mt-3">
@@ -60,13 +64,13 @@
                             <div class="card-body">
                                 <h5 class="card-title">Vorspeisen</h5>
                                 <p class="card-text">
-                                    {% if count_vorspeisen > 1 %}
+                                    {% if count_vorspeisen > 1 or count_vorspeisen == 0 %}
                                         Sie haben {{ count_vorspeisen }} Vorspeisen angelegt.
                                     {% else %}
                                         Sie haben {{ count_vorspeisen }} Vorspeise angelegt.
                                     {% endif %}
-                                <p>
-                                    <a href="{% url 'vorspeisen' %}" class="btn btn-outline-primary btn-sm">Anzeigen</a>
+                                </p>
+                                <a href="{% url 'vorspeisen' %}" class="btn btn-outline-primary btn-sm">Anzeigen</a>
                             </div>
                         </div>
 
@@ -75,14 +79,14 @@
                             <div class="card-body">
                                 <h5 class="card-title">Hauptspeisen</h5>
                                 <p class="card-text">
-                                    {% if count_hauptspeisen > 1 %}
+                                    {% if count_hauptspeisen > 1 or count_hauptspeisen == 0 %}
                                         Sie haben {{ count_hauptspeisen }} Hauptspeisen angelegt.
                                     {% else %}
                                         Sie haben {{ count_hauptspeisen }} Hauptspeise angelegt.
                                     {% endif %}
-                                <p>
-                                    <a href="{% url 'hauptspeisen' %}"
-                                       class="btn btn-outline-primary btn-sm">Anzeigen</a>
+                                </p>
+                                <a href="{% url 'hauptspeisen' %}"
+                                   class="btn btn-outline-primary btn-sm">Anzeigen</a>
                             </div>
                         </div>
 
@@ -91,32 +95,31 @@
                             <div class="card-body">
                                 <h5 class="card-title">Nachspeisen</h5>
                                 <p class="card-text">
-                                    {% if count_hauptspeisen > 1 %}
+                                    {% if count_nachspeisen > 1 or count_nachspeisen == 0  %}
                                         Sie haben {{ count_nachspeisen }} Nachspeisen angelegt.
                                     {% else %}
                                         Sie haben {{ count_nachspeisen }} Nachspeise angelegt.
                                     {% endif %}
-                                <p>
-                                    <a href="{% url 'nachspeisen' %}"
-                                       class="btn btn-outline-primary btn-sm">Anzeigen</a>
+                                </p>
+                                <a href="{% url 'nachspeisen' %}"
+                                   class="btn btn-outline-primary btn-sm">Anzeigen</a>
                             </div>
                         </div>
 
                     </div>
                     <div class="card-deck mb-4">
-
                         <!-- SNACKS -->
                         <div class="card shadow-sm">
                             <div class="card-body">
                                 <h5 class="card-title">Snacks</h5>
                                 <p class="card-text">
-                                    {% if count_snacks > 1 %}
+                                    {% if count_snacks > 1 or count_snacks == 0 %}
                                         Sie haben {{ count_snacks }} Snacks angelegt.
                                     {% else %}
-                                        Sie haben {{ count_snacks }} Snacks angelegt.
+                                        Sie haben {{ count_snacks }} Snack angelegt.
                                     {% endif %}
-                                <p>
-                                    <a href="{% url 'snacks' %}" class="btn btn-outline-primary btn-sm">Anzeigen</a>
+                                </p>
+                                <a href="{% url 'snacks' %}" class="btn btn-outline-primary btn-sm">Anzeigen</a>
                             </div>
                         </div>
 
@@ -125,14 +128,14 @@
                             <div class="card-body">
                                 <h5 class="card-title">Alkoholfreie Getränke</h5>
                                 <p class="card-text">
-                                    {% if count_alkfreidrinks > 1 %}
-                                        Sie haben {{ count_alkfreidrinks }} alkoholfreies Getränk angelegt.
+                                    {% if count_alkfreidrinks > 1 or count_alkfreidrinks == 0%}
+                                        Sie haben {{ count_alkfreidrinks }} Softdrinks angelegt.
                                     {% else %}
-                                        Sie haben {{ count_alkfreidrinks }} alkoholfreies Getränke angelegt.
+                                        Sie haben {{ count_alkfreidrinks }} alkoholfreies Getränk angelegt.
                                     {% endif %}
-                                <p>
-                                    <a href="{% url 'alkfreiedrinks' %}"
-                                       class="btn btn-outline-primary btn-sm">Anzeigen</a>
+                                </p>
+                                <a href="{% url 'alkfreiedrinks' %}"
+                                   class="btn btn-outline-primary btn-sm">Anzeigen</a>
                             </div>
                         </div>
 
@@ -141,14 +144,14 @@
                             <div class="card-body">
                                 <h5 class="card-title">Alkoholhaltige Getränke</h5>
                                 <p class="card-text">
-                                    {% if count_alkdrinks > 1 %}
-                                        Sie haben {{ count_alkdrinks }} alkoholhaltiges Getränk angelegt.
-                                    {% else %}
+                                    {% if count_alkdrinks > 1 or count_alkdrinks == 0 %}
                                         Sie haben {{ count_alkdrinks }} alkoholhaltige Getränke angelegt.
+                                    {% else %}
+                                        Sie haben {{ count_alkdrinks }} alkoholhaltiges Getränk angelegt.
                                     {% endif %}
-                                <p>
-                                    <a href="{% url 'alkoholhaltigedrinks' %}"
-                                       class="btn btn-outline-primary btn-sm">Anzeigen</a>
+                                </p>
+                                <a href="{% url 'alkoholhaltigedrinks' %}"
+                                   class="btn btn-outline-primary btn-sm">Anzeigen</a>
                             </div>
                         </div>
 
@@ -176,8 +179,10 @@
     {% else %}
         <div class="row mt-3">
             <div class="col">
-                <p>Sie haben noch keine Aufträge erstellt. Bitte <a href="mailto:info@happyqr.de">kontaktieren</a> Sie
-                    den Happy-QR Vertrieb.</p>
+                <p>
+                    Sie haben noch keine Aufträge erstellt. Bitte <a href="mailto:info@happyqr.de">kontaktieren</a> Sie
+                    den Happy-QR Vertrieb.
+                </p>
 
             </div>
         </div>

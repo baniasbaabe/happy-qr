@@ -34,7 +34,7 @@ class TestKundeSeite(LiveServerTestCase):
         self.user.save()
         force_login(self.user, self.browser, self.live_server_url)
 
-        self.browser.get('%s%s' % (self.live_server_url, '/crm/kundenliste'))
+        self.browser.get('%s%s' % (self.live_server_url, '/kundenliste'))
         self.browser.find_element_by_class_name("btn-primary").click()
         vorname_input = self.browser.find_element_by_name("vorname")
         vorname_input.send_keys('Max')
@@ -46,12 +46,12 @@ class TestKundeSeite(LiveServerTestCase):
         telefon_input.send_keys('+4917666994073')
         self.browser.find_element_by_class_name("btn-success").click()
         self.browser.find_element_by_class_name("navbar-toggler-icon").click()
-        self.browser.get('%s%s' % (self.live_server_url, '/crm/auftragsliste'))
+        self.browser.get('%s%s' % (self.live_server_url, '/auftragsliste'))
         self.browser.find_element_by_class_name("btn-primary").click()
         # self.browser.find_element_by_class_name("form-control").click()
         self.browser.find_element_by_xpath("//select[@name='kunde']/option[text()='Max Mustermann']").click()
         self.browser.find_element_by_class_name("btn-success").click()
-        self.browser.get('%s%s' % (self.live_server_url, '/crm/rechnungsliste'))
+        self.browser.get('%s%s' % (self.live_server_url, '/rechnungsliste'))
         self.browser.find_element_by_class_name("btn-primary").click()
         self.browser.find_element_by_xpath("//select[@name='kunde']/option[text()='Max Mustermann']").click()
 

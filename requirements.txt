@@ -8,5 +8,7 @@ Selenium==3.141.0
 Webdriver_manager==3.2.2
 django-selenium-login==2.0.0
 reportlab==3.5.56
+psycopg2==2.8.6
 gunicorn==20.0.4
 whitenoise==5.2.0
+django-heroku==0.3.1

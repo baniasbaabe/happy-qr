@@ -35,6 +35,10 @@ class AlkfreieDrinksForm(ModelForm):
     class Meta:
         model = AlkoholfreieDrinks
         fields = '__all__'
+        labels = {
+            'name' : 'Name',
+
+        }
         widgets = {'kundeId': forms.HiddenInput()}
 
 
@@ -56,7 +60,17 @@ class ProfilForm(ModelForm):
         model = Kunde
         fields = ['web', 'telefon']
 
+
 class CovidForm(ModelForm):
     class Meta:
         model = Besucher
         fields = "__all__"
+        labels = {
+            'email': 'E-Mail',
+            'strasse': 'Straße',
+            'plz': 'PLZ',
+            'stadt': 'Ort'
+        }
+        widgets = {
+            'kundeId': forms.HiddenInput(),
+        }

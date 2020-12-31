@@ -4,40 +4,136 @@
 {% load crispy_forms_tags %}
 {% block body %}
 
-    <div class="row mt-3">
-        <div class="col">
-            <h2>Hauptspeise hinzufügen</h2>
-            <hr>
+<div class="row mt-3">
+    <div class="col">
+        <h2>Hauptspeise hinzufügen</h2>
+        <hr>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-8 mt-3">
+        {% for msg in messages %}
+        {% if form.is_valid %}
+        <div class="alert alert-success" role="alert">
+            <span class="far fa-check-circle"></span> {{ msg }}
+        </div>
+        {% else %}
+        <div class="alert alert-warning" role="alert">
+            <span class="fas fa-exclamation-triangle"></span> {{ msg }}
+        </div>
+        {% endif %}
+        {% endfor %}
+
+        <div class="card card-body shadow-sm">
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ form | crispy }}
+                <button type="submit" class="btn btn-success">
+                    <span class="fas fa-save"></span> Speichern
+                </button>
+                <a class="btn btn-danger" href="{% url 'hauptspeisen' %}">
+                    <span class="fas fa-times-circle"></span> Abbrechen
+                </a>
+            </form>
         </div>
     </div>
+   <div class="col-4 mt-3">
+        <div class="card card-body">
+            <p><strong>Zusatzstoffe &ndash; Abkürzungsverzeichnis</strong></p>
+             <table class="table table-sm table-borderless">
+                <thead>
+                <tr>
+                    <th scope="col" >#</th>
+                    <th scope="col" >Beschreibung</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Farbstoffe</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Coffeinhaltig</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Chininhaltig</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Antioxidationsmittel</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Konservierungsstoffe</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Taurin</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Geschmacksverstärker</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>mit Süßungsmittel(n)</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>enthält eine Phenylalaninquelle</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>gewachst ( Zitrusfrüchte, Melonen, Äpfel, Birnen….)</td>
+                </tr>
+                <tr>
+                    <th scope="col" >#</th>
+                    <th scope="col" >Allergene</th>
+                </tr>
+                <tr>
+                    <td>G</td>
+                    <td>Glutenhaltiges Getreide, sowie daraus her gestellte Erzeugnisse</td>
+                </tr>
+                <tr>
+                    <td>Ei</td>
+                    <td>Eier & Eiererzeugnisse</td>
+                </tr>
+                <tr>
+                    <td>Sf</td>
+                    <td>Schalenfrüchte</td>
+                </tr>
+                <tr>
+                    <td>Su</td>
+                    <td>Schwefeldioxid & Sulfate</td>
+                </tr>
+                <tr>
+                    <td>M</td>
+                    <td>Milch & Milcherzeugnisse</td>
+                </tr>
+                <tr>
+                    <td>S</td>
+                    <td>Sojabohnen</td>
+                </tr>
+                <tr>
+                    <td>F</td>
+                    <td>Fisch</td>
+                </tr>
+                <tr>
+                    <td>K</td>
+                    <td>Krebstiere und daraus gewonnene Erzeugnisse</td>
+                </tr>
+                <tr>
+                    <td>Se</td>
+                    <td>Sellerie und Sellerieerzeugnisse</td>
+                </tr>
 
-    <div class="row">
-        <div class="col mt-3">
-            {% for msg in messages %}
-                {% if form.is_valid %}
-                    <div class="alert alert-success" role="alert">
-                        <span class="far fa-check-circle"></span> {{ msg }}
-                    </div>
-                {% else %}
-                    <div class="alert alert-warning" role="alert">
-                        <span class="fas fa-exclamation-triangle"></span> {{ msg }}
-                    </div>
-                {% endif %}
-            {% endfor %}
-
-            <div class="card card-body shadow-sm">
-                <form action="" method="POST">
-                    {% csrf_token %}
-                    {{ form | crispy }}
-                    <button type="submit" class="btn btn-success">
-                        <span class="fas fa-save"></span> Speichern
-                    </button>
-                    <a class="btn btn-danger" href="{% url 'hauptspeisen' %}">
-                        <span class="fas fa-times-circle"></span> Abbrechen
-                    </a>
-                </form>
-            </div>
+                </tbody>
+            </table>
         </div>
     </div>
+</div>
 
 {% endblock body %}
