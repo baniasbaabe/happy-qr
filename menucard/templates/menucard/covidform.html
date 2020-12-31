@@ -16,13 +16,16 @@
             <form method="post">
                 {% csrf_token %}
                 {{ form | crispy }}
-
+                <b>Mit einem Klick auf Speichern stimmen Sie den unten aufgeführten Datenschutzbestimmungen zu.</b>
                 <a href="{% url 'menucard' kunde.email %}" class="btn btn-danger">Abbrechen</a>
                 <input class="btn btn-success" type="submit" name="Submit" value="Speichern">
                 <br>
             </form>
             <!-- Modal -->
-            <p><b>1. Bezeichnung der Verarbeitungstätigkeit / Erhobene Daten</b>
+            <p>
+
+                <br>
+                <b>1. Bezeichnung der Verarbeitungstätigkeit / Erhobene Daten</b>
                 <br>
                 Erhebung Besucherdaten im Zuge der Corona-Pandemie. Folgende personenbezogene Daten werden hierbei
                 erhoben: (Bei Bedarf anpassen, wenn Ihre Gesundheitsbehörde / Verordnung hier weitere Angaben zur
