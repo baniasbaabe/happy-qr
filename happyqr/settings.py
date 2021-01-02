@@ -107,6 +107,14 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
+# EMAIL
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'happy.qr.hft@gmail.com'
+EMAIL_HOST_PASSWORD = 'Zyklaps123.'
+
 LANGUAGE_CODE = 'de-de'
 
 PHONENUMBER_DEFAULT_REGION = 'DE'
@@ -123,15 +131,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') #or staticfiles
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # or staticfiles
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
-
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # Django Heroku Settings
 django_heroku.settings(locals(), test_runner=False)
-

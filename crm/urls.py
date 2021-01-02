@@ -1,5 +1,5 @@
 from django.urls import path, include
-
+from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
@@ -38,5 +38,9 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
     path('register/', views.register_view, name='register'),
-
+    # Passwort zurücksetzen URLs
+    path('passwort_zuruecksetzen/', auth_views.PasswordResetView.as_view(template_name='crm/passwort_zuruecksetzen.html'), name='reset_password'),
+    path('passwort_zuruecksetzen/email_gesendet/', auth_views.PasswordResetDoneView.as_view(template_name='crm/passwort_zuruecksetzen_email.html'), name='password_reset_done'),
+    path('passwort_zuruecksetzen/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='crm/passwort_zuruecksetzen_formular.html'), name='password_reset_confirm'),
+    path('passwort_erfolgreich_zuruecksetzen/', auth_views.PasswordResetCompleteView.as_view(template_name='crm/passwort_erfolgreich_zurueckgesetzt.html'), name='password_reset_complete'),
 ]
