@@ -1,14 +1,11 @@
-from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.utils import timezone
-from django.contrib.auth.forms import UserCreationForm
-from urllib3.filepost import writer
 
 from .decoraters import nicht_authentifizierter_user, genehmigte_user
-from .models import *
+from .filter import *
 from .forms import *
 from io import BytesIO
 from django.template.loader import get_template
@@ -17,8 +14,6 @@ from xhtml2pdf import pisa
 import csv
 from django.contrib import messages
 from django.contrib.auth.models import Group
-import sqlite3
-from sqlite3 import Error
 
 
 @nicht_authentifizierter_user
@@ -88,8 +83,11 @@ def dashboard(request):
 @genehmigte_user(allowed_roles=['mitarbeiter'])
 def kundenliste(request):
     kunden = Kunde.objects.all()  # In der Variable 'kunden' werden nun sämtliche Kunden aus der DB gespeichert
-    context = {"kunden": kunden}  # Übergebe 'kunden' an den Render-Parameter
-    return render(request, 'crm/kundenliste.html', context)  # kundenliste.html kann nun auf die Variable 'kunden' zugreifen
+    kunden_filter = KundenFilter(request.GET, queryset=kunden)
+    kunde = kunden_filter.qs
+    context = {'kunden': kunde, 'kunden_filter': kunden_filter}  # Übergebe 'kunden' an den Render-Parameter
+    return render(request, 'crm/kundenliste.html',
+                  context)  # kundenliste.html kann nun auf die Variable 'kunden' zugreifen
 
 
 @login_required(login_url='login')
@@ -143,10 +141,10 @@ def KundeLoeschen(request, pk):
 @genehmigte_user(allowed_roles=['mitarbeiter'])
 def mitarbeiterliste(request):  # hole alle Mitarbeiter aus DB
     mitarbeiter = Mitarbeiter.objects.all()
+    mitarbeiter_filter = MitarbeiterFilter(request.GET, queryset=mitarbeiter)
+    mitarbeiter_singular = mitarbeiter_filter.qs
 
-    context = {"mitarbeiter": mitarbeiter,
-
-               }
+    context = {'mitarbeiter': mitarbeiter_singular, 'mitarbeiter_filter': mitarbeiter_filter}
     return render(request, 'crm/mitarbeiterliste.html', context)
 
 
@@ -199,10 +197,10 @@ def mitarbeiterLoeschen(request, pk):
 @genehmigte_user(allowed_roles=['mitarbeiter'])
 def auftragsliste(request):  # hole alle Aufträge aus DB
     auftraege = Auftrag.objects.all()
+    auftrag_filter = AuftragsFilter(request.GET, queryset=auftraege)
+    auftrag = auftrag_filter.qs
 
-    context = {"auftraege": auftraege,
-
-               }
+    context = {'auftraege': auftrag, 'auftrag_filter': auftrag_filter}
     return render(request, 'crm/auftragsliste.html', context)
 
 
@@ -256,10 +254,10 @@ def auftragLoeschen(request, pk):
 @genehmigte_user(allowed_roles=['mitarbeiter'])
 def rechnungsliste(request):  # hole alle Rechnungen aus DB
     rechnungen = Rechnung.objects.all()
+    rechnung_filter = RechnungenFilter(request.GET, queryset=rechnungen)
+    rechnung = rechnung_filter.qs
 
-    context = {"rechnungen": rechnungen,
-
-               }
+    context = {"rechnungen": rechnung, 'rechnung_filter': rechnung_filter}
     return render(request, 'crm/rechnungsliste.html', context)
 
 
