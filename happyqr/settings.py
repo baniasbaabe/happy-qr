@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'phonenumber_field',
+    'django_filters',
     'crm.apps.CrmConfig',
     'menucard.apps.MenucardConfig',
 ]

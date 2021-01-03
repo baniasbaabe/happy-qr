@@ -13,6 +13,7 @@ from menucard.forms import *
 from menucard.models import Vorspeise, Hauptspeise, Nachspeise, Snacks, AlkoholfreieDrinks, AlkoholhaltigeDrinks
 
 from crm.decoraters import *
+from .filter import BesucherFilter
 from .models import *
 from .forms import *
 from io import BytesIO
@@ -482,7 +483,7 @@ def menucard(request, username):
     print(request.get_full_path())
     url = request.get_full_path().split('/')
     aktueller_user = User.objects.get(username=url[-1])
-    #kunde = Kunde.objects.get(email=request.user.email)
+    # kunde = Kunde.objects.get(email=request.user.email)
     kunde = Kunde.objects.get(email=aktueller_user.email)
     vorspeisen = kunde.vorspeise_set.all()
     hauptspeise = kunde.hauptspeise_set.all()
@@ -550,8 +551,8 @@ def besucher_anlegen(request):
             return redirect('menucard', request.user.email)
 
     context = {
-        'kunde':kunde,
-        'form':form,
+        'kunde': kunde,
+        'form': form,
     }
     return render(request, "menucard/covidform.html", context)
 
@@ -561,8 +562,10 @@ def besucher_anlegen(request):
 def besucher_daten(request):  # hole alle besucher aus DB
     kunde = Kunde.objects.get(email=request.user.email)
     besucher = kunde.besucher_set.all()
+    besucher_filter = BesucherFilter(request.GET, queryset=besucher)
+    besucher_singular = besucher_filter.qs
 
-    context = {"besucher": besucher}
+    context = {"besucher": besucher_singular, 'besucher_filter': besucher_filter}
     return render(request, 'menucard/besucher_daten.html', context)
 
 
@@ -590,7 +593,8 @@ def render_to_pdf(template_src, context_dict):
 
 
 def csv_download_besucherliste(request):
-    besucher_liste = Besucher.objects.all()
+    kunde = Kunde.objects.get(email=request.user.email)
+    besucher_liste = kunde.besucher_set.all()
 
     response = HttpResponse(content_type='text/csv')
     filename = "Besucherliste.csv"
@@ -609,10 +613,10 @@ def csv_download_besucherliste(request):
 
 
 class ViewBesucherListePDF(View):
-    from .models import Besucher
 
     def get(self, request, *args, **kwargs):
-        besucher_liste = Besucher.objects.all()
+        kunde = Kunde.objects.get(email=request.user.email)
+        besucher_liste = kunde.besucher_set.all()
         data = {"besucher_liste": besucher_liste, "datum": timezone.now()}
         pdf = render_to_pdf('menucard/besucherliste_pdf.html', data)
         return HttpResponse(pdf, content_type='application/pdf')
@@ -621,7 +625,8 @@ class ViewBesucherListePDF(View):
 class DownloadBesucherlistePDF(View):
 
     def get(self, request, *args, **kwargs):
-        besucher_liste = Besucher.objects.all()
+        kunde = Kunde.objects.get(email=request.user.email)
+        besucher_liste = kunde.besucher_set.all()
         data = {"besucher_liste": besucher_liste, "datum": timezone.now()}
         pdf = render_to_pdf('menucard/besucherliste_pdf.html', data)
 

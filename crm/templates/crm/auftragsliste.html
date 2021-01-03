@@ -1,4 +1,5 @@
 {% extends 'crm/base.html' %}
+{% load crispy_forms_filters %}
 
 {% block body %}
     <div class="row mt-3">
@@ -17,6 +18,28 @@
                    href="{% url 'csv_auftragsliste_download' %}">
                     <span class="fas fa-file-csv"></span> CSV Export
                 </a>
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseFilter"
+                        aria-expanded="false" aria-controls="collapseFilter">
+                    <span class="fas fa-filter"></span> Filter
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col">
+            <div class="collapse" id="collapseFilter">
+                <div class="card">
+                    <div class="card-body">
+                        <form method="GET">
+                            {% csrf_token %}
+                            {{ auftrag_filter.form | crispy }}
+                            <button type="submit" class="btn btn-primary m-2"><span class="fas fa-filter"></span>
+                                Filtern
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
