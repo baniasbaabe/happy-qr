@@ -23,6 +23,8 @@ def genehmigte_user(allowed_roles=[]):
 
             if group in allowed_roles:
                 return view_func(request, *args, **kwargs)
+            elif group == 'kunde':
+                return redirect("menucard_dashboard")
             else:
                 return HttpResponse(
                     'Sie haben keine Befugnis für diese Seite. <b>Schließen Sie das Fenster.</b>'

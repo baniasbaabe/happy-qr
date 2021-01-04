@@ -483,7 +483,6 @@ def menucard(request, username):
     print(request.get_full_path())
     url = request.get_full_path().split('/')
     aktueller_user = User.objects.get(username=url[-1])
-    # kunde = Kunde.objects.get(email=request.user.email)
     kunde = Kunde.objects.get(email=aktueller_user.email)
     vorspeisen = kunde.vorspeise_set.all()
     hauptspeise = kunde.hauptspeise_set.all()
@@ -537,18 +536,19 @@ def profil_bearbeiten(request):
     return render(request, 'menucard/profil.html', context)
 
 
-@login_required(login_url='login')
-@genehmigte_user(allowed_roles=['kunde'])
 # Covid Datenerfassung
-def besucher_anlegen(request):
-    kunde = Kunde.objects.get(email=request.user.email)
+def besucher_anlegen(request, username):
+    print(request.get_full_path())
+    url = request.get_full_path().split('/')
+    aktueller_user = User.objects.get(username=url[-1])
+    kunde = Kunde.objects.get(email=aktueller_user.email)
 
     form = CovidForm(initial={'kundeId': kunde})
     if request.method == "POST":
         form = CovidForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('menucard', request.user.email)
+            return redirect('menucard', kunde.user.username)
 
     context = {
         'kunde': kunde,

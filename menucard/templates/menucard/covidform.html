@@ -41,7 +41,7 @@
         <div class="col">
             <small class="text-muted mb-3">
                 Sie erklären sich damit einverstanden, dass Ihre Daten zu Ihrem Schutz und einer möglichst schnellen
-                Nachverfolgbarkeit möglicher Infektionsketten mit dem neuartigen Covid-19-Virus („Corona“) für 14 Tage
+                Nachverfolgbarkeit möglicher Infektionsketten mit dem neuartigen Covid-19-Virus („Corona“)
                 gespeichert werden und Ihre Anwesenheit in unserem Lokal von uns dokumentiert wird. Bitte wenden Sie
                 sich bei Fragen an das Personal. Mehr Informationen erhalten Sie in der
                 <a href="{% url 'datenschutz' %}" target="_blank">Datenschutzerklärung.</a>
@@ -51,7 +51,7 @@
                 {% csrf_token %}
                 {{ form | crispy }}
                 <input class="btn btn-primary" type="submit" name="Submit" value="Anmelden">
-                <a href="{% url 'menucard' kunde.email %}" class="btn btn-secondary">Abbrechen</a>
+                <a href="{% url 'menucard' kunde.user.username %}" class="btn btn-secondary">Abbrechen</a>
                 <br>
             </form>
         </div>

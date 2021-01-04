@@ -50,7 +50,7 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
 
     # covidform URLs
-    path(r'menucard_view/covidform/', views.besucher_anlegen, name='covidform'),
+    path(r'menucard_view/covidform/<str:username>', views.besucher_anlegen, name='covidform'),
     path('besucher_daten/', views.besucher_daten, name='besucherdaten'),
     path('besucher_loeschen/<str:pk>/', views.besucher_loeschen, name='besucher_loeschen'),
     # covidfomr export urls
