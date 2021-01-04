@@ -62,19 +62,23 @@ def logout_view(request):
     return redirect('login')
 
 
-# Funktion um dashboard.html anzuzeigen mit sämtlichen Mitarbeitern
+# Funktion um dashboard.html anzuzeigen
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['mitarbeiter'])
 def dashboard(request):
-    # Objekt erstellen
-    mitarbeiter = Mitarbeiter.objects.all()
+    auftraege = Auftrag.objects.all()
+    total_auftraege = auftraege.count()
+    in_bearbeitung = auftraege.filter(status='In Bearbeitung').count()
+    eingegangen = auftraege.filter(status='Eingegangen').count()
+    letzte_fuenf_auftraege = Auftrag.objects.all().order_by('-auftrag_vom')[:5]
 
-    # Objekt in der HTML Datei zur Verfügung stellen
     context = {
-        'mitarbeiter': mitarbeiter,
+        'auftraege': letzte_fuenf_auftraege,
+        'total_auftraege': total_auftraege,
+        'in_bearbeitung': in_bearbeitung,
+        'eingegangen': eingegangen
     }
 
-    # Ausgabe der HTML Datei
     return render(request, 'crm/dashboard.html', context)
 
 
