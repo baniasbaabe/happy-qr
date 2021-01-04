@@ -2,24 +2,23 @@
 
 {% block body %}
     <style>
-        #total-auftraege{
-            background-color: #6495ED;
+        #total-auftraege {
+            background-color: #0087A2;
         }
 
-        #auftraege-in-bearbeitung{
-		    background-color: #6495ED;
-	    }
+        #auftraege-in-bearbeitung {
+            background-color: #0087A2;
+        }
 
-	    #auftraege-eingegangen{
-		    background-color: #6495ED;
-	    }
+        #auftraege-eingegangen {
+            background-color: #0087A2;
+        }
     </style>
 
     <div class="row mt-3">
         <div class="col">
-            <h2>
-                Dashboard &ndash; <span id="willkommenText"></span> {{ request.user.first_name }}
-            </h2>
+            <h2>Dashboard</h2>
+            <h6><span id="willkommenText"></span> {{ request.user.first_name }}</h6>
             <hr>
         </div>
     </div>
@@ -31,85 +30,94 @@
     </div>
 
     <div class="row">
-	<div class="col">
-		<div class="col-md">
-			<div class="card text-center text-white  mb-3" id="total-auftraege">
-			  	<div class="card-header">
-			  		<h5 class="card-title">Aufträge insgesamt</h5>
-			  	</div>
-			  	<div class="card-body">
-			    	<h3 class="card-title">{{total_auftraege}}</h3>
-			  	</div>
-			</div>
-		</div>
-	</div>
+        <div class="col">
+            <div class="card text-center text-white shadow mb-3" id="total-auftraege">
+                <div class="card-header">
+                    <h5 class="card-title">Aufträge insgesamt</h5>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">{{ total_auftraege }}</h3>
+                </div>
+            </div>
+        </div>
 
-	<div class="col">
-		<div class="col-md">
-			<div class="card text-center text-white  mb-3" id="auftraege-in-bearbeitung">
-			  	<div class="card-header">
-			  		<h5 class="card-title">Aufträge in Bearbeitung</h5>
-			  	</div>
-			  	<div class="card-body">
-			    	<h3 class="card-title">{{in_bearbeitung}}</h3>
-			  	</div>
-			</div>
-		</div>
-	</div>
+        <div class="col">
+            <div class="card text-center text-white shadow mb-3" id="auftraege-in-bearbeitung">
+                <div class="card-header">
+                    <h5 class="card-title">Aufträge in Bearbeitung</h5>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">{{ in_bearbeitung }}</h3>
+                </div>
+            </div>
+        </div>
 
-	<div class="col">
-		<div class="col-md">
-			<div class="card text-center text-white  mb-3"
+        <div class="col">
+            <div class="card text-center text-white shadow mb-3"
                  id="auftraege-eingegangen">
-			  	<div class="card-header">
-			  		<h5 class="card-title">Aufträge eingegangen</h5>
-			  	</div>
-			  	<div class="card-body">
-			    	<h3 class="card-title">{{eingegangen}}</h3>
-			  	</div>
-			</div>
-		</div>
-	</div>
-</div>
-    <div class="col-md-12">
-		<h5>Letzte 5 Aufträge</h5>
-		<hr>
-		<div class="card card-body">
-			<a class="btn btn-primary  btn-sm btn-block" href="{% url 'auftrag_anlegen' %}">
-                <span class="fas fa-plus"></span> Auftrag anlegen</a>
-			<table class="table table-responsive-xl">
-				<tr>
-					<th>Kunde</th>
-					<th>Status</th>
-					<th>Erstellungsdatum</th>
-                    <th>Preis</th>
-                    <th scope="col" class="text-center"><span class="far fa-edit"></span></th>
-                    <th scope="col" class="text-center"><span class="fas fa-trash-alt"></span></th>
-				</tr>
+                <div class="card-header">
+                    <h5 class="card-title">Aufträge eingegangen</h5>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">{{ eingegangen }}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
 
-				{% for auftrag in auftraege %}
-					<tr>
-						<td>{{auftrag.kunde}}</td>
-						<td>{{auftrag.status}}</td>
-						<td>{{auftrag.auftrag_vom}}</td>
-						<td>{{auftrag.preis}}</td>
-                        <td class="text-center"><a class="btn btn-sm btn-info"
-                                                       href="{% url 'auftrag_aktualisieren' auftrag.id %}"
-                                                       data-toggle="tooltip" data-placement="top"
-                                                       title="Auftrag bearbeiten">
-                                <span class="far fa-edit"></span></a></td>
-                            <td class="text-center"><a class="btn btn-sm btn-danger"
-                                                       href="{% url 'auftrag_loeschen' auftrag.id %} "
-                                                       data-toggle="tooltip" data-placement="top"
-                                                       title="Auftrag löschen">
-                                <span class="fas fa-trash-alt"></span></a></td>
-					</tr>
-				{% endfor %}
+    <div class="row mt-3">
+        <div class="col">
+            <h5>Letzte 5 Aufträge</h5>
+            <hr>
+            <div class="card card-body shadow-sm">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a class="btn btn-outline-primary" href="{% url 'auftrag_anlegen' %}">
+                        <span class="fas fa-plus"></span> Auftrag anlegen
+                    </a>
+                    <a class="btn btn-outline-primary" href="{% url 'rechnung_anlegen' %}">
+                        <span class="fas fa-plus"></span> Rechnung anlegen
+                    </a>
 
+                    <a class="btn btn-outline-primary" href="{% url 'kunde_anlegen' %}">
+                        <span class="fas fa-plus"></span> Kunden anlegen
+                    </a>
+                </div>
+                <br>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Kunde</th>
+                            <th>Status</th>
+                            <th>Erstellungsdatum</th>
+                            <th>Preis</th>
+                            <th scope="col" class="text-center"><span class="far fa-edit"></span></th>
+                            <th scope="col" class="text-center"><span class="fas fa-trash-alt"></span></th>
+                        </tr>
 
-			</table>
-		</div>
-	</div>
+                        {% for auftrag in auftraege %}
+                            <tr>
+                                <td>{{ auftrag.kunde }}</td>
+                                <td>{{ auftrag.status }}</td>
+                                <td>{{ auftrag.auftrag_vom }}</td>
+                                <td>{{ auftrag.preis }}€</td>
+                                <td class="text-center"><a class="btn btn-sm btn-info"
+                                                           href="{% url 'auftrag_aktualisieren' auftrag.id %}"
+                                                           data-toggle="tooltip" data-placement="top"
+                                                           title="Auftrag bearbeiten">
+                                    <span class="far fa-edit"></span></a></td>
+                                <td class="text-center"><a class="btn btn-sm btn-danger"
+                                                           href="{% url 'auftrag_loeschen' auftrag.id %} "
+                                                           data-toggle="tooltip" data-placement="top"
+                                                           title="Auftrag löschen">
+                                    <span class="fas fa-trash-alt"></span></a></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <script type="text/javascript">
         let date = new Date()

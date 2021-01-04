@@ -75,8 +75,6 @@
         <div class="card-header">
             <h3>Happy-Qr - {{ datum }}</h3>
         </div>
-
-
         <table class="table">
             <thead>
             <tr>
@@ -85,7 +83,6 @@
                 <th>Email</th>
                 <th>Telefon</th>
                 <th>Strasse</th>
-                <th>Hausnummer</th>
                 <th>PLZ</th>
                 <th>Stadt</th>
                 <th>Besucht am</th>
@@ -96,10 +93,9 @@
                 <tr>
                     <td>{{ besucher.vorname }}</td>
                     <td>{{ besucher.nachname }}</td>
-                    <td>{{ besucher.email }}</td>
+                    <td>{{ besucher.email | linebreaksbr }}</td>
                     <td>{{ besucher.telefon }}</td>
-                    <td>{{ besucher.strasse }}</td>
-                    <td>{{ besucher.hausnummer }}</td>
+                    <td>{{ besucher.strasse }} {{ besucher.hausnummer }}</td>
                     <td>{{ besucher.plz }}</td>
                     <td>{{ besucher.stadt }}</td>
                     <td>{{ besucher.besucht_am }}</td>
