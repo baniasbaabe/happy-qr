@@ -15,6 +15,10 @@ class TestViews(TestCase):
         self.group = Group(name=group_name)
         self.group.save()
 
+        self.user.groups.add(self.group)
+        self.user.save()
+        self.client.login(username="user1", password="Hallo12345")
+
         self.kunde = Kunde.objects.create(vorname="Hallo", nachname="Tschüss", email=self.user.email,
                                           telefon="+4917666994073",
                                           notiz="hi", web="hi.de", template="Template 1")
@@ -26,13 +30,9 @@ class TestViews(TestCase):
         self.alkfreiedrinks_url = reverse("alkfreiedrinks")
         self.alkhaltigedrinks_url = reverse("alkoholhaltigedrinks")
         self.snacks_url = reverse("snacks")
-
-
+        self.vorspeisen_anlegen_url = reverse("vorspeisen_anlegen")
 
     def test_dashboard_GET(self):
-        self.user.groups.add(self.group)
-        self.user.save()
-        self.client.login(username="user1", password="Hallo12345")
 
         response = self.client.get(self.dashboard_url)
 
@@ -40,18 +40,13 @@ class TestViews(TestCase):
         self.assertTemplateUsed(response, "menucard/dashboard.html")
 
     def test_vorspeisen_GET(self):
-        self.user.groups.add(self.group)
-        self.user.save()
-        self.client.login(username="user1", password="Hallo12345")
+
         response = self.client.get(self.vorspeisen_url)
 
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, "menucard/vorspeisen.html")
 
     def test_hauptspeisen_GET(self):
-        self.user.groups.add(self.group)
-        self.user.save()
-        self.client.login(username="user1", password="Hallo12345")
 
         response = self.client.get(self.hauptspeisen_url)
 
@@ -59,9 +54,6 @@ class TestViews(TestCase):
         self.assertTemplateUsed(response, "menucard/hauptspeisen.html")
 
     def test_nachspeisen_GET(self):
-        self.user.groups.add(self.group)
-        self.user.save()
-        self.client.login(username="user1", password="Hallo12345")
 
         response = self.client.get(self.nachspeisen_url)
 
@@ -69,9 +61,6 @@ class TestViews(TestCase):
         self.assertTemplateUsed(response, "menucard/nachspeisen.html")
 
     def test_alkfreiedrinks_GET(self):
-        self.user.groups.add(self.group)
-        self.user.save()
-        self.client.login(username="user1", password="Hallo12345")
 
         response = self.client.get(self.alkfreiedrinks_url)
 
@@ -79,9 +68,6 @@ class TestViews(TestCase):
         self.assertTemplateUsed(response, "menucard/alkfreiedrinks.html")
 
     def test_alkhaltigedrinks_GET(self):
-        self.user.groups.add(self.group)
-        self.user.save()
-        self.client.login(username="user1", password="Hallo12345")
 
         response = self.client.get(self.alkhaltigedrinks_url)
 
@@ -89,9 +75,6 @@ class TestViews(TestCase):
         self.assertTemplateUsed(response, "menucard/alkoholhaltigedrinks.html")
 
     def test_snacks_GET(self):
-        self.user.groups.add(self.group)
-        self.user.save()
-        self.client.login(username="user1", password="Hallo12345")
 
         response = self.client.get(self.snacks_url)
 
@@ -99,11 +82,8 @@ class TestViews(TestCase):
         self.assertTemplateUsed(response, "menucard/snacks.html")
 
     def test_CREATE_vorspeise(self):
-        self.user.groups.add(self.group)
-        self.user.save()
-        self.client.login(username="user1", password="Hallo12345")
 
-        post_response = self.client.post(reverse("vorspeisen_anlegen"), {
+        post_response = self.client.post(self.vorspeisen_anlegen_url, {
             "name": "Vorspeisename",
             "beschreibung": "Createbeschreibung",
             "preis": 1,
@@ -111,12 +91,8 @@ class TestViews(TestCase):
         })
         self.assertEquals(post_response.status_code, 302)
         self.assertEqual(Vorspeise.objects.last().name, "Vorspeisename")
-        # self.assertEquals(Vorspeise.objects.count(), 2)
 
     def test_CREATE_hauptspeise(self):
-        self.user.groups.add(self.group)
-        self.user.save()
-        self.client.login(username="user1", password="Hallo12345")
 
         post_response = self.client.post(reverse("hauptspeisen_anlegen"), {
             "name": "Hauptspeisename",
@@ -126,7 +102,6 @@ class TestViews(TestCase):
         })
         self.assertEquals(post_response.status_code, 302)
         self.assertEqual(Hauptspeise.objects.last().name, "Hauptspeisename")
-        # self.assertEquals(Hauptspeise.objects.count(), 2)
 
     '''
     def test_CREATE_nachspeise(self):
@@ -138,6 +113,8 @@ class TestViews(TestCase):
         self.assertEquals(post_response.status_code, 302)
         self.assertEqual(Nachspeise.objects.last().name, "Nachspeisename")
         self.assertEquals(Nachspeise.objects.count(), 2)
+
+    
 
     def test_CREATE_snacks(self):
         post_response = self.client.post(reverse("snacks_anlegen"), {

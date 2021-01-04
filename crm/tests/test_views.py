@@ -14,6 +14,10 @@ class TestViews(TestCase):
         self.group = Group(name=group_name)
         self.group.save()
 
+        self.user.groups.add(self.group)
+        self.user.save()
+        self.client.login(username="user1", password="Hallo12345")
+
         self.kundenliste_url = reverse("kundenliste")
         self.register_url = reverse("register")
         self.login_url = reverse("login")
@@ -74,17 +78,8 @@ class TestViews(TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, "crm/dashboard.html")
 
-    def test_login_GET(self):
-        response = self.client.get(self.login_url)
 
-        self.assertEquals(response.status_code, 200)
-        self.assertTemplateUsed(response, "crm/login.html")
 
-    def test_register_GET(self):
-        response = self.client.get(self.register_url)
-
-        self.assertEquals(response.status_code, 200)
-        self.assertTemplateUsed(response, "crm/registrierung.html")
 
     def test_mitarbeiterliste_GET(self):
         self.user.groups.add(self.group)
@@ -232,3 +227,17 @@ class TestViews(TestCase):
         post_response = self.client.post(reverse('rechnung_loeschen', kwargs={"pk": rechnung.id}))
         self.assertEquals(post_response.status_code, 302)
         self.assertEquals(Rechnung.objects.count(), 0)
+
+    def test_login_GET(self):
+        self.client.logout()
+        response = self.client.get(self.login_url)
+
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, "crm/login.html")
+
+    def test_register_GET(self):
+        self.client.logout()
+        response = self.client.get(self.register_url)
+
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, "crm/registrierung.html")

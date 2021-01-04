@@ -7,6 +7,7 @@ def nicht_authentifizierter_user(view_func):
     def wrapper_func(request, *args, **kwargs):
         if request.user.is_authenticated:
             return redirect('crm_dashboard')
+            pass
         else:
             return view_func(request, *args, **kwargs)
 

@@ -48,3 +48,5 @@ class TestUrls(TestCase):
     def test_snacks_anlegen_is_anlegen(self):
         url = reverse("snacks_anlegen")
         self.assertEquals(resolve(url).func, snacks_anlegen)
+
+
