@@ -2,7 +2,7 @@
 <!doctype html>
 <html>
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <title>Happy Qr</title>
     <style type="text/css">
         @page {
@@ -80,11 +80,10 @@
             <tr>
                 <th>Vorname</th>
                 <th>Nachname</th>
-                <th>Email</th>
                 <th>Telefon</th>
                 <th>Strasse</th>
                 <th>PLZ</th>
-                <th>Stadt</th>
+                <th>Ort</th>
                 <th>Besucht am</th>
             </tr>
             </thead>
@@ -93,7 +92,6 @@
                 <tr>
                     <td>{{ besucher.vorname }}</td>
                     <td>{{ besucher.nachname }}</td>
-                    <td>{{ besucher.email | linebreaksbr }}</td>
                     <td>{{ besucher.telefon }}</td>
                     <td>{{ besucher.strasse }} {{ besucher.hausnummer }}</td>
                     <td>{{ besucher.plz }}</td>
