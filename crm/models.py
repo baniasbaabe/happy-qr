@@ -50,7 +50,7 @@ class Auftrag(models.Model):
     produkt = models.CharField(max_length=45, choices=PRODUKT, default='Digital Menucard')
     status = models.CharField(max_length=45, choices=STATUS, default='Eingegangen')
     auftrag_vom = models.DateTimeField(auto_now_add=True, null=True)
-    preis = models.DecimalField(max_length=8, max_digits=8, decimal_places=2, default=600.00)
+    preis = models.DecimalField(max_length=8, max_digits=8, decimal_places=2, default='')
     notiz = models.TextField(null=True, blank=True)
 
     def __str__(self):

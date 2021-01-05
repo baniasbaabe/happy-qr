@@ -1,11 +1,12 @@
 {% extends 'crm/base.html' %}
+{% load crispy_forms_filters %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% block body %}
 
 <div class="row mt-3">
     <div class="col">
-        <h2>Kunden anlegen</h2>
+        <h2>Kunden bearbeiten</h2>
         <hr>
     </div>
 </div>
@@ -15,7 +16,6 @@
         <div class="card card-body shadow">
             <form action="" method="POST">
                 {% csrf_token %}
-
                 {{ form | crispy }}
                 <input class="btn btn-success" type="submit" name="Submit" value="Speichern">
                 <a class="btn btn-danger" href="{% url 'kundenliste' %}">Abbrechen</a>
