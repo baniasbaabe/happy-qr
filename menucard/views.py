@@ -23,10 +23,6 @@ from xhtml2pdf import pisa
 import csv
 from django.contrib import messages
 from django.contrib.auth.models import Group, User
-import sqlite3
-from sqlite3 import Error
-
-# Create your views here.
 
 from reportlab.pdfgen import canvas
 from django.http import HttpResponse
@@ -34,6 +30,7 @@ from reportlab.graphics.shapes import Drawing
 from reportlab.graphics.barcode.qr import QrCodeWidget
 from reportlab.graphics import renderPDF
 
+# Create your views here.
 
 def logout_view(request):
     logout(request)

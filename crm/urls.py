@@ -3,8 +3,8 @@ from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
+    # Startseite-URL-------------------------------------------------------------
     path('', views.dashboard, name='crm_dashboard'),
-
     # Kunden-URLs-------------------------------------------------------------
     path('kundenliste/', views.kundenliste, name='kundenliste'),
     path("kunde_anlegen/", views.KundeAnlegen, name='kunde_anlegen'),
@@ -13,7 +13,6 @@ urlpatterns = [
     path('pdf_download_kundenliste/', views.DownloadKundenlistePDF.as_view(), name="pdf_download_kundenliste"),
     path("kunde_aktualisieren/<str:pk>/", views.KundeAktualisieren, name='kunde_aktualisieren'),
     path('csv_download_kundenliste/', views.csv_download_kundenliste, name="csv_download_kundenliste"),
-
     # Mitarbeiter-URLs-------------------------------------------------------------
     path('mitarbeiterliste/', views.mitarbeiterliste, name='mitarbeiterliste'),
     path("mitarbeiter_anlegen/", views.mitarbeiterAnlegen, name='mitarbeiter_anlegen'),
