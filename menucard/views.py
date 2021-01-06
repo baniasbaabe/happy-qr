@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 
-from crm.models import Auftrag
+from crm.models import Auftrag, Rechnung
 from menucard.forms import *
 from menucard.models import Vorspeise, Hauptspeise, Nachspeise, Snacks, AlkoholfreieDrinks, AlkoholhaltigeDrinks
 
@@ -633,7 +633,22 @@ class DownloadBesucherlistePDF(View):
         response['Content-Disposition'] = content
 
         return response
+'''    
+class DownloadPDF_Rechnung(View):
 
+    def get(self, request, pk, *args, **kwargs):
+        kunde = Kunde.objects.get(email=request.user.email)
+        rechnung = Rechnung.kunde.get(id=kunde.id.pk)
+        #rechnung = Rechnung.objects.get(id=pk)
+        data = {"rechnung": rechnung, "datum": timezone.now()}
+        pdf = render_to_pdf('menucard/rechnung_pdf.html', data)
+        
+        response = HttpResponse(pdf, content_type='application/pdf')
+        filename = "Rechnung_%s.pdf" % (rechnung.id)
+        content = "attachment; filename='%s'" % (filename)
+        response['Content-Disposition'] = content
+        return response
+'''
 
 def test_qr(request):
     response = HttpResponse(content_type='application/pdf')
