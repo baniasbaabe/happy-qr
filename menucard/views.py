@@ -82,10 +82,10 @@ def dashboard(request):
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 def vorspeisen(request):
-    kunde = Kunde.objects.get(email=request.user.email)
-    vorspeise = kunde.vorspeise_set.all()
-    context = {'vorspeise': vorspeise}
-    return render(request, 'menucard/vorspeisen.html', context)
+    kunde = Kunde.objects.get(email=request.user.email)  # Vorspeise dem Kunden zuweisen
+    vorspeise = kunde.vorspeise_set.all()  # QuerySet zur Ausgabe aller Vorspeisen
+    context = {'vorspeise': vorspeise}  # Variabel, die in der vorspeisen.html iteriert werden soll
+    return render(request, 'menucard/vorspeisen.html', context)  # Verknüpfung der Funktion mit der vorspeisen.html
 
 
 @login_required(login_url='login')
@@ -677,3 +677,7 @@ def test_qr(request):
 
 def datenschutz(request):
     return render(request, 'menucard/datenerfassung_info.html')
+
+
+def kunden_handbuch(request):
+    return render(request, 'menucard/handbuch.html')

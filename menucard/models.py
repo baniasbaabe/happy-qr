@@ -9,10 +9,9 @@ from phonenumber_field.modelfields import PhoneNumberField
 class Vorspeise(models.Model):
     name = models.CharField(max_length=55, null=False, blank=False)
     beschreibung = models.TextField(blank=True, default='')
-    zusatzstoffe = models.CharField(max_length=55, null=True, blank=True)
-    preis = models.DecimalField(max_length=8, max_digits=8, decimal_places=2, default="")
+    zusatzstoffe = models.CharField(max_length=55, null=True, blank=True, default='')
+    preis = models.DecimalField(max_length=8, max_digits=8, decimal_places=2, default='')
     kundeId = models.ForeignKey(Kunde, null=True, on_delete=models.SET_NULL)
-
 
     def __str__(self):
         return f'{self.name}'
@@ -21,8 +20,8 @@ class Vorspeise(models.Model):
 class Hauptspeise(models.Model):
     name = models.CharField(max_length=55, null=False, blank=False)
     beschreibung = models.TextField(blank=True, default='')
-    zusatzstoffe = models.CharField(max_length=55, null=True, blank=True)
-    preis = models.DecimalField(max_length=8, max_digits=8, decimal_places=2, default="")
+    zusatzstoffe = models.CharField(max_length=55, null=True, blank=True, default='')
+    preis = models.DecimalField(max_length=8, max_digits=8, decimal_places=2, default='')
     kundeId = models.ForeignKey(Kunde, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
@@ -32,7 +31,7 @@ class Hauptspeise(models.Model):
 class Nachspeise(models.Model):
     name = models.CharField(max_length=55, null=False, blank=False)
     beschreibung = models.TextField(blank=True, default='')
-    zusatzstoffe = models.CharField(max_length=55, null=True, blank=True)
+    zusatzstoffe = models.CharField(max_length=55, null=True, blank=True, default='')
     preis = models.DecimalField(max_length=8, max_digits=8, decimal_places=2, default="")
     kundeId = models.ForeignKey(Kunde, null=True, on_delete=models.SET_NULL)
 
@@ -43,7 +42,7 @@ class Nachspeise(models.Model):
 class Snacks(models.Model):
     name = models.CharField(max_length=55, null=False, blank=False)
     beschreibung = models.TextField(blank=True, default='')
-    zusatzstoffe = models.CharField(max_length=55, null=True, blank=True)
+    zusatzstoffe = models.CharField(max_length=55, null=True, blank=True, default='')
     preis = models.DecimalField(max_length=8, max_digits=8, decimal_places=2, default="")
     kundeId = models.ForeignKey(Kunde, null=True, on_delete=models.SET_NULL)
 
@@ -55,7 +54,7 @@ class AlkoholfreieDrinks(models.Model):
     name = models.CharField(max_length=55, null=False, blank=False)
     liter = models.DecimalField(max_length=8, max_digits=8, decimal_places=2, default="")
     beschreibung = models.TextField(blank=True, default='')
-    zusatzstoffe = models.CharField(max_length=55, null=True, blank=True)
+    zusatzstoffe = models.CharField(max_length=55, null=True, blank=True, default='')
     preis = models.DecimalField(max_length=8, max_digits=8, decimal_places=2, default="")
     kundeId = models.ForeignKey(Kunde, null=True, on_delete=models.SET_NULL)
 
