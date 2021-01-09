@@ -5,9 +5,9 @@ from .models import *
 
 class VorspeiseForm(ModelForm):
     class Meta:
-        model = Vorspeise
-        fields = '__all__'
-        widgets = {'kundeId': forms.HiddenInput()}
+        model = Vorspeise  # Verwendet die Attribute der Klasse Vorspeise als Input-Felder
+        fields = '__all__'  # Ausgabe aller Felder
+        widgets = {'kundeId': forms.HiddenInput()}  # Zeige das Input-Feld 'kundeId' nicht im Formular
 
 
 class HauptspeiseForm(ModelForm):
@@ -36,7 +36,7 @@ class AlkfreieDrinksForm(ModelForm):
         model = AlkoholfreieDrinks
         fields = '__all__'
         labels = {
-            'name' : 'Name',
+            'name': 'Name',
 
         }
         widgets = {'kundeId': forms.HiddenInput()}

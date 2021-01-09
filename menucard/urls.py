@@ -63,4 +63,7 @@ urlpatterns = [
 
     # Datenschutz
     path('datenschutzerklaerung/', views.datenschutz, name='datenschutz'),
+
+    # Handbuch
+    path('happy-qr/handbuch/', views.kunden_handbuch, name='kunden_handbuch'),
 ]
