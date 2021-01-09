@@ -165,7 +165,11 @@
                                             {% for i in vorspeisen %}
                                                 <tr>
                                                     <td>
-                                                        {{ i.name }} <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                        {{ i.name }}
+                                                        {% if i.zusatzstoffe is None %}
+                                                        {% else %}
+                                                            <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                        {% endif %}
                                                         <br>
                                                         <small class="text-small text-muted">{{ i.beschreibung }}</small>
                                                     </td>
@@ -216,7 +220,11 @@
                                             {% for i in hauptspeise %}
                                                 <tr>
                                                     <td>
-                                                        {{ i.name }} <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                        {{ i.name }}
+                                                        {% if i.zusatzstoffe is None %}
+                                                        {% else %}
+                                                            <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                        {% endif %}
                                                         <br>
                                                         <small class="text-small text-muted">{{ i.beschreibung }}</small>
                                                     </td>
@@ -267,7 +275,11 @@
                                             {% for i in nachspeise %}
                                                 <tr>
                                                     <td>
-                                                        {{ i.name }} <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                        {{ i.name }}
+                                                        {% if i.zusatzstoffe is None %}
+                                                        {% else %}
+                                                            <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                        {% endif %}
                                                         <br>
                                                         <small class="text-small text-muted">{{ i.beschreibung }}</small>
                                                     </td>
@@ -318,7 +330,11 @@
                                             {% for i in snacks %}
                                                 <tr>
                                                     <td>
-                                                        {{ i.name }} <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                        {{ i.name }}
+                                                        {% if i.zusatzstoffe is None %}
+                                                        {% else %}
+                                                            <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                        {% endif %}
                                                         <br>
                                                         <small class="text-small text-muted">{{ i.beschreibung }}</small>
                                                     </td>
@@ -370,7 +386,11 @@
                                             {% for i in softdrink %}
                                                 <tr>
                                                     <td>
-                                                        {{ i.name }} <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                    {{ i.name }}
+                                                        {% if i.zusatzstoffe is None %}
+                                                        {% else %}
+                                                            <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                        {% endif %}
                                                         <br>
                                                         <small class="text-small text-muted">{{ i.beschreibung }}</small>
                                                     </td>
@@ -422,7 +442,11 @@
                                             {% for i in alkdrinks %}
                                                 <tr>
                                                     <td>
-                                                        {{ i.name }} <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                    {{ i.name }}
+                                                        {% if i.zusatzstoffe is None %}
+                                                        {% else %}
+                                                            <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                        {% endif %}
                                                         <br>
                                                         <small class="text-small text-muted">{{ i.beschreibung }}</small>
                                                     </td>
@@ -648,7 +672,11 @@
                                             {% for i in vorspeisen %}
                                                 <tr>
                                                     <td>
-                                                        {{ i.name }} <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                    {{ i.name }}
+                                                        {% if i.zusatzstoffe is None %}
+                                                        {% else %}
+                                                            <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                        {% endif %}
                                                         <br>
                                                         <small class="text-small text-muted">{{ i.beschreibung }}</small>
                                                     </td>
@@ -698,7 +726,11 @@
                                             {% for i in hauptspeise %}
                                                 <tr>
                                                     <td>
-                                                        {{ i.name }} <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                    {{ i.name }}
+                                                        {% if i.zusatzstoffe is None %}
+                                                        {% else %}
+                                                            <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                        {% endif %}
                                                         <br>
                                                         <small class="text-small text-muted">{{ i.beschreibung }}</small>
                                                     </td>
@@ -748,7 +780,11 @@
                                             {% for i in nachspeise %}
                                                 <tr>
                                                     <td>
-                                                        {{ i.name }} <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                    {{ i.name }}
+                                                        {% if i.zusatzstoffe is None %}
+                                                        {% else %}
+                                                            <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                        {% endif %}
                                                         <br>
                                                         <small class="text-small text-muted">{{ i.beschreibung }}</small>
                                                     </td>
@@ -798,7 +834,11 @@
                                             {% for i in snacks %}
                                                 <tr>
                                                     <td>
-                                                        {{ i.name }} <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                    {{ i.name }}
+                                                        {% if i.zusatzstoffe is None %}
+                                                        {% else %}
+                                                            <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                        {% endif %}
                                                         <br>
                                                         <small class="text-small text-muted">{{ i.beschreibung }}</small>
                                                     </td>
@@ -849,7 +889,11 @@
                                             {% for i in softdrink %}
                                                 <tr>
                                                     <td>
-                                                        {{ i.name }} <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                    {{ i.name }}
+                                                        {% if i.zusatzstoffe is None %}
+                                                        {% else %}
+                                                            <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                        {% endif %}
                                                         <br>
                                                         <small class="text-small text-muted">{{ i.beschreibung }}</small>
                                                     </td>
@@ -901,7 +945,11 @@
                                             {% for i in alkdrinks %}
                                                 <tr>
                                                     <td>
-                                                        {{ i.name }} <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                    {{ i.name }}
+                                                        {% if i.zusatzstoffe is None %}
+                                                        {% else %}
+                                                            <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                        {% endif %}
                                                         <br>
                                                         <small class="text-small text-muted">{{ i.beschreibung }}</small>
                                                     </td>
@@ -1140,7 +1188,11 @@
                                             {% for i in vorspeisen %}
                                                 <tr>
                                                     <td>
-                                                        {{ i.name }} <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                    {{ i.name }}
+                                                        {% if i.zusatzstoffe is None %}
+                                                        {% else %}
+                                                            <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                        {% endif %}
                                                         <br>
                                                         <small class="text-small text-muted">{{ i.beschreibung }}</small>
                                                     </td>
@@ -1191,7 +1243,11 @@
                                             {% for i in hauptspeise %}
                                                 <tr>
                                                     <td>
-                                                        {{ i.name }} <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                    {{ i.name }}
+                                                        {% if i.zusatzstoffe is None %}
+                                                        {% else %}
+                                                            <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                        {% endif %}
                                                         <br>
                                                         <small class="text-small text-muted">{{ i.beschreibung }}</small>
                                                     </td>
@@ -1242,7 +1298,11 @@
                                             {% for i in nachspeise %}
                                                 <tr>
                                                     <td>
-                                                        {{ i.name }} <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                    {{ i.name }}
+                                                        {% if i.zusatzstoffe is None %}
+                                                        {% else %}
+                                                            <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                        {% endif %}
                                                         <br>
                                                         <small class="text-small text-muted">{{ i.beschreibung }}</small>
                                                     </td>
@@ -1292,7 +1352,11 @@
                                             {% for i in snacks %}
                                                 <tr>
                                                     <td>
-                                                        {{ i.name }} <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                    {{ i.name }}
+                                                        {% if i.zusatzstoffe is None %}
+                                                        {% else %}
+                                                            <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                        {% endif %}
                                                         <br>
                                                         <small class="text-small text-muted">{{ i.beschreibung }}</small>
                                                     </td>
@@ -1344,7 +1408,11 @@
                                             {% for i in softdrink %}
                                                 <tr>
                                                     <td>
-                                                        {{ i.name }} <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                    {{ i.name }}
+                                                        {% if i.zusatzstoffe is None %}
+                                                        {% else %}
+                                                            <sup class="text-muted">{{ i.zusatzstoffe }}</sup>
+                                                        {% endif %}
                                                         <br>
                                                         <small class="text-small text-muted">{{ i.beschreibung }}</small>
                                                     </td>
