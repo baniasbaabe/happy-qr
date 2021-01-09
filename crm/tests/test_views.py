@@ -242,3 +242,15 @@ class TestViews(TestCase):
 
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, "crm/registrierung.html")
+
+    def test_DOWNLOAD_Kundenliste_CSV(self):
+
+        response = self.client.get(reverse('csv_download_kundenliste'))
+        filename = "Kundenliste.csv"
+        self.assertEquals(response.get('Content-Disposition'), "attachment; filename='%s'" % (filename))
+
+    def test_DOWNLOAD_Kundenliste_PDF(self):
+
+        response = self.client.get(reverse('pdf_download_kundenliste'))
+        filename = "Kundenliste.pdf"
+        self.assertEquals(response.get('Content-Disposition'), "attachment; filename='%s'" % (filename))
