@@ -188,6 +188,7 @@ class TestViews(TestCase):
         self.mitarbeiter1.refresh_from_db()
         self.assertEqual(self.mitarbeiter1.vorname, 'Update')
 
+
     def test_DELETE_mitarbeiter(self):
         self.user.groups.add(self.group)
         self.user.save()
