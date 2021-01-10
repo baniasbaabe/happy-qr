@@ -65,6 +65,7 @@ def dashboard(request):
     template = kunde.template
 
     context = {
+        'kunde': kunde,
         'form': form,
         'count_vorspeisen': count_vorspeisen,
         'count_hauptspeisen': count_hauptspeisen,
@@ -633,22 +634,21 @@ class DownloadBesucherlistePDF(View):
         response['Content-Disposition'] = content
 
         return response
-'''    
+
 class DownloadPDF_Rechnung(View):
 
-    def get(self, request, pk, *args, **kwargs):
-        kunde = Kunde.objects.get(email=request.user.email)
-        rechnung = Rechnung.kunde.get(id=kunde.id.pk)
-        #rechnung = Rechnung.objects.get(id=pk)
+    def get(self, request, *args, **kwargs):
+        reg_kunde = Kunde.objects.get(email=request.user.email)
+        rechnung = reg_kunde.rechnung_set.order_by('-datum')[0]
         data = {"rechnung": rechnung, "datum": timezone.now()}
-        pdf = render_to_pdf('menucard/rechnung_pdf.html', data)
+        pdf = render_to_pdf('menucard/menucard_rechnung_pdf.html', data)
         
         response = HttpResponse(pdf, content_type='application/pdf')
-        filename = "Rechnung_%s.pdf" % (rechnung.id)
+        filename = "Rechnung_%s.pdf" % (reg_kunde.vorname + reg_kunde.nachname)
         content = "attachment; filename='%s'" % (filename)
         response['Content-Disposition'] = content
         return response
-'''
+
 
 def test_qr(request):
     response = HttpResponse(content_type='application/pdf')

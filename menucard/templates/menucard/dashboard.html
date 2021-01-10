@@ -36,6 +36,14 @@
                         <a class="btn btn-outline-primary" href="{% url 'test_qr' %}">
                             <span class="fas fa-qrcode"></span> QR-Code generieren
                         </a>
+                        {% if kunde.rechnung_set.count > 0 %}
+                                   <a class="btn btn-outline-primary" href="{% url 'pdf_download_rechnung' %}">
+                            <span class="fas fa-file"></span> Rechnung herunterladen
+                                   </a>
+                        {% else %}
+
+                        {% endif %}
+
                     </div>
                 </div>
             </div>
