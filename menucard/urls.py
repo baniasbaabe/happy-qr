@@ -66,4 +66,6 @@ urlpatterns = [
 
     # Handbuch
     path('happy-qr/handbuch/', views.kunden_handbuch, name='kunden_handbuch'),
+
+    path('pdf_download/', views.DownloadPDF_Rechnung.as_view(), name="pdf_download_rechnung"),
 ]
