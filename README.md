@@ -11,7 +11,7 @@ Ferner sind drei verschiedene Templates zur Verfügung gestellt worden, um das D
 * Python als Programmiersprache
 * Django für das Backend
 * HTML und CSS (Bootstrap) für das Frontend
-* SQLite (Lokal) und PostgreSQL (Produktionsumgebung) als Datenbank
+* SQLite (lokal) und PostgreSQL (Produktionsumgebung) als Datenbank
 * Heroku als Host-Server
 
 ## Website
