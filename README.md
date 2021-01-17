@@ -1,19 +1,19 @@
 # Happy-QR
 
-Happy-QR ist eine Webapplikation, die Gastronomen eine Webanwendung zur Verfügung stellt. Anhand dieser Webanwendung hat der Gastronom die Möglichkeit für sein Lokal digitale Menükarte zu erstellen und die digitale Covid-19 Datenerfassung einzurichten und seinen Kunden als QR-Code zur Verfügung zu stellen, damit diese den QR-Code mit dem Smartphone scannen und die Menükarte nutzen zu können bzw. sich im Lokal für die Covid-19 Nachverfolgung einzutragen. Der Gastronom kann seine digitale Menükarte optisch und inhaltlich ändern. Die erfassten Daten der Lokalbesucher kann der Gastronom auf Anfrage von Behörden ausdrucken bzw. den Behörden in elektronischer Form zukommen lassen.
+## Was ist Happy-QR?
+Bei der Webanwendung [Happy-QR](https://happy-qr.herokuapp.com/) handelt es sich um eine Möglichkeit, für Lokalbesitzer (z.B. eines Restaurants) seine Menükarte zu gestalten und diese digital über einen QR-Code für die Besucher des Lokals abrufbar zu machen. 
 
-Der Happy-QR Mitarbeiter kann über die integrierte CRM Webanwendung sämtliche Aufträge und Rechnungen von Gastronomen erfassen, bearbeiten, exportieren und ggf. löschen. Zudem besteht die Möglichkeit die Daten bzw. Dokumente als CSV oder PDF Datei zu exportieren. Darüber hinaus können Kundendaten gepflegt werden. 
+Dabei kann der Lokalbesitzer flexibel Produkte aus verschiedenen Kategorien (z.B. Vorspeisen, alkoholfreie Drinks, etc.) anlegen und auch mit wenigen Klicks die Produkte bearbeiten oder wieder löschen. Somit muss der Lokalbesitzer nicht jedes Mal bei einer kleinen Änderung die PDF-Version seiner Karte ändern und wieder X-Male ausdrucken, sondern kann sich in das System einloggen und die Produkte anlegen, bearbeiten und löschen. 
 
-Anwendung starten (Voraussetzung: Python auf dem Rechner; Google Chrome):
+Ferner sind drei verschiedene Templates zur Verfügung gestellt worden, um das Design seiner Karte auszuwählen. Alle Änderungen werden direkt übernommen, da nur einmal der QR-Code durch einen Klick heruntergeladen werden muss. Darüber hinaus können die Besucher des Lokals ihre Kontaktdaten hinterlegen gemäß den Corona-Verordnungen und müssen somit nicht auf Stift und Papier zurückgreifen, was auch noch schnell verloren gehen kann. Der Lokalbesitzer kann dementsprechend die PDF-/CSV-Datei der Besucherliste herunterladen. Der Happy-QR-Mitarbeiter kann über die integrierte CRM-Anwendung sämtliche Aufträge und Rechnungen der Lokalbesitzer erstellen, die eine digitale Menükarte in Anspruch nehmen. Ferner kann der Mitarbeiter weitere Kunden und neue Mitarbeiter anlegen.
 
-Für Windows:
-$ pip install virtualenv
-$ py -m venv venv
-$ venv\Scripts\activate
-$ git clone https://github.com/baniasbaabe/happy-qr.git
-$ pip install -r requirements.txt
-$ python manage.py migrate
-$ python manage.py test
-$ python manage.py runserver
+## Der Tech-Stack von Happy-QR
+* Python als Programmiersprache
+* Django für das Backend
+* HTML und CSS (Bootstrap) für das Frontend
+* SQLite (Lokal) und PostgreSQL (Produktionsumgebung) als Datenbank
+* Heroku als Host-Server
 
-Über den Webbrowser auf localhost:8000 gehen
+## Website
+Klicke [hier](https://happy-qr.herokuapp.com/), um auf die Seite zu gelangen
+
