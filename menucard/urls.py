@@ -53,7 +53,7 @@ urlpatterns = [
     path(r'menucard_view/covidform/<str:username>', views.besucher_anlegen, name='covidform'),
     path('besucher_daten/', views.besucher_daten, name='besucherdaten'),
     path('besucher_loeschen/<str:pk>/', views.besucher_loeschen, name='besucher_loeschen'),
-    # covidfomr export urls
+    # covidform export urls
     path('besucherliste_pdf_view/', views.ViewBesucherListePDF.as_view(), name="besucherliste_pdf_view"),
     path('besucherliste_pdf_download/', views.DownloadBesucherlistePDF.as_view(), name="besucherliste_pdf_download"),
     path('besucherliste_csv_download/', views.csv_download_besucherliste, name="besucherliste_csv_download"),
@@ -67,5 +67,6 @@ urlpatterns = [
     # Handbuch
     path('happy-qr/handbuch/', views.kunden_handbuch, name='kunden_handbuch'),
 
+    #Rechnung URL
     path('pdf_download/', views.DownloadPDF_Rechnung.as_view(), name="pdf_download_rechnung"),
 ]

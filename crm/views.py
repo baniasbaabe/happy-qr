@@ -88,7 +88,7 @@ def logout_view(request):
 
                         Returns:
                                  redirect(): Methode, die ein HttpResponseRedirect
-                                 der CRM oder Menucard URL zurückgibt
+                                 Login-URL zurückgibt
 
     '''
     logout(request)
@@ -109,7 +109,8 @@ def dashboard(request):
 
                     Returns:
                             render(): Methode, die das Dashboard-Template mit dem Context-Dict samt
-                                        Auftragsdaten kombiniert und gibt ein HttpResponse zurück mit dem gerenderten Text
+                                        Auftragsdaten kombiniert und gibt ein HttpResponse zurück mit dem gerenderten
+                                        Text
     '''
     auftraege = Auftrag.objects.all()
     total_auftraege = auftraege.count()
@@ -530,7 +531,15 @@ def rechnungLoeschen(request, pk):
 
 
 def render_to_pdf(template_src, context_dict):
+    '''
+                Rendert den Inhalt in ein PDF
+                        Parameters:
+                                template_src (str): Pfad zur HTML-Datei
+                                context_dict (dict): Dictionary mit dem Inhalt für HTML-Datei
 
+                        Returns:
+                                HttpResponse(): Methode, um eine HTTP-Response zu erstellen mit der PDF
+    '''
     template = get_template(template_src)
     html = template.render(context_dict)
     result = BytesIO()
@@ -541,6 +550,15 @@ def render_to_pdf(template_src, context_dict):
 
 
 def csv_download(request, pk):
+    '''
+                Schreibt den Inhalt einer Rechnung in eine CSV-Datei und lädt sie runter
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+                                pk (int): Primärschlussel der Rechnung
+
+                        Returns:
+                                response: CSV-Datei mit Inhalt der Rechnung als Download
+    '''
     rechnung = Rechnung.objects.get(id=pk)
 
     response = HttpResponse(content_type='text/csv')
@@ -561,6 +579,17 @@ def csv_download(request, pk):
 class ViewPDF(View):
 
     def get(self, request, pk, *args, **kwargs):
+        '''
+                    Rendert die Besucherliste in eine PDF-Datei und öffnet sie im Browser
+                            Parameters:
+                                    self (object): Objekt
+                                    request (HttpRequest): Ein Request-Objekt
+                                    pk (int): Primärschlüssel der Rechnung
+
+                            Returns:
+                                    HttpResponse(): Methode, um eine HTTP-Response zu erstellen mit der PDF und
+                                    sie im Browser zu öffnen
+        '''
         rechnung = Rechnung.objects.get(id=pk)
         data = {"rechnung": rechnung, "datum": timezone.now()}
         pdf = render_to_pdf('crm/rechnung_pdf.html', data)
@@ -570,6 +599,16 @@ class ViewPDF(View):
 class DownloadPDF(View):
 
     def get(self, request, pk, *args, **kwargs):
+        '''
+                    Rendert die Rechnung in eine PDF-Datei und lädt sie herunter
+                            Parameters:
+                                    self (object): Objekt
+                                    request (HttpRequest): Ein Request-Objekt
+                                    pk (int): Primärschlüssel der Rechnung
+                            Returns:
+                                    HttpResponse(): Methode, um eine HTTP-Response zu erstellen mit der PDF und
+                                    sie herunterzuladen
+        '''
         rechnung = Rechnung.objects.get(id=pk)
         data = {"rechnung": rechnung, "datum": timezone.now()}
         pdf = render_to_pdf('crm/rechnung_pdf.html', data)
@@ -581,10 +620,15 @@ class DownloadPDF(View):
         return response
 
 
-# Kundenliste PDF/CSV
-
-
 def csv_download_kundenliste(request):
+    '''
+                Schreibt den Inhalt der Kundenliste in eine CSV-Datei und lädt sie runter
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+
+                        Returns:
+                                response: CSV-Datei mit Inhalt der Kundenliste als Download
+    '''
     kunden_liste = Kunde.objects.all()
 
     response = HttpResponse(content_type='text/csv')
@@ -605,6 +649,16 @@ def csv_download_kundenliste(request):
 class ViewKundenListePDF(View):
 
     def get(self, request, *args, **kwargs):
+        '''
+                    Rendert die Kundenliste in eine PDF-Datei und öffnet sie im Browser
+                            Parameters:
+                                    self (object): Objekt
+                                    request (HttpRequest): Ein Request-Objekt
+
+                            Returns:
+                                    HttpResponse(): Methode, um eine HTTP-Response zu erstellen mit der PDF und
+                                    sie im Browser zu öffnen
+        '''
         kunden_liste = Kunde.objects.all()
         data = {"kunden_liste": kunden_liste, "datum": timezone.now()}
         pdf = render_to_pdf('crm/kundenliste_pdf.html', data)
@@ -614,6 +668,15 @@ class ViewKundenListePDF(View):
 class DownloadKundenlistePDF(View):
 
     def get(self, request, *args, **kwargs):
+        '''
+                    Rendert die Kundenliste in eine PDF-Datei und lädt sie herunter
+                            Parameters:
+                                    self (object): Objekt
+                                    request (HttpRequest): Ein Request-Objekt
+                            Returns:
+                                    HttpResponse(): Methode, um eine HTTP-Response zu erstellen mit der PDF und
+                                    sie herunterzuladen
+        '''
         kunden_liste = Kunde.objects.all()
         data = {"kunden_liste": kunden_liste, "datum": timezone.now()}
         pdf = render_to_pdf('crm/kundenliste_pdf.html', data)
@@ -629,6 +692,15 @@ class DownloadKundenlistePDF(View):
 class DownloadAuftragslistePDF(View):
 
     def get(self, request, *args, **kwargs):
+        '''
+                    Rendert die Auftragsliste in eine PDF-Datei und lädt sie herunter
+                            Parameters:
+                                    self (object): Objekt
+                                    request (HttpRequest): Ein Request-Objekt
+                            Returns:
+                                    HttpResponse(): Methode, um eine HTTP-Response zu erstellen mit der PDF und
+                                    sie herunterzuladen
+        '''
         auftrags_liste = Auftrag.objects.all()
         data = {"auftrags_liste": auftrags_liste, "datum": timezone.now()}
         pdf = render_to_pdf('crm/auftragsliste_pdf.html', data)
@@ -642,6 +714,14 @@ class DownloadAuftragslistePDF(View):
 
 
 def csv_download_auftragsliste(request):
+    '''
+                Schreibt den Inhalt der Auftragsliste in eine CSV-Datei und lädt sie runter
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+
+                        Returns:
+                                response: CSV-Datei mit Inhalt der Auftragsliste als Download
+    '''
     auftrags_liste = Auftrag.objects.all()
 
     response = HttpResponse(content_type='text/csv')

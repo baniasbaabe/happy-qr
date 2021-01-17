@@ -45,8 +45,14 @@ class TestUrls(TestCase):
         url = reverse('nachspeisen_anlegen')
         self.assertEquals(resolve(url).func, nachspeisen_anlegen)
 
-    def test_snacks_anlegen_is_anlegen(self):
+    def test_snacks_anlegen_is_resolved(self):
         url = reverse("snacks_anlegen")
         self.assertEquals(resolve(url).func, snacks_anlegen)
 
+    def test_benutzerhandbuch_is_resolved(self):
+        url = reverse("kunden_handbuch")
+        self.assertEquals(resolve(url).func, kunden_handbuch)
 
+    def test_datenschutz_is_resolved(self):
+        url = reverse("datenschutz")
+        self.assertEquals(resolve(url).func, datenschutz)

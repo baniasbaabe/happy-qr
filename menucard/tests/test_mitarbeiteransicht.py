@@ -9,7 +9,7 @@ from django.contrib.auth.models import User, Group
 from seleniumlogin import force_login
 
 
-class TestKundeSeite(LiveServerTestCase):
+class TestMitarbeiterSeite(LiveServerTestCase):
 
     @classmethod
     def setUp(cls):
@@ -17,7 +17,6 @@ class TestKundeSeite(LiveServerTestCase):
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('--headless')
         chrome_options.add_argument('--disable-gpu')
-        cls.client = Client()
         cls.browser = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
         cls.user = User.objects.create_superuser(username="hallo123", password="dasisteintest123!")
         cls.group = Group(name='mitarbeiter')
@@ -46,14 +45,14 @@ class TestKundeSeite(LiveServerTestCase):
         self.browser.find_element_by_class_name("btn-success").click()
         self.browser.get('%s%s' % (self.live_server_url, '/auftragsliste'))
         self.browser.find_element_by_class_name("btn-primary").click()
-        self.browser.find_element_by_xpath("//select[@name='kunde']/option[text()='Max Mustermann']").click()
+        self.browser.find_element_by_xpath("//select[@name='kunde']/option[text()='Max Mustermann']").click() # Dropdown
         preis_input = self.browser.find_element_by_name("preis")
         preis_input.send_keys('600,00')
         self.browser.find_element_by_class_name("btn-success").click()
         self.browser.get('%s%s' % (self.live_server_url, '/rechnungsliste'))
         self.browser.find_element_by_class_name("btn-primary").click()
-        self.browser.find_element_by_xpath("//select[@name='kunde']/option[text()='Max Mustermann']").click()
+        self.browser.find_element_by_xpath("//select[@name='kunde']/option[text()='Max Mustermann']").click() # Dropdown
 
         self.browser.find_element_by_xpath(
-            "//select[@name='auftrag']/option[text()='Auftragsnummer: 1, Kunde Max Mustermann']").click()
+            "//select[@name='auftrag']/option[text()='Auftragsnummer: 2, Kunde Max Mustermann']").click()
         self.browser.find_element_by_class_name("btn-success").click()

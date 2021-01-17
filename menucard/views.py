@@ -33,6 +33,17 @@ from reportlab.graphics import renderPDF
 # Create your views here.
 
 def logout_view(request):
+    '''
+                Loggt den Kunden wieder aus und leitet ihn zur Login-Page weiter
+
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+
+                        Returns:
+                                 redirect(): Methode, die ein HttpResponseRedirect
+                                 Login-URL zurückgibt
+
+    '''
     logout(request)
     messages.info(request, 'Sie haben sich erfolgreich ausgeloggt.')
     return redirect('login')
@@ -42,9 +53,20 @@ def logout_view(request):
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 def dashboard(request):
+    '''
+             Gibt die Anzahl der Produkte in der jeweiligen Kategorie samt die Kategorie selber und die Option
+             für den Template-Wechsel an das HTML-Template weiter
+
+                    Parameters:
+                            request (HttpRequest): Ein Request-Objekt
+
+                    Returns:
+                            render(): Methode, die das Dashboard-Template mit dem Context-Dict samt
+                                        Kategorien + Anzahl der Produkte pro Kategorie und Template-Dropdownkombiniert
+                                        und gibt ein HttpResponse zurück mit dem gerenderten Text
+    '''
     kunde = Kunde.objects.get(email=request.user.email)
     auftrag = kunde.auftrag_set.first()
-    # auftrag = request.user.kunde.auftrag_set.first()
 
     # Template ändern
     form = TemplateForm(instance=kunde)
@@ -83,15 +105,36 @@ def dashboard(request):
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 def vorspeisen(request):
+    '''
+                 Gibt die Vorspeisedaten an das Template weiter zum Anzeigen der Vorspeisen
+
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+
+                        Returns:
+                                render(): Methode, die das Vorspeisen-Template mit dem Context-Dict samt
+                                            Vorspeisedaten kombiniert und gibt ein HttpResponse zurück mit dem
+                                            gerenderten Text
+    '''
     kunde = Kunde.objects.get(email=request.user.email)  # Vorspeise dem Kunden zuweisen
     vorspeise = kunde.vorspeise_set.all()  # QuerySet zur Ausgabe aller Vorspeisen
-    context = {'vorspeise': vorspeise}  # Variabel, die in der vorspeisen.html iteriert werden soll
+    context = {'vorspeise': vorspeise}  # Dictionary, die in der vorspeisen.html interiert werden soll
     return render(request, 'menucard/vorspeisen.html', context)  # Verknüpfung der Funktion mit der vorspeisen.html
 
 
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 def vorspeisen_anlegen(request):
+    '''
+                 Gibt die Form zum Anlegen der Vorspeise an das Vorspeiseform-Template weiter
+
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+
+                        Returns:
+                                render(): Methode, die das Vorspeiseform-Template mit der Form zum Anlegen
+                                kombiniert und gibt ein HttpResponse zurück mit dem gerenderten Text
+    '''
     kunde = Kunde.objects.get(email=request.user.email)
     form = VorspeiseForm(initial={'kundeId': kunde})
 
@@ -111,6 +154,17 @@ def vorspeisen_anlegen(request):
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 def vorspeisen_bearbeiten(request, pk):
+    '''
+                 Gibt die Vorspeisebearbeiten-Form an das Vorspeiseform-Template weiter
+
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+                                pk (int): Primärschlussel der Vorspeise
+
+                        Returns:
+                                render(): Methode, die das Vorspeiseform-Template mit der Form zum Aktualisieren
+                                kombiniert und gibt ein HttpResponse zurück mit dem gerenderten Text
+    '''
     vorspeise = Vorspeise.objects.get(id=pk)
     form = VorspeiseForm(instance=vorspeise)
 
@@ -132,6 +186,17 @@ def vorspeisen_bearbeiten(request, pk):
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 def vorspeisen_loeschen(request, pk):
+    '''
+                Gibt die Vorspeiselöschen-Form an das Vorspeiselöschen-Template weiter
+
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+                                pk (int): Primärschlussel der Vorspeise
+
+                        Returns:
+                                render(): Methode, die das Vorspeiselöschen-Template mit der Form zum Löschen
+                                kombiniert und gibt ein HttpResponse zurück mit dem gerenderten Text
+    '''
     vorspeise = Vorspeise.objects.get(id=pk)
 
     if request.method == "POST":
@@ -146,6 +211,17 @@ def vorspeisen_loeschen(request, pk):
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 def hauptspeisen(request):
+    '''
+                 Gibt die Hauptspeisedaten an das Template weiter zum Anzeigen der Hauptspeisen
+
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+
+                        Returns:
+                                render(): Methode, die das Hauptspeisen-Template mit dem Context-Dict samt
+                                            Hauptspeisen kombiniert und gibt ein HttpResponse zurück mit dem
+                                            gerenderten Text
+    '''
     kunde = Kunde.objects.get(email=request.user.email)
     hauptspeise = kunde.hauptspeise_set.all()
 
@@ -156,6 +232,16 @@ def hauptspeisen(request):
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 def hauptspeisen_anlegen(request):
+    '''
+                 Gibt die Form zum Anlegen der Hauptspeise an das Hauptspeiseform-Template weiter
+
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+
+                        Returns:
+                                render(): Methode, die das Hauptspeiseform-Template mit der Form zum Anlegen
+                                kombiniert und gibt ein HttpResponse zurück mit dem gerenderten Text
+    '''
     kunde = Kunde.objects.get(email=request.user.email)
 
     hauptspeise = Hauptspeise()
@@ -177,6 +263,17 @@ def hauptspeisen_anlegen(request):
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 def hauptspeisen_bearbeiten(request, pk):
+    '''
+                 Gibt die Hauptspeisebearbeiten-Form an das Hauptspeiseform-Template weiter
+
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+                                pk (int): Primärschlussel der Hauptspeise
+
+                        Returns:
+                                render(): Methode, die das Hauptspeiseform-Template mit der Form zum Aktualisieren
+                                kombiniert und gibt ein HttpResponse zurück mit dem gerenderten Text
+    '''
     hauptspeise = Hauptspeise.objects.get(id=pk)
     form = HauptspeiseForm(instance=hauptspeise)
 
@@ -198,6 +295,17 @@ def hauptspeisen_bearbeiten(request, pk):
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 def hauptspeise_loeschen(request, pk):
+    '''
+                Gibt die Hauptspeiselöschen-Form an das Hauptspeiselöschen-Template weiter
+
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+                                pk (int): Primärschlussel der Hauptspeise
+
+                        Returns:
+                                render(): Methode, die das Hauptspeiselöschen-Template mit der Form zum Löschen
+                                kombiniert und gibt ein HttpResponse zurück mit dem gerenderten Text
+    '''
     hauptspeise = Hauptspeise.objects.get(id=pk)
 
     if request.method == "POST":
@@ -212,6 +320,17 @@ def hauptspeise_loeschen(request, pk):
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 def nachspeisen(request):
+    '''
+                 Gibt die Nachspeisedaten an das Template weiter zum Anzeigen der Nachspeisen
+
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+
+                        Returns:
+                                render(): Methode, die das Nachspeisen-Template mit dem Context-Dict samt
+                                            Nachspeisen kombiniert und gibt ein HttpResponse zurück mit dem
+                                            gerenderten Text
+    '''
     kunde = Kunde.objects.get(email=request.user.email)
     nachspeise = kunde.nachspeise_set.all()
 
@@ -222,6 +341,16 @@ def nachspeisen(request):
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 def nachspeisen_anlegen(request):
+    '''
+                 Gibt die Form zum Anlegen der Nachspeise an das Nachspeiseform-Template weiter
+
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+
+                        Returns:
+                                render(): Methode, die das Nachspeiseform-Template mit der Form zum Anlegen
+                                kombiniert und gibt ein HttpResponse zurück mit dem gerenderten Text
+    '''
     kunde = Kunde.objects.get(email=request.user.email)
 
     form = NachspeiseForm(initial={'kundeId': kunde})
@@ -244,6 +373,17 @@ def nachspeisen_anlegen(request):
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 def nachspeisen_bearbeiten(request, pk):
+    '''
+                 Gibt die Nachspeisebearbeiten-Form an das Nachspeiseform-Template weiter
+
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+                                pk (int): Primärschlussel der Nachspeise
+
+                        Returns:
+                                render(): Methode, die das Nachspeiseform-Template mit der Form zum Aktualisieren
+                                kombiniert und gibt ein HttpResponse zurück mit dem gerenderten Text
+    '''
     nachspeise = Nachspeise.objects.get(id=pk)
     form = NachspeiseForm(instance=nachspeise)
 
@@ -265,6 +405,17 @@ def nachspeisen_bearbeiten(request, pk):
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 def nachspeisen_loeschen(request, pk):
+    '''
+                Gibt die Nachspeiselöschen-Form an das Nachspeiselöschen-Template weiter
+
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+                                pk (int): Primärschlussel der Nachspeise
+
+                        Returns:
+                                render(): Methode, die das Nachspeiselöschen-Template mit der Form zum Löschen
+                                kombiniert und gibt ein HttpResponse zurück mit dem gerenderten Text
+    '''
     nachspeise = Nachspeise.objects.get(id=pk)
 
     if request.method == "POST":
@@ -279,6 +430,17 @@ def nachspeisen_loeschen(request, pk):
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 def snacks(request):
+    '''
+                 Gibt die Snacksdaten an das Template weiter zum Anzeigen der Snacks
+
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+
+                        Returns:
+                                render(): Methode, die das Snacks-Template mit dem Context-Dict samt
+                                            Snacksdaten kombiniert und gibt ein HttpResponse zurück mit dem
+                                            gerenderten Text
+    '''
     kunde = Kunde.objects.get(email=request.user.email)
     snacks = kunde.snacks_set.all()
 
@@ -289,6 +451,16 @@ def snacks(request):
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 def snacks_anlegen(request):
+    '''
+                 Gibt die Form zum Anlegen der Snacks an das Snacksform-Template weiter
+
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+
+                        Returns:
+                                render(): Methode, die das Snacksform-Template mit der Form zum Anlegen
+                                kombiniert und gibt ein HttpResponse zurück mit dem gerenderten Text
+    '''
     kunde = Kunde.objects.get(email=request.user.email)
 
     form = SnacksForm(initial={'kundeId': kunde})
@@ -310,6 +482,17 @@ def snacks_anlegen(request):
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 def snacks_bearbeiten(request, pk):
+    '''
+                 Gibt die Snacksbearbeiten-Form an das Snacksform-Template weiter
+
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+                                pk (int): Primärschlussel des Snacks
+
+                        Returns:
+                                render(): Methode, die das Snacksform-Template mit der Form zum Aktualisieren
+                                kombiniert und gibt ein HttpResponse zurück mit dem gerenderten Text
+    '''
     snack = Snacks.objects.get(id=pk)
     form = SnacksForm(instance=snack)
 
@@ -331,6 +514,17 @@ def snacks_bearbeiten(request, pk):
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 def snacks_loeschen(request, pk):
+    '''
+                Gibt die Snackslöschen-Form an das Snackslöschen-Template weiter
+
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+                                pk (int): Primärschlussel des Snacks
+
+                        Returns:
+                                render(): Methode, die das Snackslöschen-Template mit der Form zum Löschen
+                                kombiniert und gibt ein HttpResponse zurück mit dem gerenderten Text
+    '''
     snack = Snacks.objects.get(id=pk)
 
     if request.method == "POST":
@@ -345,6 +539,17 @@ def snacks_loeschen(request, pk):
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 def alkoholhaltigedrinks(request):
+    '''
+                 Gibt die Alkhaltigendrinksedaten an das Template weiter zum Anzeigen der Alkhaltigendrinks
+
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+
+                        Returns:
+                                render(): Methode, die das Alkhaltigendrinks-Template mit dem Context-Dict samt
+                                            Alkhaltigendrinksdaten kombiniert und gibt ein HttpResponse zurück mit dem
+                                            gerenderten Text
+    '''
     kunde = Kunde.objects.get(email=request.user.email)
     alkdrink = kunde.alkoholhaltigedrinks_set.all()
 
@@ -355,6 +560,16 @@ def alkoholhaltigedrinks(request):
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 def alkoholhaltigedrinks_anlegen(request):
+    '''
+                 Gibt die Form zum Anlegen der Alkhaltigendrinks an das Alkhaltigendrinksform-Template weiter
+
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+
+                        Returns:
+                                render(): Methode, die das Alkhaltigendrinksform-Template mit der Form zum Anlegen
+                                kombiniert und gibt ein HttpResponse zurück mit dem gerenderten Text
+    '''
     kunde = Kunde.objects.get(email=request.user.email)
     form = AlkhaltigeDrinksForm(initial={'kundeId': kunde})
 
@@ -376,6 +591,17 @@ def alkoholhaltigedrinks_anlegen(request):
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 def alkoholhaltigedrinks_bearbeiten(request, pk):
+    '''
+                 Gibt die Alkhaltigedrinksbearbeiten-Form an das ALkhaltigedrinksform-Template weiter
+
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+                                pk (int): Primärschlussel des Alkhaltigendrinks
+
+                        Returns:
+                                render(): Methode, die das Alkhaltigedrinksform-Template mit der Form zum
+                                Aktualisieren kombiniert und gibt ein HttpResponse zurück mit dem gerenderten Text
+    '''
     alkdrink = AlkoholhaltigeDrinks.objects.get(id=pk)
     form = AlkhaltigeDrinksForm(instance=alkdrink)
 
@@ -397,6 +623,17 @@ def alkoholhaltigedrinks_bearbeiten(request, pk):
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 def alkoholhaltigedrinks_loeschen(request, pk):
+    '''
+                Gibt die Alkhaltigedrinkslöschen-Form an das Alkhaltigedrinkslöschen-Template weiter
+
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+                                pk (int): Primärschlussel des Alkhaltigendrinks
+
+                        Returns:
+                                render(): Methode, die das ALkhaltigedrinkslöschen-Template mit der Form zum Löschen
+                                kombiniert und gibt ein HttpResponse zurück mit dem gerenderten Text
+    '''
     alkdrink = AlkoholhaltigeDrinks.objects.get(id=pk)
 
     if request.method == "POST":
@@ -411,6 +648,17 @@ def alkoholhaltigedrinks_loeschen(request, pk):
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 def alkfreiedrinks(request):
+    '''
+                 Gibt die Alkfreiendrinksedaten an das Template weiter zum Anzeigen der Alkfreiendrinks
+
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+
+                        Returns:
+                                render(): Methode, die das Alkfreiendrinks-Template mit dem Context-Dict samt
+                                            Alkfreiendrinksdaten kombiniert und gibt ein HttpResponse zurück mit dem
+                                            gerenderten Text
+    '''
     kunde = Kunde.objects.get(email=request.user.email)
     softdrink = kunde.alkoholfreiedrinks_set.all()
 
@@ -421,6 +669,16 @@ def alkfreiedrinks(request):
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 def alkfreiedrinks_anlegen(request):
+    '''
+                 Gibt die Form zum Anlegen der Alkfreiendrinks an das Alkfreiendrinksform-Template weiter
+
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+
+                        Returns:
+                                render(): Methode, die das Alkfreiendrinksform-Template mit der Form zum Anlegen
+                                kombiniert und gibt ein HttpResponse zurück mit dem gerenderten Text
+    '''
     kunde = Kunde.objects.get(email=request.user.email)
 
     form = AlkfreieDrinksForm(initial={'kundeId': kunde})
@@ -443,6 +701,17 @@ def alkfreiedrinks_anlegen(request):
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 def alkfreiedrinks_bearbeiten(request, pk):
+    '''
+                 Gibt die Alkfreiedrinksbearbeiten-Form an das Alkfreiedrinksform-Template weiter
+
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+                                pk (int): Primärschlussel des Alkfreiendrinks
+
+                        Returns:
+                                render(): Methode, die das Akfreiedrinksform-Template mit der Form zum Aktualisieren
+                                kombiniert und gibt ein HttpResponse zurück mit dem gerenderten Text
+    '''
     softdrink = AlkoholfreieDrinks.objects.get(id=pk)
     form = AlkfreieDrinksForm(instance=softdrink)
 
@@ -464,6 +733,17 @@ def alkfreiedrinks_bearbeiten(request, pk):
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 def alkfreiedrinks_loeschen(request, pk):
+    '''
+                Gibt die Alkfreiedrinkslöschen-Form an das Alkfreiedrinkslöschen-Template weiter
+
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+                                pk (int): Primärschlussel des Alkfreiendrinks
+
+                        Returns:
+                                render(): Methode, die das ALkfreiedrinkslöschen-Template mit der Form zum Löschen
+                                kombiniert und gibt ein HttpResponse zurück mit dem gerenderten Text
+    '''
     softdrink = AlkoholfreieDrinks.objects.get(id=pk)
 
     if request.method == "POST":
@@ -474,9 +754,19 @@ def alkfreiedrinks_loeschen(request, pk):
     return render(request, 'menucard/alkfreiedrinks_loeschen.html', context)
 
 
-# @login_required(login_url='login')
-# @genehmigte_user(allowed_roles=['kunde'])
 def menucard(request, username):
+    '''
+                 Gibt die gescannte Menükarte aus, basierend auf den Username von dem man es gescannt hat
+
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+                                username (String): Name des Users
+
+                        Returns:
+                                render(): Methode, die das Menükarten-Template mit dem Context-Dict samt
+                                            Produkten aller Kategorien und dem ausgewählten Template kombiniert und
+                                            gibt ein HttpResponse zurück mit dem gerenderten Text
+    '''
     # Änderung mit url
     print(request.get_full_path())
     url = request.get_full_path().split('/')
@@ -506,6 +796,17 @@ def menucard(request, username):
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 def profil_bearbeiten(request):
+    '''
+                 Gibt die Profil-Form und die Passwortvergessenform an das Profil-Template weiter
+
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+
+                        Returns:
+                                render(): Methode, die das Profil-Template mit der Form zum Aktualisieren des Profils
+                                und des PW-Vergessen kombiniert und gibt ein HttpResponse zurück mit dem gerenderten
+                                Text
+    '''
     # PROFIL BEARBEITEN
     kunde = Kunde.objects.get(email=request.user.email)
     form = ProfilForm(instance=kunde)
@@ -536,6 +837,17 @@ def profil_bearbeiten(request):
 
 # Covid Datenerfassung
 def besucher_anlegen(request, username):
+    '''
+                 Gibt die Form zum Anlegen des Besuchers an das Alkfreiendrinksform-Template weiter
+
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+                                username (str): Name des Users (des jeweiligen Lokalbesitzers)
+
+                        Returns:
+                                render(): Methode, die das Covidform-Template mit der Form zum Anlegen des Besuchers
+                                kombiniert und gibt ein HttpResponse zurück mit dem gerenderten Text
+    '''
     print(request.get_full_path())
     url = request.get_full_path().split('/')
     aktueller_user = User.objects.get(username=url[-1])
@@ -558,6 +870,18 @@ def besucher_anlegen(request, username):
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 def besucher_daten(request):  # hole alle besucher aus DB
+    '''
+                 Gibt die Besucherdaten und die Besucher-Filterform an das Template weiter zum Anzeigen der
+                 Besucherliste des Lokalbesitzers
+
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+
+                        Returns:
+                                render(): Methode, die das Besucherdaten-Template mit dem Context-Dict samt
+                                            Besucherliste und Besucher-Filterform kombiniert und gibt ein
+                                            HttpResponse zurück mit dem gerenderten Text
+    '''
     kunde = Kunde.objects.get(email=request.user.email)
     besucher = kunde.besucher_set.all()
     besucher_filter = BesucherFilter(request.GET, queryset=besucher)
@@ -570,6 +894,17 @@ def besucher_daten(request):  # hole alle besucher aus DB
 @login_required(login_url='login')
 @genehmigte_user(allowed_roles=['kunde'])
 def besucher_loeschen(request, pk):
+    '''
+                Gibt die Besucherlöschen-Form an das Besucherlöschen-Template weiter
+
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+                                pk (int): Primärschlussel des Besuchers
+
+                        Returns:
+                                render(): Methode, die das Besucherlöschen-Template mit der Form zum Löschen
+                                kombiniert und gibt ein HttpResponse zurück mit dem gerenderten Text
+    '''
     besucher = Besucher.objects.get(id=pk)
 
     if request.method == "POST":
@@ -581,6 +916,15 @@ def besucher_loeschen(request, pk):
 
 
 def render_to_pdf(template_src, context_dict):
+    '''
+                Rendert den Inhalt in ein PDF
+                        Parameters:
+                                template_src (str): Pfad zur HTML-Datei
+                                context_dict (dict): Dictionary mit dem Inhalt für HTML-Datei
+
+                        Returns:
+                                HttpResponse(): Methode, um eine HTTP-Response zu erstellen mit der PDF
+    '''
     template = get_template(template_src)
     html = template.render(context_dict)
     result = BytesIO()
@@ -591,6 +935,14 @@ def render_to_pdf(template_src, context_dict):
 
 
 def csv_download_besucherliste(request):
+    '''
+                Schreibt den Inhalt der Besucherliste in eine CSV-Datei und lädt sie runter
+                        Parameters:
+                                request (HttpRequest): Ein Request-Objekt
+
+                        Returns:
+                                response: CSV-Datei mit Inhalt der Besucherliste als Download
+    '''
     kunde = Kunde.objects.get(email=request.user.email)
     besucher_liste = kunde.besucher_set.all()
 
@@ -613,6 +965,16 @@ def csv_download_besucherliste(request):
 class ViewBesucherListePDF(View):
 
     def get(self, request, *args, **kwargs):
+        '''
+                    Rendert die Besucherliste in eine PDF-Datei und öffnet sie im Browser
+                            Parameters:
+                                    self (object): Objekt
+                                    request (HttpRequest): Ein Request-Objekt
+
+                            Returns:
+                                    HttpResponse(): Methode, um eine HTTP-Response zu erstellen mit der PDF und
+                                    sie im Browser zu öffnen
+        '''
         kunde = Kunde.objects.get(email=request.user.email)
         besucher_liste = kunde.besucher_set.all()
         data = {"besucher_liste": besucher_liste, "datum": timezone.now()}
@@ -623,6 +985,16 @@ class ViewBesucherListePDF(View):
 class DownloadBesucherlistePDF(View):
 
     def get(self, request, *args, **kwargs):
+        '''
+                    Rendert die Besucherliste in eine PDF-Datei und öffnet sie im Browser
+                            Parameters:
+                                    self (object): Objekt
+                                    request (HttpRequest): Ein Request-Objekt
+
+                            Returns:
+                                    HttpResponse(): Methode, um eine HTTP-Response zu erstellen mit der PDF und
+                                    sie im Browser zu öffnen
+        '''
         kunde = Kunde.objects.get(email=request.user.email)
         besucher_liste = kunde.besucher_set.all()
         data = {"besucher_liste": besucher_liste, "datum": timezone.now()}
@@ -638,6 +1010,16 @@ class DownloadBesucherlistePDF(View):
 class DownloadPDF_Rechnung(View):
 
     def get(self, request, *args, **kwargs):
+        '''
+                    Rendert die Rechnung in eine PDF-Datei und lädt sie herunter
+                            Parameters:
+                                    self (object): Objekt
+                                    request (HttpRequest): Ein Request-Objekt
+
+                            Returns:
+                                    HttpResponse(): Methode, um eine HTTP-Response zu erstellen mit der PDF und
+                                    sie herunterzuladen
+        '''
         reg_kunde = Kunde.objects.get(email=request.user.email)
         rechnung = reg_kunde.rechnung_set.order_by('-datum')[0]
         data = {"rechnung": rechnung, "datum": timezone.now()}
@@ -651,6 +1033,15 @@ class DownloadPDF_Rechnung(View):
 
 
 def test_qr(request):
+    '''
+                Erstellt einen QR-Code für die Menükarte des Lokalbesitzers, rendert ihn in eine PDF
+                und lädt sie runter Inhalt in ein PDF
+                        Parameters:
+                                request (Http-Request): Ein Request-Objekt
+
+                        Returns:
+                                response: PDF-Datei mit QR-Code heruntergeladen
+    '''
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="QRCode.pdf"'
 
@@ -676,8 +1067,26 @@ def test_qr(request):
 
 
 def datenschutz(request):
+    '''
+                    Gibt HTML-Template mit der Datenschutz-Info zurück
+
+                            Parameters:
+                                    request (HttpRequest): Ein Request-Objekt
+
+                            Returns:
+                                    render(): Gibt das Datenschutz-HTML-Template zurück
+    '''
     return render(request, 'menucard/datenerfassung_info.html')
 
 
 def kunden_handbuch(request):
+    '''
+                    Gibt HTML-Template mit dem Benutzerhandbuch für den Kunden zurück
+
+                            Parameters:
+                                    request (HttpRequest): Ein Request-Objekt
+
+                            Returns:
+                                    render(): Gibt das Handbuch-HTML-Template zurück
+    '''
     return render(request, 'menucard/handbuch.html')
